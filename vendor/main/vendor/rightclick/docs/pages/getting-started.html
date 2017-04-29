@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!-- Copyright (C) 2014 Fajar Chandra <contact@jar2.net> -->
+
+<head>
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../js/content.js"></script>
+	<link type="text/css" rel="stylesheet" href="../css/content.css" />
+</head>
+
+<body>
+<h1>Getting Started</h1>
+
+<h2>Introduction</h2>
+
+<p>
+	PopMenu is a jQuery plugin that lets you add right-click context menu (popup menu) 
+	to any HTML element on your web page! Not only for desktop users, PopMenu can also 
+	provide context menu for mobile users with touch screen by long-tapping.
+</p>
+
+<h2>Basic Usage</h2>
+
+<p>
+	Using PopMenu is easy. But before we begin, PopMenu requires several 
+	JS and CSS files to work. Therefore, load the following files in the HEAD 
+	section of the page.
+</p>
+
+<ul>
+	<li>
+		<b>jquery-1.7.1.min.js</b> <i>(required)</i><br />
+		PopMenu requires jQuery version 1.7 or later to work.
+	</li>
+	<li>
+		<b>jquery.popmenu.js</b> <i>(required)</i><br />
+		This is the PopMenu jQuery plugin script.
+	</li>
+	<li>
+		<b>jquery.popmenu.css</b> <i>(required)</i><br />
+		The default CSS file to style the context menu using system colors.
+	</li>
+	<li>
+		<b>jquery.popmenu.icons.css</b> <i>(optional)</i><br />
+		Additional CSS file containing common icons for menu items.
+	</li>
+</ul>
+	
+<pre class="code">
+&lt;script type="text/javascript" src="js/jquery-1.7.1.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.popmenu.js"&gt;&lt;/script&gt;
+&lt;link type="text/css" rel="stylesheet" href="css/jquery.popmenu.css" /&gt;
+&lt;link type="text/css" rel="stylesheet" href="css/jquery.popmenu.icons.css" /&gt;
+</pre>
+
+<p>
+	Once the files are loaded, we could assign PopMenu to any HTML elements.
+	Let's say we want to assign a context menu to a button. To assign a 
+	separator, add an item without label. Each menu item consists of an ID
+	and options. Please note that the ID of all menu items, including submenu items 
+	in a single context menu group must be unique.
+</p>
+
+<pre class="code">
+&lt;input type="button" id="MyButton" value="Right Click Here" /&gt;
+
+&lt;script type="text/javascript"&gt;
+$(function() {
+	$('#MyButton').popmenu({
+		itemId1: {label: 'Item One', action: eventHandler},
+		separator: {},
+		itemId2: {label: 'Item Two', action: eventHandler},
+	});
+});
+
+function eventHandler() { 
+	/* Function to be executed when an item is selected */ 
+}
+&lt;/script&gt;
+</pre>
+	
+<p>
+	Please refer to <a href="examples.html">Examples</a> for more advanced 
+	usages of PopMenu.
+</p>
+
+<h2>Accessing Menu Items</h2>
+
+<p>
+	Calling <span class="inline-code">$(elm).popmenu()</span> without any parameters 
+	will return you an instance of <a href="PopMenu.html">PopMenu</a> object. With 
+	this object, you could add, remove, and access menu items. Each menu item is 
+	an instance of <a href="PopMenuItem.html">PopMenuItem</a>. Consult these two 
+	classes for more information regarding available methods and options.
+</p>
+
+<pre class="code">
+// To access PopMenu instance
+$(elm).popmenu();
+
+// To access menu item
+$(elm).popmenu().find('item_id');
+
+// To add a new item
+$(elm).popmenu().append('item_id', {label: 'Item Label'});
+
+// To remove an item
+$(elm).popmenu().remove('item_id');
+</pre>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+/**
+ * PopMenu Documentation
+ * 
+ * Base stylesheet for PopMenu Documentation.
+ * 
+ * @author   Fajar Chandra
+ * @since    2014.05.29
+ */
+
+body {
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	background: #fff;
+	color: #333;
+	margin: 0;
+}
+
+a {
+	color: #7d5bf5;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}

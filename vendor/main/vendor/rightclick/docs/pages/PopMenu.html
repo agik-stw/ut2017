@@ -1,0 +1,500 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!-- Copyright (C) 2014 Fajar Chandra <contact@jar2.net> -->
+
+<head>
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../js/content.js"></script>
+	<link type="text/css" rel="stylesheet" href="../css/content.css" />
+</head>
+
+<body>
+<h1>PopMenu Class</h1>
+
+<h2>Constructor</h2>
+
+<pre class="inline-code">
+PopMenu([menu])
+</pre>
+<p>
+	An object can be passed to <span class="inline-code">menu</span> parameter 
+	to define a list of menu items. 
+</p>
+<ul>
+	<li>
+		<b>menu</b>: Object<br />
+		The menu object structure basically consists 
+		of <span class="inline-code">id: options</span> pairs. For the list of available 
+		options, please refer to <a href="PopMenuItem.html">PopMenuItem</a> class.
+	</li>
+</ul>
+<pre class="code hidden">
+// EXAMPLE //
+var menu = new PopMenu({
+	new: {label: 'New', icon: 'new'},
+	open: {label: 'Open', icon: 'open'},
+	save: {label: 'Save', icon: 'save'},
+	saveAs: {label: 'SaveAs'}
+});
+</pre>
+
+
+<!-- -------------------------------------------------------- -->
+
+<h2>Constants</h2>
+
+<h3>direction.RIGHT_BOTTOM: integer = 3</h3>
+<p class="h-tag">since 1.0</p>
+
+<h3>direction.RIGHT_TOP: integer = 2</h3>
+<p class="h-tag">since 1.0</p>
+
+<h3>direction.LEFT_BOTTOM: integer = 1</h3>
+<p class="h-tag">since 1.0</p>
+
+<h3>direction.LEFT_TOP: integer = 0</h3>
+<p class="h-tag">since 1.0</p>
+
+
+<!-- -------------------------------------------------------- -->
+
+<h2>Options</h2>
+
+<a name="effect"></a>
+<h3>effect: string = fade</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+fade | slide | none
+</pre>
+<p>
+	Transition effects for context menu.
+</p>
+
+<a name="duration"></a>
+<h3>duration: integer = 200</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Transition duration in ms if an effect is not 'none'.
+</p>
+
+<a name="contextMenu"></a>
+<h3>contextMenu: boolean = false</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	A flag determining whether this PopMenu is a top level menu or a sub-menu. 
+	Please use <a href="#contextMenu()">contextMenu()</a> to change this value.
+</p>
+
+<!-- -------------------------------------------------------- -->
+
+<h2>Properties</h2>
+
+<a name="dollar-sign"></a>
+<h3>$: jQuery</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Reference to DOM (jQuery) representation of the context menu.
+</p>
+
+<a name="id"></a>
+<h3>id: string = (random)</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	The HTML ID of the PopMenu.
+</p>
+
+<a name="data"></a>
+<h3>data: Object</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Internally stores the menu options. Please use <a href="#options()">options()</a> method 
+	to get/set menu options.
+</p>
+
+<!-- -------------------------------------------------------- -->
+
+<h2>Methods</h2>
+
+<a name="append()"></a>
+<h3>append: <a href="PopMenuItem.html">PopMenuItem</a></h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+append(id, options)
+</pre>
+<p>
+	Append a menu item at the end of the list.
+</p>
+<ul>
+	<li>
+		<b>id</b>: string<br />
+		ID of the new menu item.
+	</li>
+	<li>
+		<b>options</b>: Object<br />
+		PopMenuItem options. For the list of available 
+		options, please refer to <a href="PopMenuItem.html">PopMenuItem</a> class.
+	</li>
+</ul>
+<pre class="code hidden">
+// To insert a menu item named 'exit' at the end
+$(elm).popmenu().append('exit', {
+	label: 'Exit'
+});
+</pre>
+
+<a name="contextMenu()"></a>
+<h3>contextMenu: boolean</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+contextMenu(value)
+</pre>
+<p>
+	Set the PopMenu as a top level context menu if true is passed as the value.
+	Or get the current status if no parameter is passed.
+</p>
+<ul>
+	<li>
+		<b>value</b>: boolean<br />
+		True if the PopMenu is set as a top level context menu.
+	</li>
+</ul>
+<pre class="code hidden">
+// To set the current PopMenu as a top level context menu, and show it on the page
+var menu = new PopMenu({
+	add: {label: 'Add'},
+	remove: {label: 'Remove'}
+});
+
+menu.contextMenu(true);
+menu.show(0, 0);
+</pre>
+
+<a name="find()"></a>
+<h3>find: <a href="PopMenuItem.html">PopMenuItem</a></h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+find(id)
+</pre>
+<p>
+	Find a menu item. If a particular item is not found, NULL will be returned.
+</p>
+<ul>
+	<li>
+		<b>id</b>: string<br />
+		ID of the menu item.
+	</li>
+</ul>
+<pre class="code hidden">
+// To disable a menu entry named 'save'
+$(elm).popmenu().find('save').disable(true);
+</pre>
+
+<a name="hide()"></a>
+<h3>hide: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+hide([effect [, duration]])
+</pre>
+<p>
+	Hide context menu if currently being shown.
+</p>
+<ul>
+	<li>
+		<b>effect</b>: string<br />
+		Effect to use. If null, effect which is used when showing the context menu 
+		will be used. See <a href="#effect">effect</a> option for available options.
+	</li>
+	<li>
+		<b>duration</b>: integer<br />
+		Duration of the effect in ms.
+	</li>
+</ul>
+<pre class="code hidden">
+// To hide the context menu using 'fade' effect after 3 seconds
+var menu = new PopMenu();
+menu.show(0, 0);
+
+setTimeout(function() {
+	menu.hide('fade');
+}, 3000);
+</pre>
+
+<a name="hideSubmenus()"></a>
+<h3>hideSubmenus: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+hideSubmenus([effect [, duration]])
+</pre>
+<p>
+	Hide submenus if currently being shown.
+</p>
+<ul>
+	<li>
+		<b>effect</b>: string<br />
+		Effect to use. If null, effect which is used when showing the context menu 
+		will be used. See <a href="#effect">effect</a> option for available options.
+	</li>
+	<li>
+		<b>duration</b>: integer<br />
+		Duration of the effect in ms.
+	</li>
+</ul>
+<pre class="code hidden">
+// To hide the all submenus using 'fade' effect after 3 seconds
+var menu = new PopMenu();
+menu.show(0, 0);
+menu.find('displayModeItem').submenu.showAsSubmenu();
+
+setTimeout(function() {
+	menu.hideSubmenus('fade');
+}, 3000);
+</pre>
+
+
+<a name="insert()"></a>
+<h3>insert: <a href="PopMenuItem.html">PopMenuItem</a></h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+insert(id, options, after)
+</pre>
+<p>
+	Insert a menu item in the middle of the list.
+</p>
+<ul>
+	<li>
+		<b>id</b>: string<br />
+		ID of the new menu item.
+	</li>
+	<li>
+		<b>options</b>: Object<br />
+		PopMenuItem options. For the list of available 
+		options, please refer to <a href="PopMenuItem.html">PopMenuItem</a> class.
+	</li>
+	<li>
+		<b>after</b>: string<br />
+		ID of an existing item which the new menu item will be placed after.
+	</li>
+</ul>
+<pre class="code hidden">
+// To insert a menu item named 'save' after 'open'
+$(elm).popmenu().insert('save', {
+	label: 'Save'
+}, 'open');
+</pre>
+
+<a name="options()"></a>
+<h3>options: object</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+options([options])
+</pre>
+<p>
+	Get/set menu options.
+</p>
+<ul>
+	<li>
+		<b>options</b>: object<br />
+		Options to be set, please refer to Options section for list of available options. 
+		If none is specified, the method will act as getter.
+	</li>
+</ul>
+<pre class="code hidden">
+// To retrieve options
+var options = $(elm).popmenu().options();
+
+// To set the transition duration to 300ms
+$(elm).popmenu().options({duration: 300});
+</pre>
+
+<a name="populateMenu()"></a>
+<h3>populateMenu: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+populateMenu(menu)
+</pre>
+<p>
+	Populate PopMenu with menu items. Existing items will be kept.
+</p>
+<ul>
+	<li>
+		<b>menu</b>: Object<br />
+		The menu object structure basically consists 
+		of <span class="inline-code">id: options</span> pairs. For the list of available 
+		options, please refer to <a href="PopMenuItem.html">PopMenuItem</a> class.
+	</li>
+</ul>
+<pre class="code hidden">
+// To insert a set of menu items to existing context menu
+$(elm).popmenu().populateMenu({
+	sep0: {type: 'separator'},
+	add: {label: 'Add', icon: 'add'},
+	remove: {label: 'Remove', icon: 'remove'}
+});
+</pre>
+
+<a name="prepend()"></a>
+<h3>prepend: <a href="PopMenuItem.html">PopMenuItem</a></h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+prepend(id, options)
+</pre>
+<p>
+	Insert a menu item at the beginning of the list.
+</p>
+<ul>
+	<li>
+		<b>id</b>: string<br />
+		ID of the new menu item.
+	</li>
+	<li>
+		<b>options</b>: Object<br />
+		PopMenuItem options. For the list of available 
+		options, please refer to <a href="PopMenuItem.html">PopMenuItem</a> class.
+	</li>
+</ul>
+<pre class="code hidden">
+// To insert a menu item named 'new' at the beginning
+$(elm).popmenu().prepend('new', {
+	label: 'New File'
+});
+</pre>
+
+<a name="remove()"></a>
+<h3>remove: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+remove(id)
+</pre>
+<p>
+	Remove a menu item and its submenus.
+</p>
+<ul>
+	<li>
+		<b>id</b>: string<br />
+		ID of the menu item.
+	</li>
+</ul>
+<pre class="code hidden">
+// To remove a menu entry named 'new'
+$(elm).popmenu().remove('new');
+</pre>
+
+<a name="selectedItem()"></a>
+<h3>selectedItem: <a href="PopMenuItem.html">PopMenuItem</a></h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+selectedItem()
+</pre>
+<p>
+	Get currently selected item. If no item is selected, null will be returned.
+</p>
+<pre class="code hidden">
+// To check if the currently selected item is the 'save' item.
+if($(elm).popmenu().find('save') == $(elm).popmenu().selectedItem()) {
+	alert('Save item is selected.');
+}
+</pre>
+
+<a name="show()"></a>
+<h3>show: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+show(x, y, [effect [, duration]])
+</pre>
+<p>
+	Show context menu. If x and y coordinates are speified, the context menu 
+	expand direction will be automatically determined not to overflow the viewport.
+	By default, the expand direction is to bottom right.
+	Please note that this function only works for context menu. For submenu, use 
+	<a href="#showAsSubmenu()">showAsSubmenu()</a> instead.
+</p>
+<ul>
+	<li>
+		<b>x</b>: integer<br />
+		Position of the context menu from the left of viewport in pixels.
+	</li>
+	<li>
+		<b>y</b>: integer<br />
+		Position of the context menu from the top of viewport in pixels.
+	</li>
+	<li>
+		<b>effect</b>: string<br />
+		Effect to use. If null or 'default', effect which is set in options will be used.
+		See <a href="#effect">effect</a> option for available options.
+	</li>
+	<li>
+		<b>duration</b>: integer<br />
+		Duration of the effect in ms.
+	</li>
+</ul>
+<pre class="code hidden">
+// To show the context menu on top left
+var menu = PopMenu();
+menu.show(0, 0);
+</pre>
+
+<a name="showAsSubmenu()"></a>
+<h3>showAsSubmenu: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+showAsSubmenu([direction, [effect [, duration]]])
+</pre>
+<p>
+	Show sub-menu. 
+	By default, the expand direction is to bottom right.
+	Please note that this function only works for submenu. For context menu, use 
+	<a href="#show()">show()</a> instead.
+</p>
+<ul>
+	<li>
+		<b>direction</b>: PopMenu.direction = RIGHT_BOTTOM<br />
+		Direction the submenu will be opened. Available options are:
+		<ul>
+			<li>PopMenu.direction.RIGHT_BOTTOM</li>
+			<li>PopMenu.direction.RIGHT_TOP</li>
+			<li>PopMenu.direction.LEFT_BOTTOM</li>
+			<li>PopMenu.direction.LEFT_TOP</li>
+		</ul>
+	</li>
+	<li>
+		<b>effect</b>: string<br />
+		Effect to use. If null or 'default', effect which is set in options will be used.
+		See <a href="#effect">effect</a> option for available options.
+	</li>
+	<li>
+		<b>duration</b>: integer<br />
+		Duration of the effect in ms.
+	</li>
+</ul>
+<pre class="code hidden">
+// To show the context menu on top left
+var menu = PopMenu();
+menu.show(0, 0);
+</pre>
+
+
+<a name="updateLabels()"></a>
+<h3>updateLabels: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+updateLabels([force])
+</pre>
+<p>
+	Update all menu labels.
+</p>
+<ul>
+	<li>
+		<b>force</b>: boolean = false<br />
+		If set to true, item without dynamic labels (ie. string) will also be updated.
+	</li>
+</ul>
+<pre class="code hidden">
+// To force updating all menu labels
+$(elm).popmenu().updateLabels(true);
+</pre>
+
+</body>
+
+</html> 

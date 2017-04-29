@@ -1,0 +1,58 @@
+/**
+ * jQuery PopMenu
+ * 
+ * PopMenu with system colors.
+ * Default jquery.popmenu.css is required.
+ * 
+ * @author   Fajar Chandra
+ * @since    2014.05.29
+ */
+
+@import url('jquery.popmenu.css'); 
+
+/* MENU */
+
+.PopMenu-Menu {
+	background: Menu;
+	border: 1px solid ActiveBorder;
+	color: MenuText;
+}
+
+/* MENU ITEM */
+
+.PopMenu-Item a {
+	color: MenuText;
+}
+
+.PopMenu-Item.selected,
+.PopMenu-Item:hover {
+	background: Highlight;
+}
+
+.PopMenu-Item:hover > a {
+	color: HighlightText;
+}
+
+.PopMenu-Item.disabled {
+	background: transparent;
+}
+
+.PopMenu-Item.disabled > a {
+	color: GrayText;
+}
+
+/* MENU ICON */
+
+.PopMenu-Icon {
+	color: MenuText;
+}
+
+.PopMenu-Item.disabled .PopMenu-Icon {
+	color: GrayText;
+}
+
+/* MENU SEPARATOR */
+
+.PopMenu-Separator {
+	background: GrayText;
+}

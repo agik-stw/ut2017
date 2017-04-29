@@ -1,0 +1,82 @@
+/**
+ * PopMenu Documentation
+ * 
+ * Stylesheet for Content Frame.
+ * 
+ * @author   Fajar Chandra
+ * @since    2014.05.29
+ */
+
+@import url('docs.css');
+
+html {
+	height: 100%;
+}
+
+body {
+	margin: 20px;
+	box-sizing: border-box;
+} 
+
+h1 {
+	margin: -20px -20px 20px -20px;
+	background: #7d5bf5;
+	color: #fff;
+	padding: 20px;
+	border-bottom: 2px solid #444;
+}
+
+h2 {
+	border-bottom: 2px solid #333;
+}
+
+h3 {
+	border-bottom: 1px solid #ccc;
+}
+
+.h-tag {
+	margin-top: -1.5em;
+	font-style: italic;
+	font-size: 11px;
+	color: #666;
+}
+
+.code {
+	background: #FFF5C8;
+	border: double 3px #888;
+	padding: 10px;
+	font-family: monospace;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+	margin: 0;
+}
+
+.inline-code {
+	background: #FFF5C8;
+	border: dashed 1px #888;
+	padding: 0 2px;
+	font-family: monospace;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+	margin: 0;
+}
+
+.code.hidden {
+	display: none;
+}
+
+.code-folder {
+	background: #888;
+	color: #fff;
+	margin: 0;
+	cursor: pointer;
+	padding: 4px 10px;
+	transition: background .2s, color .2s;
+}
+
+.code-folder:hover {
+	color: #f5d95b;
+	background: #666;
+}

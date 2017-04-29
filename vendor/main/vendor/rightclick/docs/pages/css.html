@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!-- Copyright (C) 2014 Fajar Chandra <contact@jar2.net> -->
+
+<head>
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../js/content.js"></script>
+	<link type="text/css" rel="stylesheet" href="../css/content.css" />
+</head>
+
+<body>
+<h1>Styling Context Menu</h1>
+
+<h2>Provided Themes</h2>
+
+<p>
+	Three themes are provided in the PopMenu distribution:
+	<ul>
+		<li>
+			<b>jquery.popmenu.css</b><br />
+			Default light theme.
+		</li>
+		<li>
+			<b>jquery.popmenu.dark.css</b><br />
+			Dark theme.
+		</li>
+		<li>
+			<b>jquery.popmenu.syscolors.css</b><br />
+			Context menu using system colors.
+		</li>
+	</ul>
+</p>
+
+<h2>Writing Custom Stylesheet</h2>
+
+<p>
+	If the provided CSS files aren't enough to match your website theme, it is 
+	possible to create your own stylesheet. The quickest way to do this is by 
+	importing the default CSS file by calling 
+	<span class="inline-code">@import url('jquery.popmenu.css');</span> on the 
+	beginning of your CSS file. The following code is a sample CSS file from 
+	the Dark theme.
+</p>
+
+<pre class="code hidden">
+/* Import default theme as the base */
+@import url('jquery.popmenu.css'); 
+
+/* Write customizations here... */
+
+/* MENU */
+
+.PopMenu-Menu {
+	background: #666;
+	background: linear-gradient(#777, #555);
+	border: 1px solid #333;
+	color: #ddd;
+}
+
+/* MENU ITEM */
+
+.PopMenu-Item a {
+	color: #ddd;
+}
+
+.PopMenu-Item:hover {
+	background: #43ace8;
+}
+
+.PopMenu-Item:hover a {
+	color: #fff;
+}
+
+.PopMenu-Item.disabled {
+	background: transparent;
+}
+
+.PopMenu-Item.disabled a {
+	color: #888;
+}
+
+/* MENU ICON */
+
+.PopMenu-Icon {
+	color: #ddd;
+}
+
+.PopMenu-Item.disabled .PopMenu-Icon {
+	color: #888;
+}
+
+/* MENU SEPARATOR */
+
+.PopMenu-Separator a {
+	background: #888;
+}
+</pre>
+
+<h3>HTML Structure</h3>
+<p>
+	The HTML structure of the context menu is listed below.
+</p>
+
+<pre class="code">
+&lt;div class="PopMenu"&gt;
+	&lt;ul class="PopMenu-Menu PopMenu-TopMenu"&gt;
+		&lt;li class="PopMenu-Item"&gt;
+			&lt;a class="PopMenu-Link" data-key="a" data-name="add"&gt;
+				&lt;u&gt;A&lt;/u&gt;dd
+			&lt;/a&gt;
+			&lt;span class="PopMenu-Icon" style="background-image: none;" data-icon="add"&gt;&lt;/span&gt;
+		&lt;/li&gt;
+		&lt;li class="PopMenu-Item disabled"&gt;
+			&lt;a class="PopMenu-Link" data-key="r" data-name="remove"&gt;
+				&lt;u&gt;R&lt;/u&gt;emove
+			&lt;/a&gt;
+			&lt;span class="PopMenu-Icon" style="background-image: none;" data-icon="remove"&gt;&lt;/span&gt;
+		&lt;/li&gt;
+		&lt;li class="PopMenu-Separator"&gt;
+			&lt;a class="PopMenu-Link" data-name="separator"&gt;&lt;/a&gt;
+		&lt;/li&gt;
+		&lt;li class="PopMenu-Item"&gt;
+			&lt;a class="PopMenu-Link" data-key="h" data-name="home"&gt;
+				Visit &lt;u&gt;H&lt;/u&gt;omepage
+			&lt;/a&gt;
+			&lt;span class="PopMenu-Icon" style="background-image: url("../img/home.png");"&gt;&lt;/span&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+
+<h3>Classes</h3>
+<p>
+	To make customizations easier, each element is assigned specific classes.
+	All classes are prefixed with "PopMenu-" to avoid conflicts with other 
+	CSS files.
+</p>
+
+<ul>
+	<li>
+		<b>PopMenu</b><br />
+		The base container of the context menu. Usually there's no need to make 
+		any chages to this class.
+	</li>
+	<li>
+		<b>PopMenu-Menu</b><br />
+		Context menu frame. This class is used on both top level menu and sub-menus.
+	</li>
+	<li>
+		<b>PopMenu-TopMenu</b><br />
+		Top level context menu frame.
+	</li>
+	<li>
+		<b>PopMenu-SubMenu</b><br />
+		Sub-menu frame.
+	</li>
+	<li>
+		<b>PopMenu-Item</b><br />
+		Context menu item.
+	</li>
+	<li>
+		<b>PopMenu-Link</b><br />
+		Item label.
+	</li>
+	<li>
+		<b>PopMenu-Icon</b><br />
+		Icon to be displayed beside a menu item.
+	</li>
+	<li>
+		<b>PopMenu-Separator</b><br />
+		A separator.
+	</li>
+</ul>
+
+</body>
+
+</html>
