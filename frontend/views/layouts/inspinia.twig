@@ -1,0 +1,158 @@
+
+
+{{ use('/yii/helpers/Html') }}
+{{use('/yii/widgets/Breadcrumbs') }}
+{{ use('/yii/widgets/Menu') }}
+{{ use('/yii/helpers/Url')}}
+{{ use('/kartik/sidenav/SideNav')}}
+{{ use('/frontend/assets/InspiniaAsset') }}
+{{ register_inspinia_asset() }}
+use frontend/assets/BootstrapAsset;
+BootstrapAsset::register($this);
+use frontend/assets/AppAsset;
+AppAsset::register($this);
+use frontend/assets/BowerAsset;
+BowerAsset::register($this);
+use frontend/components/inspinia/InsBreadcrumbs;
+$moduleurl=Yii::$app->urlManager->parseRequest(Yii::$app->request);
+$url=$moduleurl[0];
+
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+   <meta charset="<?= Yii::$app->charset ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?= Html::csrfMetaTags() ?>
+  <title><?= Html::encode($this->title) ?></title>
+  <?php $this->head() ?>
+</head>
+
+<body class="fixed-sidebar fixed-nav fixed-nav-basic">
+<?php $this->beginBody() ?>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+<ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="<?php echo Url::base('').'/'.'inspinia/img/profile_small.jpg';?>" />
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="contacts.html">Contacts</a></li>
+                                <li><a href="mailbox.html">Mailbox</a></li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            IN+
+                        </div>
+                    </li>
+                    <li>
+
+                         <li class="menu_active" id="menu">
+                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                    <li id="view_data"><a href="<?php echo Url::base('');?>/lube/action/view"><i class="fa fa-circle"></i> <span class="nav-label">Dashboard MFC</span></a></li>
+                        <li><a href="ecommerce_products_grid.html"><i class="fa fa-circle"></i> <span class="nav-label">Dashboard MFC 2</span></a></li>
+                    </ul>
+                </li>
+                       
+                       <li class="<?php if ($url=='monitoring/used_oil') {
+                        echo 'active';
+                    }elseif($url=='monitoring/fuel'){
+                        echo 'active';
+                    } 
+                        ?>" id="menu">
+                    <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Monitoring</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+
+                    <li class="<?php if ($url=='monitoring/used_oil') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>" id="view_data"><a href="<?php echo Url::toRoute('/monitoring/used_oil') ?>"><i class="fa fa-circle"></i> <span class="nav-label">Used Oil</span></a></li>
+
+                    <li class="<?php if ($url=='monitoring/fuel') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>" id="view_data"><a href="<?php echo Url::toRoute('/monitoring/fuel') ?>"><i class="fa fa-circle"></i> <span class="nav-label">Fuel</span></a></li>
+
+                        <li><a href="ecommerce_products_grid.html"><i class="fa fa-circle"></i> <span class="nav-label">New Oil & Others</span></a></li>
+
+                        <li><a href="ecommerce_products_grid.html"><i class="fa fa-circle"></i> <span class="nav-label">UnitNo History</span></a></li>
+
+                         <li><a href="ecommerce_products_grid.html"><i class="fa fa-circle"></i> <span class="nav-label">Machine Health</span></a></li>
+
+                          <li><a href="ecommerce_products_grid.html"><i class="fa fa-circle"></i> <span class="nav-label">Component Health</span></a></li>
+
+                           <li><a href="ecommerce_products_grid.html"><i class="fa fa-circle"></i> <span class="nav-label">Machine Comparation</span></a></li>
+
+                           <li><a href="ecommerce_products_grid.html"><i class="fa fa-circle"></i> <span class="nav-label">Consistency History</span></a></li>
+
+                    </ul>
+                </li>
+
+                <li><a href="ecommerce_products_grid.html"><i class="fa fa-truck"></i> <span class="nav-label">Sample Tracking</span></a></li>
+
+                </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-link" href="#"><i class="fa fa-windows"></i> </a>
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="<?php echo Yii::$app->homeUrl;?>"><span class="m-r-sm text-muted welcome-message"><big class="bold">Petrolab Client Report</big></span></a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+
+                      <!--content................................................ -->
+        <!--breadcrumbs-->
+<?php /*InsBreadcrumbs::beginBread('Home','h2');*/ ?>
+<!-- <li><a href="#">Home</a></li> -->
+<?php /*InsBreadcrumbs::endBread();*/ ?>
+            <!--breadcrumbs-->
+<?=$content?>
+
+        <!--content................................................ -->
+        </div>
+
+        <div class="fixed footer">
+
+                    <div>
+                        <strong>Copyright</strong> Petrolab Services &copy; <?php echo date('Y'); ?>
+                    </div>
+                </div>
+
+    </div>
+
+     <?php $this->endBody() ?> 
+</body>
+</html>
+<?php $this->endPage() ?>

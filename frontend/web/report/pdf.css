@@ -1,0 +1,101 @@
+li{
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	list-style: none;
+}
+.fixed {
+        position: fixed;
+}
+.col1{
+	/* margin-left: 100px; */
+}
+.col3{
+	/* position: fixed; */
+	margin-left: 30px;
+}
+.col4{
+	/* margin-left: 830px; */
+	/* position: fixed; */
+	margin-right: 350px;
+	padding: 0;
+}
+#head{
+	overflow:auto;
+	padding: 0;
+}
+#chi { float:left;
+	list-style: none;
+	margin-left: 0;
+	padding: 0;
+ }
+#chi:last-child {
+	float:right; 
+}
+.th_bold{
+	font-weight: bold;
+	background-color: #e6e600;
+	/* border: solid 0.1px; */
+	border-color: #b8b894;
+}
+.bg_td{
+	background-color: #ebebe0 !important;
+}
+._12px{
+	font-size: 12px;
+}
+._13px{
+	font-size: 13px;
+}
+._14px{
+	font-size: 14px;
+}
+.center{
+	text-align: center;
+}
+#logominyak{
+/* 	text-align: center; */
+	/* margin-left: 60px; */
+	padding-left: 60px;
+	/* position: fixed; */
+	/* width: 60px; */
+}
+.border-tb{
+	border: solid 0.1px;
+	border-color: #b8b894;
+}
+.urgent{
+	background-color: #ffe6ff !important;
+	/* border: solid 1px; */
+	border-color: #b8b894;
+}
+.tb-body{
+	background-color: #e0ebeb;
+	/* border: solid 0.1px; */
+	border-color: #b8b894;
+}
+#chart{
+	
+	height: auto;
+	border: solid 0.3px;
+	border-color: black;
+}
+#chart2{
+	
+	height: auto;
+	border: solid 0.3px;
+	border-color: black;
+}
+.c-label{
+	height: auto;
+	width: 500px;
+	background-color: #66d9ff;
+}
+.c-label b{
+	text-align: center;
+	padding-left: 200px;
+}
+.justify{
+	text-align: justify;
+	padding: 5px;
+}

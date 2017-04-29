@@ -1,0 +1,45 @@
+.splash_title{
+font-weight: bold;
+font-size: 50px;
+}
+.splash_title2{
+font-weight: bold;
+font-size: 20px;
+}
+.bold{
+font-weight: bold;
+}
+.th_table{
+	background-color: #476b6b !important;
+	color: white !important;
+}
+.footer{
+/*	background-color: #e0e0d1 !important;*/
+	max-height: 50px;
+}
+.liNone{
+	list-style: none;
+	font-weight: bold;
+}
+.panel-heading {
+    padding: 5px 15px;
+}
+
+.panel-footer {
+	padding: 1px 15px;
+	color: #A0A0A0;
+}
+
+.profile-img {
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 10px;
+	display: block;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+/* td.highlight {
+    background-color: whitesmoke !important;
+} */
+
