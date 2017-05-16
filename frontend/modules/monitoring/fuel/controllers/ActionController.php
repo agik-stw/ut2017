@@ -7,6 +7,7 @@ use app\models\TbTransaction;
 use kartik\mpdf\Pdf;
 /*use app\plugins\fpdf181\FPDF;*/
 use Yii;
+use app\models\Fuel;
 
 use app\assets\AppAsset;
 use app\assets\ChartAsset;
@@ -53,7 +54,7 @@ return Json::encode($ar);
          // call mPDF methods on the fly
         'methods' => [ 
             /*'SetHeader'=>['Oil Analysis Report'],*/ 
-            'SetFooter'=>['Page. {PAGENO}'],
+            'SetFooter'=>['FUEL ANALYSIS REPORT-Page. {PAGENO}'],
         ]
     ]);
 return $pdf->render();
@@ -67,6 +68,16 @@ return $pdf->render();
           break;
       }
 
+    }
+
+    public function actionView($reportid){
+      $data=Fuel::find()
+      ->where(['report_id'=>$reportid])->one();
+
+            header("Content-type: application/pdf");
+header("Content-Disposition: inline; filename=".$data['file_upload']);
+
+        return $this->renderPartial('view',['data'=>$data]);
     }
 
 

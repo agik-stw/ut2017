@@ -30,6 +30,8 @@ use frontend\assets\RightclickAsset;
 RightclickAsset::register($this);
 use frontend\assets\SweetAlertAsset;
 SweetAlertAsset::register($this);
+use frontend\assets\AjaxAnimation;
+AjaxAnimation::register($this);
 use frontend\components\inspinia\InsBreadcrumbs;
 use richardfan\widget\JSRegister;
 $moduleurl=Yii::$app->urlManager->parseRequest(Yii::$app->request);

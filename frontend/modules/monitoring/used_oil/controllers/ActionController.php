@@ -91,13 +91,24 @@ return Json::encode($data);
 
       public function actionGetdata_by_date($date1,$date2)
     {
-     
+     \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+
       $session = Yii::$app->session;
       $data_id=$session->get('data_id');
 $connection = Yii::$app->db;
 $command = $connection->createCommand('call getTransactionByReceiveDate("'.$data_id.'"'.',"'.$date1.'"'.',"'.$date2.'")');     
 $data=$command->queryAll();
-return Json::encode($data);
+$totalData=count($data);
+$totalFiltered=$totalData;
+
+
+$json_data = array(
+            /*"draw"            => 1, */
+            "recordsTotal"    => intval( $totalData ),
+            "recordsFiltered" => intval( $totalFiltered ),
+            "data"            => $data
+            );
+return $json_data;
 
     }
 
@@ -169,7 +180,26 @@ return $connt;
 return $pdf->render();
           break;
           case 'excel':
-         echo 'ini laporan excel, lab number : '.$labNumber;
+          $date1=$_REQUEST['date1'];
+          $date2=$_REQUEST['date2'];
+           $session = Yii::$app->session;
+      $data_id=$session->get('data_id');
+$connection = Yii::$app->db;
+$command = $connection->createCommand('call getTransactionByReceiveDate("'.$data_id.'"'.',"'.$date1.'"'.',"'.$date2.'")');     
+$data=$command->queryAll();
+/*\Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+return $data;*/
+/*return $this->renderPartial('excel',['data'=>$data]);*/
+
+          $filename = 'report-'.$date1.'/'.'sd/'.$date2.'.xls';
+          header("Content-type: application/vnd-ms-excel");
+           header("Content-Disposition: attachment; filename=".$filename);
+return $this->renderPartial('excel',['data'=>$data]);
+          break;
+          case 'critical_item':
+          /*Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;*/
+          /*return 'aaa';*/
+          return $this->renderPartial('export/exportxls');
           break;
         
         default:

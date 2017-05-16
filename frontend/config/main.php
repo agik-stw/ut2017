@@ -14,6 +14,12 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+    'backendDoor' => [
+                'class' => 'yii\web\urlManager',
+                'baseUrl' => 'http://admin.ut2017.dev:84/',//i.e. $_SERVER['DOCUMENT_ROOT'] .'/yiiapp/web/'
+                'enablePrettyUrl' => true,
+                'showScriptName' => false,
+        ],
     'pdf' => [
         'class' => Pdf::classname(),
         'format' => Pdf::FORMAT_A4,
@@ -94,6 +100,9 @@ return [
         'login' => [
             'class' => 'app\modules\login\Module',
         ],
+        'pdfjs' => [
+       'class' => '\yii2assets\pdfjs\Module',
+   ],
     ],
     'params' => $params,
     'defaultRoute' => 'dashboard',

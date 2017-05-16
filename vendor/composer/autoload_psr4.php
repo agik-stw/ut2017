@@ -15,6 +15,7 @@ return array(
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'yii2mod\\c3\\chart\\' => array($vendorDir . '/yii2mod/yii2-c3-chart'),
+    'yii2assets\\pdfjs\\' => array($vendorDir . '/yii2assets/yii2-pdfjs'),
     'richardfan\\widget\\' => array($vendorDir . '/richardfan1126/yii2-js-register'),
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
     'nullref\\datatable\\' => array($vendorDir . '/nullref/yii2-datatables/src'),

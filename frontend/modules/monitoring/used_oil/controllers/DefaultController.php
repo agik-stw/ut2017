@@ -28,6 +28,16 @@ class DefaultController extends Controller
         if (!$session['username']) {
             return Yii::$app->getResponse()->redirect(Url::toRoute('/login'));
         }
-        return $this->render('index');
+
+        if ($session['level_name']=='FMC' || $session['level_name']=='Admin') {
+            $export=array(['exp'=>'<option disabled="" selected value="Select_Export">Select Export</option>'],
+                ['exp'=>'<option value="excel">EXCEL</option>'],
+                ['exp'=>'<option value="critical_item">CRITICAL ITEM</option>']);
+            return $this->render('index',['export'=>$export]);
+        }else{
+$export=array(['exp'=>'<option value="pdf">PDF</option>']);
+            return $this->render('index',['export'=>$export]);
+        }
+        
     }
 }

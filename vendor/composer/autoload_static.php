@@ -28,6 +28,7 @@ class ComposerStaticIniteb6f4f08170918eac9893efea485f28c
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
             'yii2mod\\c3\\chart\\' => 17,
+            'yii2assets\\pdfjs\\' => 17,
         ),
         'r' => 
         array (
@@ -146,6 +147,10 @@ class ComposerStaticIniteb6f4f08170918eac9893efea485f28c
         'yii2mod\\c3\\chart\\' => 
         array (
             0 => __DIR__ . '/..' . '/yii2mod/yii2-c3-chart',
+        ),
+        'yii2assets\\pdfjs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yii2assets/yii2-pdfjs',
         ),
         'richardfan\\widget\\' => 
         array (

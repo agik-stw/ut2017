@@ -347,16 +347,9 @@ use richardfan\widget\JSRegister;
 <div ng-app="">
 
 <div class="ibox-title">
-<div class="col-md-2 pull-left">
-<div class="form-group">
-  <label for="export">Option Export:</label>
-  <select disabled="" class="form-control input-sm select2" id="export">
-  <option disabled="" selected="" value="Select_Export">Select Export</option>
-    <option value="pdf">PDF</option>
-    <option value="excel">EXCEL</option>
-  </select>
-</div>
-</div>
+
+
+<div id="bloadify4"></div>
 
 <div class="col-md-2 pull-left">
 <div class="form-group">
@@ -388,6 +381,19 @@ use richardfan\widget\JSRegister;
 <div class="form-group input-sm">
   <label></label>
  <button id="btn-refresh" class="btn btn-xs btn-default form-control"><span class="glyphicon glyphicon-refresh"></span></button>
+</div>
+</div>
+
+<div class="col-md-2 pull-left">
+<div class="form-group">
+  <label for="export">Option Export:</label>
+  <select disabled="" class="form-control input-sm select2" id="export">
+    <?php
+    foreach ($export as $key) {
+        echo $key['exp'];
+    }
+    ?>
+  </select>
 </div>
 </div>
 
@@ -468,7 +474,7 @@ var tb=$("#tb_used_oil").DataTable({
         "autoWidth": true,
         "ajax": {
           "url": "<?php echo Url::toRoute('/api/usedoil/getdata?token=itpetrolab');?>",
-          'type':'POST'
+          'type':'post'
         },
     columns: [
     {
@@ -536,12 +542,30 @@ $(row).find('td:eq(13)').css('color', '#0033cc');
 });
 
 
+$("#btn-refresh").on('click',function(event) {
+    var dateStart=$("#date1").val();
+    var dateEnd=$("#date2").val();
+
+   if ($("#select-date").val()=='all_date') {
+tb.ajax.url('<?php echo Url::toRoute('/api/usedoil/getdata?token=itpetrolab');?>').load();
+   }else if($("#select-date").val()=='receive_date'){
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/used_oil/action/getdata_by_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
+/*tb.ajax.reload(null, false).draw();*/
+console.log("ajax table");
+   }else if($("#select-date").val()=='report_date'){
+
+   }else if($("#select-date").val()=='sample_date'){
+
+   }
+});
+
+
 
 $('#tb_used_oil tbody').on( 'click', 'tr', function () {
 var data=( tb.row( this ).data() );
 /*alert(data.lab_no);*/
 $("#labno").val(data.lab_no);
-$("#export").removeAttr('disabled');
+
 /*ymz.jq_toast({text:"Lab Number: "+data.lab_no+"", type: "notice", sec: 1});*/
 
 $("#ex_pdf").attr('href',"<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=pdf');?>"+'&'+'labNumber='+data.lab_no)
@@ -563,28 +587,21 @@ $(".select2").select2();
 $("#export").on('change',function(event) {
 var type=$(this).val();
 var labno=$("#labno").val();
-window.open("<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=');?>"+type+'&'+'labNumber='+labno,'_blank')
+window.open("<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=');?>"+type+'&labNumber=0'+'&'+'date1='+$("#date1").val()+'&'+'date2='+$("#date2").val(),'_blank');
 $("#export").val('Select_Export');
 });
 
 
 $("#select-date").on('change',function(event) {
+    
  dateEn();
-});
+ if ($(this).val()=="all_date") {
+    $("#date1").val("");
+    $("#date2").val("");
+    dateDis();
+    $("#btn-refresh").removeAttr('disabled');
+ }
 
-$("#btn-refresh").on('click',function(event) {
-    var dateStart=$("#date1").val();
-    var dateEnd=$("#date2").val();
-
-   if ($("#select-date").val()=='all_date') {
-
-   }else if($("#select-date").val()=='receive_date'){
-tb.ajax.url( "<?php echo Url::toRoute('/monitoring/used_oil/action/getdata_by_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
-   }else if($("#select-date").val()=='report_date'){
-
-   }else if($("#select-date").val()=='sample_date'){
-
-   }
 });
 
 dateDis();
@@ -597,6 +614,30 @@ dateDis();
     'position' => \yii\web\View::POS_END
 ]); ?>
 <script>
+
+$.ajaxSetup({
+beforeSend:function(){
+    showLoader();
+},
+complete:function(){
+    hideLoader();
+}
+});
+
+
+
+function showLoader(){
+HoldOn.open({
+    theme:'sk-rect',
+    message:"<h4>"+"Please Wait..."+"</h4>"
+});
+}
+
+function hideLoader(){
+HoldOn.close();
+}
+
+
 
     //modal//
 function Detail(labNumber){
@@ -694,12 +735,17 @@ function dateDis(){
   $("#btn-refresh").attr({
       disabled: 'disabled'
   });
+  $("#export").attr({
+      disabled: 'disabled'
+  });
+
 }
 
 function dateEn(){
-  $('#date1').removeAttr('disabled')
-  $('#date2').removeAttr('disabled')
-  $("#btn-refresh").removeAttr('disabled')
+  $('#date1').removeAttr('disabled');
+  $('#date2').removeAttr('disabled');
+  $("#btn-refresh").removeAttr('disabled');
+   $("#export").removeAttr('disabled');
 }
 
 

@@ -18,18 +18,34 @@ class UsedoilController extends \yii\web\Controller
       ->where(['token'=>$token])
       ->one();
 if ($tokencek) {
-	$requestData= $_REQUEST;
+$requestData= $_REQUEST;
+$columns = array( 
+	0 =>'lab_no', 
+	1 => 'grouploc',
+	2=> 'branch',
+	3=> 'customer_name',
+	4=> 'lab_no',
+	5=> 'sample_date',
+	6=> 'receive_date',
+	7=> 'report_date',
+	8=> 'unit_number',
+	9=> 'component_name',
+	10=> 'model',
+	11=> 'lab_no',
+	12=> 'oil_change',
+	13=> 'eval_code'
+
+);
 	$data_id=$session->get('data_id');
 	$data=UsedOil::getdata($data_id);
 	$totalData=count($data);
 	$totalFiltered=$totalData;
 
-       $ar['data']=$data;
 
 $json_data = array(
-			/*"draw"            => intval( $requestData['draw'] ), 
+			/*"draw"            => 1, */
 			"recordsTotal"    => intval( $totalData ),
-			"recordsFiltered" => intval( $totalFiltered ),*/
+			"recordsFiltered" => intval( $totalFiltered ),
 			"data"            => $data
 			);
 return $json_data;

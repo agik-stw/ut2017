@@ -12,15 +12,6 @@ return array (
       '@richardfan/widget' => $vendorDir . '/richardfan1126/yii2-js-register',
     ),
   ),
-  'kartik-v/yii2-krajee-base' => 
-  array (
-    'name' => 'kartik-v/yii2-krajee-base',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base',
-    ),
-  ),
   'kartik-v/yii2-widget-sidenav' => 
   array (
     'name' => 'kartik-v/yii2-widget-sidenav',
@@ -84,15 +75,6 @@ return array (
       '@yii2mod/c3/chart' => $vendorDir . '/yii2mod/yii2-c3-chart',
     ),
   ),
-  'yiisoft/yii2-swiftmailer' => 
-  array (
-    'name' => 'yiisoft/yii2-swiftmailer',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
-    ),
-  ),
   'yiisoft/yii2-bootstrap' => 
   array (
     'name' => 'yiisoft/yii2-bootstrap',
@@ -100,6 +82,24 @@ return array (
     'alias' => 
     array (
       '@yii/bootstrap' => $vendorDir . '/yiisoft/yii2-bootstrap',
+    ),
+  ),
+  'yiisoft/yii2-faker' => 
+  array (
+    'name' => 'yiisoft/yii2-faker',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
+    ),
+  ),
+  'yiisoft/yii2-swiftmailer' => 
+  array (
+    'name' => 'yiisoft/yii2-swiftmailer',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
     ),
   ),
   'yiisoft/yii2-debug' => 
@@ -111,6 +111,24 @@ return array (
       '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
     ),
   ),
+  'kartik-v/yii2-krajee-base' => 
+  array (
+    'name' => 'kartik-v/yii2-krajee-base',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base',
+    ),
+  ),
+  'yii2assets/yii2-pdfjs' => 
+  array (
+    'name' => 'yii2assets/yii2-pdfjs',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@yii2assets/pdfjs' => $vendorDir . '/yii2assets/yii2-pdfjs',
+    ),
+  ),
   'yiisoft/yii2-gii' => 
   array (
     'name' => 'yiisoft/yii2-gii',
@@ -118,15 +136,6 @@ return array (
     'alias' => 
     array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii',
-    ),
-  ),
-  'yiisoft/yii2-faker' => 
-  array (
-    'name' => 'yiisoft/yii2-faker',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
 );

@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-$this->title = 'Report | Dashboard';
+$this->title = 'Admin | Dashboard';
 use richardfan\widget\JSRegister;
 ?>
 

@@ -30,6 +30,8 @@ use backend\assets\RightclickAsset;
 RightclickAsset::register($this);
 use backend\assets\SweetAlertAsset;
 SweetAlertAsset::register($this);
+use backend\assets\AjaxAnimation;
+AjaxAnimation::register($this);
 use backend\components\inspinia\InsBreadcrumbs;
 $moduleurl=Yii::$app->urlManager->parseRequest(Yii::$app->request);
 $url=$moduleurl[0];
@@ -67,7 +69,7 @@ $url=$moduleurl[0];
                                 <li><a href="contacts.html">Contacts</a></li>
                                 <li><a href="mailbox.html">Mailbox</a></li> -->
                                 <li class="divider"></li>
-                                <li><a href="<?php echo Url::toRoute('/login/proces/logout'); ?>">Logout</a></li>
+                                <li><a href="#" onclick="Logout();">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -84,6 +86,52 @@ $url=$moduleurl[0];
                     <li class="<?php if ($url=='user') {
                         echo 'active';
                     }else{echo 'inactive';} ?>" id="view_data"><a href="<?php echo Url::toRoute('/user') ?>" data-toggle="tooltip" title="Please click for Action"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/users.png';?>" />  <span class="nav-label">User</span></a></li>
+
+                    <li class="<?php if ($url=='monitoring/used_oil') {
+                        echo 'active';
+                    }elseif($url=='monitoring/fuel'){
+                        echo 'active';
+                    }elseif($url=='monitoring/new_oil'){
+                        echo 'active';
+                    }
+                    elseif($url=='monitoring/unit_no_history'){
+                        echo 'active';
+                    }
+                    elseif($url=='monitoring/machine_health'){
+                        echo 'active';
+                    }
+                        ?>" id="menu">
+                    <a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/monitor.png';?>" /> <span class="nav-label">Monitoring</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+
+                    <li class="<?php if ($url=='monitoring/used_oil') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>" id="view_data"><a href="<?php echo Url::toRoute('/monitoring/used_oil') ?>" data-toggle="tooltip" title="Please click for Action"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Used Oil</span></a></li>
+
+                    <li class="<?php if ($url=='monitoring/fuel') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>" id="view_data"><a href="<?php echo Url::toRoute('/monitoring/fuel') ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Fuel</span></a></li>
+
+                        <li class="<?php if ($url=='monitoring/new_oil') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/new_oil')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">New Oil & Others</span></a></li>
+
+                        <li class="<?php if ($url=='monitoring/unit_no_history') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/unit_no_history')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" /> </i> <span class="nav-label">UnitNo History</span></a></li>
+
+                         <li class="<?php if ($url=='monitoring/machine_health') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/machine_health')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Health</span></a></li>
+
+                          <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Component Health</span></a></li>
+
+                           <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Comp.</span></a></li>
+
+                           <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Consistency History</span></a></li>
+
+                    </ul>
+                </li>
 
                 </li>
 
@@ -105,11 +153,11 @@ $url=$moduleurl[0];
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <a href="<?php echo Yii::$app->homeUrl;?>"><span class="m-r-sm text-muted welcome-message"><big class="bold">Petrolab Client Report</big></span></a>
+                    <a href="<?php echo Yii::$app->homeUrl;?>"><span class="m-r-sm text-muted welcome-message"><big class="bold">Administrator Petrolab Client Report</big></span></a>
                 </li>
 
                 <li>
-                    <a href="<?php echo Url::toRoute('/login/proces/logout'); ?>">
+                    <a href="#" onclick="Logout();">
                         <img alt="image" src="<?php echo Url::base('').'/'.'img/icon/arrow-curve-000-double.png';?>" /> Log out
                     </a>
                 </li>

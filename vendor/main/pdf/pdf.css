@@ -30,12 +30,12 @@ li{
 	padding: 0;
  }
 #chi:last-child {
-	float:right; 
+	float:right;
 }
 .th_bold{
 	font-weight: bold;
-	background-color: #e6e600;
-	/* border: solid 0.1px; */
+	background-color: #d6d6c2;
+	height: 30px;
 	border-color: #b8b894;
 }
 .bg_td{
@@ -53,12 +53,12 @@ li{
 .center{
 	text-align: center;
 }
+.sub{
+	text-align: left;
+	padding-left: 10px;
+}
 #logominyak{
-/* 	text-align: center; */
-	/* margin-left: 60px; */
-	padding-left: 60px;
-	/* position: fixed; */
-	/* width: 60px; */
+
 }
 .border-tb{
 	border: solid 0.1px;
@@ -75,13 +75,13 @@ li{
 	border-color: #b8b894;
 }
 #chart{
-	
+
 	height: auto;
 	border: solid 0.3px;
 	border-color: black;
 }
 #chart2{
-	
+
 	height: auto;
 	border: solid 0.3px;
 	border-color: black;
@@ -99,12 +99,17 @@ li{
 	text-align: justify;
 	padding: 5px;
 }
-
+@page *{
+   margin-top: 2.54cm;
+    margin-bottom: 2.54cm;
+    margin-left: 0cm;
+    margin-right: 0cm;
+}
 
 
 
 /*fuel*/
-.underHeadLine{
+/* .underHeadLine{
 	height: 2px;
 	background-color: #eeeedd;
 	clear: both;
@@ -123,4 +128,4 @@ padding-left: 30px;
 }
 #tdRight{
 vertical-align: top;
-}
+} */

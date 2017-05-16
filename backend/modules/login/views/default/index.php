@@ -13,7 +13,8 @@ use richardfan\widget\JSRegister;
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Admin | Login</title>
+    <link rel="icon" href="<?php echo Url::base('').'/'.'img/icon/books.png';?>">
     <?php $this->head() ?>
 </head>
 <body>
