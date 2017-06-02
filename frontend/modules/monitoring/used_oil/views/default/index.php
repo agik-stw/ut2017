@@ -526,14 +526,14 @@ tb=$("#tb_used_oil").DataTable({
                 "data":           'EVAL_CODE',
                 "render": function ( data, type, full, meta ) {
                     //status code
-if (data=='') {
-return 'Normal';
-}else if(data=='N'){
+if(data=='N'){
 return 'Normal';
 }else if(data=='B'){
 return 'Attention';
 }else if(data=='C'){
 return 'Urgent';
+}else{
+  return 'Normal';  
 }
     }
             }
@@ -565,7 +565,7 @@ $(row).find('td:eq(13)').css('color', '#0033cc');
    $(row).find('td:eq(13)').css('color', '#0033cc');
    $(row).find('td:eq(13)').css('background-color', '#00ff00');
    $(row).find('td:eq(0)').css('border-right', '4px solid #00ff00');
- }else if(data.EVAL_CODE==''){
+ }else/*(data.EVAL_CODE=='')*/{
 /*   $('td', row).css('background-color', '#ffa31a'); */
    $(row).find('td:eq(13)').css('color', '#0033cc');
    $(row).find('td:eq(13)').css('background-color', '#00ff00');
