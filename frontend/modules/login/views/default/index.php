@@ -6,20 +6,22 @@ use yii\widgets\Menu;
 use yii\helpers\Url;
 use kartik\sidenav\SideNav;
 use frontend\assets\AppAsset;
+
 AppAsset::register($this);
 use richardfan\widget\JSRegister;
+
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User | Login</title>
-    <link rel="icon" href="<?php echo Url::base('').'/'.'img/icon/books.png';?>">
-    <?php $this->head() ?>
-</head>
-<body>
-<?php $this->beginBody() ?>
- <div class="container" style="margin-top:150px">
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>User | Login</title>
+        <link rel="icon" href="<?php echo Url::base('') . '/' . 'img/icon/books.png'; ?>">
+        <?php $this->head() ?>
+    </head>
+    <body>
+    <?php $this->beginBody() ?>
+    <div class="container" style="margin-top:150px">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-md-offset-4">
                 <div class="panel panel-default">
@@ -32,7 +34,7 @@ use richardfan\widget\JSRegister;
                                 <div class="row">
                                     <div class="center-block">
                                         <img class="profile-img"
-                                            src="<?php echo Url::base('').'/'.'img/user.png';?>" alt="">
+                                             src="<?php echo Url::base('') . '/' . 'img/user.png'; ?>" alt="">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -41,8 +43,9 @@ use richardfan\widget\JSRegister;
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="glyphicon glyphicon-user"></i>
-                                                </span> 
-                                                <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                                                </span>
+                                                <input class="form-control" placeholder="Username" name="username"
+                                                       type="text" autofocus>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -50,11 +53,15 @@ use richardfan\widget\JSRegister;
                                                 <span class="input-group-addon">
                                                     <i class="glyphicon glyphicon-lock"></i>
                                                 </span>
-                                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                                <input class="form-control" placeholder="Password" name="password"
+                                                       type="password" value="">
                                             </div>
+                                            <?= Yii::$app->session->hasFlash('error') ? "<p class=\"help-block help-block-error\">
+                                                " . Yii::$app->session->getFlash('error') . "</p>" : '' ?>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in">
+                                            <input type="submit" class="btn btn-lg btn-primary btn-block"
+                                                   value="Sign in">
                                         </div>
                                     </div>
                                 </div>
@@ -63,14 +70,14 @@ use richardfan\widget\JSRegister;
 
                     </div>
                     <div class="panel-footer ">
-                       <!--  Don't have an account! <a href="#" onClick=""> Sign Up Here </a> -->
-                       <b>Petrolab Report</b>
+                        <!--  Don't have an account! <a href="#" onClick=""> Sign Up Here </a> -->
+                        <b>Petrolab Report</b>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<?php $this->endBody() ?> 
-</body>
-</html>
+    <?php $this->endBody() ?>
+    </body>
+    </html>
 <?php $this->endPage() ?>

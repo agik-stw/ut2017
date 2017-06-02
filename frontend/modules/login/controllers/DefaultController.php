@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\login\controllers;
+
 use app\models\loginForm;
 use yii\web\Controller;
 use Yii;
@@ -16,7 +17,7 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-     return $this->renderPartial('index');
-}
+        return $this->renderPartial('index');
+    }
 
 }
