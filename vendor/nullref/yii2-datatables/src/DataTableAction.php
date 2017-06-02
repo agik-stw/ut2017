@@ -13,6 +13,7 @@ use yii\base\Action;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\web\Response;
 
 /**
@@ -22,6 +23,18 @@ use yii\web\Response;
  */
 class DataTableAction extends Action
 {
+    /**
+     * Types of request method
+     */
+    const REQUEST_METHOD_GET = 'GET';
+    const REQUEST_METHOD_POST = 'POST';
+
+    /**
+     * @see \nullref\datatable\DataTableAction::getParam
+     * @var string
+     */
+    public $requestMethod = self::REQUEST_METHOD_GET;
+
     /**
      * @var ActiveQuery
      */
@@ -43,6 +56,26 @@ class DataTableAction extends Action
      */
     public $applyFilter;
 
+    /**
+     * Format data
+     * Signature is following:
+     * function ($query, $columns)
+     * @var callable
+     */
+    public $formatData;
+
+    /**
+     * Format response
+     * Signature is following:
+     * function ($response)
+     * @var callable
+     */
+    public $formatResponse;
+
+    /**
+     * Check if query is configured
+     * @throws InvalidConfigException
+     */
     public function init()
     {
         if ($this->query === null) {
@@ -50,24 +83,27 @@ class DataTableAction extends Action
         }
     }
 
+    /**
+     * @return array|ActiveRecord[]
+     */
     public function run()
     {
         /** @var ActiveQuery $originalQuery */
         $originalQuery = $this->query;
         $filterQuery = clone $originalQuery;
-        $draw = Yii::$app->request->getQueryParam('draw');
+        $draw = $this->getParam('draw');
         $filterQuery->where = null;
-        $search = Yii::$app->request->getQueryParam('search', ['value' => null, 'regex' => false]);
-        $columns = Yii::$app->request->getQueryParam('columns', []);
-        $order = Yii::$app->request->getQueryParam('order', []);
+        $search = $this->getParam('search', ['value' => null, 'regex' => false]);
+        $columns = $this->getParam('columns', []);
+        $order = $this->getParam('order', []);
         $filterQuery = $this->applyFilter($filterQuery, $columns, $search);
         $filterQuery = $this->applyOrder($filterQuery, $columns, $order);
         if (!empty($originalQuery->where)) {
             $filterQuery->andWhere($originalQuery->where);
         }
         $filterQuery
-            ->offset(Yii::$app->request->getQueryParam('start', 0))
-            ->limit(Yii::$app->request->getQueryParam('length', -1));
+            ->offset($this->getParam('start', 0))
+            ->limit($this->getParam('length', -1));
         $dataProvider = new ActiveDataProvider(['query' => $filterQuery, 'pagination' => ['pageSize' => Yii::$app->request->getQueryParam('length', 10)]]);
         Yii::$app->response->format = Response::FORMAT_JSON;
         try {
@@ -75,12 +111,26 @@ class DataTableAction extends Action
                 'draw' => (int)$draw,
                 'recordsTotal' => (int)$originalQuery->count(),
                 'recordsFiltered' => (int)$dataProvider->getTotalCount(),
-                'data' => $filterQuery->all(),
+                'data' => $this->formatData($filterQuery, $columns),
             ];
         } catch (\Exception $e) {
             return ['error' => $e->getMessage()];
         }
-        return $response;
+
+        return $this->formatResponse($response);
+    }
+
+    /**
+     * Extract param from request
+     * @param $name
+     * @param null $defaultValue
+     * @return mixed
+     */
+    protected function getParam($name, $defaultValue = null)
+    {
+        return $this->requestMethod == self::REQUEST_METHOD_GET ?
+            Yii::$app->request->getQueryParam($name, $defaultValue) :
+            Yii::$app->request->getBodyParam($name, $defaultValue);
     }
 
     /**
@@ -128,5 +178,32 @@ class DataTableAction extends Action
             $query->addOrderBy([$columns[$item['column']]['data'] => $sort]);
         }
         return $query;
+    }
+
+    /**
+     * @param ActiveQuery $query
+     * @param array $columns
+     * @return array|ActiveRecord[]
+     */
+    public function formatData(ActiveQuery $query, $columns)
+    {
+        if ($this->formatData !== null) {
+            return call_user_func($this->formatData, $query, $columns);
+        }
+
+        return $query->all();
+    }
+
+    /**
+     * @param array $response
+     * @return array|ActiveRecord[]
+     */
+    public function formatResponse($response)
+    {
+        if ($this->formatResponse !== null) {
+            return call_user_func($this->formatResponse, $response);
+        }
+
+        return $response;
     }
 } 

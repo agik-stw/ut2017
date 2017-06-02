@@ -14,6 +14,9 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+    'assetManager' => [
+            'linkAssets' => true,
+ ],
     'backendDoor' => [
                 'class' => 'yii\web\urlManager',
                 'baseUrl' => 'http://admin.ut2017.dev:84/',//i.e. $_SERVER['DOCUMENT_ROOT'] .'/yiiapp/web/'
@@ -52,7 +55,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'error/type/404',
         ],
 
         'urlManager' => [
@@ -103,7 +106,10 @@ return [
         'pdfjs' => [
        'class' => '\yii2assets\pdfjs\Module',
    ],
-    ],
+     'error' => [
+       'class' => 'app\modules\error\Module',
+   ]
+   ],
     'params' => $params,
     'defaultRoute' => 'dashboard',
 ];

@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class PdfAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/main/pdf';
+    public $sourcePath = '@f_vendor/pdf';
     public $css = [
         'pdf.css',
     ];

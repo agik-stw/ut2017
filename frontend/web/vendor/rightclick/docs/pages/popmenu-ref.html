@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!-- Copyright (C) 2014 Fajar Chandra <contact@jar2.net> -->
+
+<head>
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../js/content.js"></script>
+	<link type="text/css" rel="stylesheet" href="../css/content.css" />
+</head>
+
+<body>
+<h1>Plugin Reference</h1>
+
+In general, these plugin methods and options can be accessed by calling: <br />
+<span class="inline-code">$(elm).popmenu('method_or_option_name', ...)</span>
+
+<h2>Options</h2>
+
+<a name="effect"></a>
+<h3>effect: string = default</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+fade | slide | none | default
+</pre>
+<p>
+	Transition effects for context menu. When set to 'default', effect set to 
+	the assigned context menu will be used.
+</p>
+
+<a name="duration"></a>
+<h3>duration: integer = null</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Transition duration in ms if an effect is not 'none'. If set to null, duration set 
+	to the assigned context menu will be used.
+</p>
+
+<!-- -------------------------------------------------------- -->
+
+<h2>Methods</h2>
+
+<a name="hide"></a>
+<h3>hide: PopMenu</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+$(elm).popmenu('hide');
+</pre>
+<p>
+	Hide context menu if currently being shown.
+</p>
+
+<a name="init"></a>
+<h3>init: jQuery</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+$(elm).popmenu('init', menu, options);
+</pre>
+<p>
+	Initialize context menu for the selected elements. This method should not be 
+	called directly, instead use <a href="#default">default method</a>.
+</p>
+<ul>
+	<li>
+		<b>menu</b>: Object<br />
+		The menu object structure basically consists 
+		of <span class="inline-code">id: options</span> pairs. For the list of available 
+		options, please refer to <a href="PopMenuItem.html">PopMenuItem</a> class.
+	</li>
+	<li>
+		<b>options</b>: Object<br />
+		Options for the context menu.
+	</li>
+</ul>
+
+<a name="show"></a>
+<h3>show: PopMenu</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+$(elm).popmenu('show' [, event]);
+</pre>
+<p>
+	Show context menu.
+</p>
+<ul>
+	<li>
+		<b>event</b>: object<br />
+		Event argument object to be passed. Pass an event object from other events 
+		so the context menu could determine mouse cursor position.
+	</li>
+</ul>
+<pre class="code hidden">
+// EXAMPLE //
+$(elm).click(function(e) {
+	$(this).popmenu('show', e);
+});
+</pre>
+
+</body>
+
+</html> 

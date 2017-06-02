@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class BowerwebAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/main/vendor/bower';
+    public $sourcePath = '@b_bower';
     public $css = [
         'animatedmodal/demo/css/normalize.min.css',
         'animatedmodal/demo/css/animate.min.css',

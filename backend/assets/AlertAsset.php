@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class AlertAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/main/vendor/alertInfo';
+    public $sourcePath = '@b_vendor/alertInfo';
     public $css = [
         'ymz_box.css',
     ];

@@ -15,6 +15,9 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+      'assetManager' => [
+            'linkAssets' => true,
+ ],
 
      'urlManagerFrontend' => [
                 'class' => 'yii\web\urlManager',
@@ -52,7 +55,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'error/type/404',
         ],
 
         'urlManager' => [
@@ -91,8 +94,16 @@ return [
         'pdfjs' => [
        'class' => '\yii2assets\pdfjs\Module',
    ],
+   'error' => [
+       'class' => 'app\modules\error\Module',
+   ],
+   'utility' => [
 
-    ],
+            'class' => 'app\modules\utility\Module',
+
+        ],
+   ],
+ 
     'params' => $params,
     'defaultRoute' => 'dashboard',
 ];

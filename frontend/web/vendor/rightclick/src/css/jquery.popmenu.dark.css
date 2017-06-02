@@ -1,0 +1,60 @@
+/**
+ * jQuery PopMenu
+ * 
+ * Dark themed context menu.
+ * Default jquery.popmenu.css is required.
+ * 
+ * @author   Fajar Chandra
+ * @since    2014.05.29
+ */
+
+@import url('jquery.popmenu.css'); 
+
+/* MENU */
+
+.PopMenu-Menu {
+	background: #666;
+	background: linear-gradient(#777, #555);
+	border: 1px solid #333;
+	color: #ddd;
+}
+
+
+/* MENU ITEM */
+
+.PopMenu-Item a {
+	color: #ddd;
+}
+
+.PopMenu-Item.selected,
+.PopMenu-Item:hover {
+	background: #43ace8;
+}
+
+.PopMenu-Item:hover > a {
+	color: #fff;
+}
+
+.PopMenu-Item.disabled {
+	background: transparent;
+}
+
+.PopMenu-Item.disabled > a {
+	color: #888;
+}
+
+/* MENU ICON */
+
+.PopMenu-Icon {
+	color: #000;
+}
+
+.PopMenu-Item.disabled .PopMenu-Icon {
+	color: #888;
+}
+
+/* MENU SEPARATOR */
+
+.PopMenu-Separator {
+	background: #888;
+}

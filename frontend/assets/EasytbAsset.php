@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class EasytbAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/main/vendor/easyTable';
+    public $sourcePath = '@f_vendor/easyTable';
     public $css = [
         'easyTable.css',
     ];

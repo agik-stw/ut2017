@@ -9,17 +9,8 @@ use richardfan\widget\JSRegister;
 <div ng-app="">
 
 <div class="ibox-title">
-<div class="col-md-2 pull-left">
-<div class="form-group">
-  <label for="export">Option Export:</label>
-
-  <select disabled="" class="form-control input-sm select2" id="export">
-  <option disabled="" selected="" value="Select_Export">Select Export</option>
-    <option value="pdf">PDF</option>
-    <option value="excel">EXCEL</option>
-  </select>
-</div>
-</div>
+<h3>Fuel</h3>
+<div style="height: 2px; width: 100%; background-color: black;"></div>
 
 <div class="col-md-2 pull-left">
 <div class="form-group">
@@ -38,9 +29,9 @@ use richardfan\widget\JSRegister;
  <div class="form-group" id="daterange">
 <label class="font-noraml">Range select</label>
 <div class="input-daterange input-group">
- <input id="date1" type="text" class="input-sm form-control" placeholder="00-00-0000" name="start"/>
+ <input id="date1" type="text" class="input-sm form-control" placeholder="yyyy-mm-dd" name="start"/>
  <span class="input-group-addon">to</span>
-<input id="date2" type="text" class="input-sm form-control" placeholder="00-00-0000" name="end"/>
+<input id="date2" type="text" class="input-sm form-control" placeholder="yyyy-mm-dd" name="end"/>
 </div>
 </div>
 </div>
@@ -128,7 +119,7 @@ var tb=$("#tb_used_oil").DataTable({
         "responsive": true,
         "autoWidth": true,
         "ajax": {
-          "url": "<?php echo Yii::$app->backendDoor->createUrl('monitoring/fuel/api/get');?>",
+          "url": "<?php echo Url::toRoute('/monitoring/fuel/action/getdata');?>",
           'type':'get'
         },
     columns: [
@@ -221,13 +212,15 @@ $(".select2").select2();
 $("#export").on('change',function(event) {
 var type=$(this).val();
 var labno=$("#labno").val();
-window.open("<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=');?>"+type+'&'+'labNumber='+labno,'_blank')
+window.open("<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=');?>"+type+'&'+'labNumber='+labno,'View/Download Pdf','_blank',directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=1,resizable=0)
 $("#export").val('Select_Export');
 });
 
 
 $("#select-date").on('change',function(event) {
  dateEn();
+ $("#date1").val("");
+ $("#date2").val("");
 });
 
 $("#btn-refresh").on('click',function(event) {
@@ -235,13 +228,13 @@ $("#btn-refresh").on('click',function(event) {
     var dateEnd=$("#date2").val();
 
    if ($("#select-date").val()=='all_date') {
-
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/getdata');?>").load();
    }else if($("#select-date").val()=='receive_date'){
-tb.ajax.url( "<?php echo Url::toRoute('/monitoring/used_oil/action/getdata_by_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/get_by_receive_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
    }else if($("#select-date").val()=='report_date'){
-
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/get_by_report_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
    }else if($("#select-date").val()=='sample_date'){
-
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/get_by_sample_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
    }
 });
 
@@ -270,14 +263,14 @@ complete:function(){
 
     //modal//
 function view(rid){
- window.open("<?php echo Url::toRoute('/monitoring/fuel/action/view?reportid=') ?>"+rid, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=50,width=1200,height=600");
+ window.open("<?php echo Url::toRoute('/monitoring/fuel/report/view?reportid=') ?>"+rid, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=50,width=1200,height=600");
 }
 
 $('#date1').datepicker({
-format: 'dd-mm-yyyy',
+format: 'yyyy-mm-dd',
             });
 $('#date2').datepicker({
-format: 'dd-mm-yyyy',
+format: 'yyyy-mm-dd',
             });
 
 function dateDis(){
@@ -316,4 +309,3 @@ function(){
 
 </script>
 <?php JSRegister::end(); ?>
-

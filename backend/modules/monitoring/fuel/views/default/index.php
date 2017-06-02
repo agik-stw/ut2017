@@ -5,6 +5,8 @@ $this->title = 'PCR | Fuel';
 use richardfan\widget\JSRegister;
 ?>
 
+<!--hidden id-->
+<input type="hidden" id="typeSubmit" name="typeSubmit" value="">
 
 <!-- Modal -->
 <div class="modal inmodal" id="modal1" role="dialog" aria-hidden="true">
@@ -17,14 +19,14 @@ use richardfan\widget\JSRegister;
                                                        <span class="sr-only">Close</span>
                                                    </button>
                                                    <!--<i class="fa fa-laptop modal-icon"></i>-->
-                                                   <h4 class="modal-title"><b id="modalTitle">Add New</b></h4>
+                                                   <h4 class="modal-title"><b id="modalTitle"></b></h4>
                                                </div>
                                                <div class="modal-body">
 
 
 <div class="form-group">
-    <label>Report id</label>
-    <input id="report_id" type="text" placeholder="report id" name="report_id" class="form-control" value="<?php echo Random::reportId(); ?>">
+    <label>Report id <b class="star">***{{aaa}}</b></label>
+    <input id="report_id" type="text" placeholder="report id" name="report_id" class="form-control" value="" v-model="v_report_id">
 </div>
 
                                                    <div class="form-group">
@@ -46,7 +48,7 @@ use richardfan\widget\JSRegister;
 <div class="form-group">
   <label>Customer</label>
   <select class="form-control" id="customer_name" name="customer_name">
-  <option selected="" disabled="" value="all_date">Select</option>
+  <option selected="" disabled="" value="select">Select</option>
   <?php foreach ($customers as $cust) { ?>
       <option value="<?php echo $cust['CustomerID']; ?>"><?php echo $cust['Name']; ?></option>
   <?php } ?>
@@ -55,12 +57,15 @@ use richardfan\widget\JSRegister;
                                                    <div class="form-group">
   <label>Departement</label>
   <select class="form-control" id="departement" name="departement">
-  <option selected="" disabled="" value="all_date">Select</option>
+  <option selected="" disabled="" value="select">Select</option>
   <?php foreach ($departement as $dept) { ?>
       <option value="<?php echo $dept['departement_id']; ?>"><?php echo $dept['departement_name']; ?></option>
   <?php } ?>
   </select>
 </div>
+
+
+
                                                    <div class="form-group">
                                                        <label>Lab Number</label>
                                                        <input type="text" placeholder="Lab Number" class="form-control" id="lab_number" name="lab_number">
@@ -86,8 +91,8 @@ use richardfan\widget\JSRegister;
                                                        <input type="text" placeholder="Alert" class="form-control" id="alert" name="alert">
                                                    </div>
                                                    <div class="form-group">
-  <label for="sel1">File Pdf</label>
-<input class="form-control" type="file" id="file_upload" accept=".pdf" name="file_upload">
+  <label for="sel1">File Pdf <b class="star">*** </b></label>
+<input class="form-control" type="file" id="file_upload" accept=".pdf" name="file_upload" @change="onChange()">
 </div>
 
                                                </div>
@@ -105,17 +110,9 @@ use richardfan\widget\JSRegister;
 <div ng-app="">
 
 <div class="ibox-title">
+<h3>Fuel</h3>
+<div style="height: 2px; width: 100%; background-color: black;"></div>
 <div class="row">
-<div class="col-md-2 pull-left">
-<div class="form-group">
-  <label for="export">Option Export:</label>
-  <select disabled="" class="form-control input-sm select2" id="export">
-  <option disabled="" selected="" value="Select_Export">Select Export</option>
-    <option value="pdf">PDF</option>
-    <option value="excel">EXCEL</option>
-  </select>
-</div>
-</div>
 
 <div class="col-md-2 pull-left">
 <div class="form-group">
@@ -134,9 +131,9 @@ use richardfan\widget\JSRegister;
  <div class="form-group" id="daterange">
 <label class="font-noraml">Range select</label>
 <div class="input-daterange input-group">
- <input id="date1" type="text" class="input-sm form-control" placeholder="00-00-0000" name="start"/>
+ <input id="date1" type="text" class="input-sm form-control" placeholder="yyyy-mm-dd" name="start"/>
  <span class="input-group-addon">to</span>
-<input id="date2" type="text" class="input-sm form-control" placeholder="00-00-0000" name="end"/>
+<input id="date2" type="text" class="input-sm form-control" placeholder="yyyy-mm-dd" name="end"/>
 </div>
 </div>
 </div>
@@ -236,7 +233,7 @@ var tb=$("#tb_used_oil").DataTable({
         "responsive": true,
         "autoWidth": true,
         "ajax": {
-          "url": "<?php echo Url::toRoute('/monitoring/fuel/api/get');?>",
+          "url": "<?php echo Url::toRoute('/monitoring/fuel/action/get');?>",
           'type':'get'
         },
     columns: [
@@ -246,7 +243,7 @@ var tb=$("#tb_used_oil").DataTable({
                 "data":           'report_id',
                 /*"defaultContent": '<a href="#" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF">PDF</a>'+'&nbsp;<a href="#" class="btn btn-xs btn-info" data-toggle="tooltip" title="Please click row for view data">View</a>',*/
                 "render": function ( data, type, full, meta ) {
-      return '<a class="btn btn-xs btn-success" data-toggle="tooltip" title="Please click row for save to PDF" target="_blank" href="'+"<?php echo Url::toRoute('/monitoring/fuel/action/report?type=pdf&labNumber='); ?>"+data+'"><span class="glyphicon glyphicon-pencil"></span></a>'+'&nbsp;<a class="btn btn-xs btn-info viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="view('+"'"+data+"'"+')"><span class="glyphicon glyphicon-eye-open"></span></a>'+'&nbsp;<a class="btn btn-xs btn-danger viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="deleteData('+"'"+data+"'"+')"><span class="glyphicon glyphicon-trash"></span></a>';
+      return '<a class="btn btn-xs btn-success" data-toggle="tooltip" title="Edit" href="#" onclick="edit('+"'"+data+"'"+')"><span class="glyphicon glyphicon-pencil"></span></a>'+'&nbsp;<a class="btn btn-xs btn-info viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="view('+"'"+data+"'"+')"><span class="glyphicon glyphicon-eye-open"></span></a>'+'&nbsp;<a class="btn btn-xs btn-danger viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="deleteData('+"'"+data+"'"+')"><span class="glyphicon glyphicon-trash"></span></a>';
     }
             },
             {data:'report_id'},
@@ -345,12 +342,13 @@ $("#btn-refresh").on('click',function(event) {
     var dateEnd=$("#date2").val();
 
    if ($("#select-date").val()=='all_date') {
-
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/get');?>" ).load();
    }else if($("#select-date").val()=='receive_date'){
-tb.ajax.url( "<?php echo Url::toRoute('/monitoring/used_oil/action/getdata_by_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/getdata_by_receive_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
    }else if($("#select-date").val()=='report_date'){
-
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/getdata_by_report_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
    }else if($("#select-date").val()=='sample_date'){
+    tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/getdata_by_sample_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
 
    }
 });
@@ -360,15 +358,18 @@ dateDis();
 
 /*tampilkan modal tambah data baru*/
 $('#btn_add').click(function(event) {
+  $('#typeSubmit').val('add');
+  clear();
+  $('#modalTitle').html('Add new');
     $('#modal1').modal('show');
 });
 
 /*ajax serverSide tambah data baru*/
     $("#form").on('submit',(function(e) {
         e.preventDefault();
-
+var typeSubmit=$('#typeSubmit').val();
         $.ajax({
-            url: "<?php echo Url::toRoute('/monitoring/fuel/api/add');?>",
+            url: "<?php echo Url::toRoute('/monitoring/fuel/action/');?>/"+typeSubmit,
             type: "POST",
             data:  new FormData(this),
             contentType: false,
@@ -381,10 +382,10 @@ $('#btn_add').click(function(event) {
             tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/api/get') ?>").load();
             $('#form input').val('');
             },
-            error: function(e) 
+            error: function(e)
             {
-                
-            }           
+
+            }
        });
 
     }));
@@ -412,17 +413,31 @@ complete:function(){
 
     //modal//
 function view(rid){
- window.open("<?php echo Url::toRoute('/monitoring/fuel/action/view?reportid=') ?>"+rid, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=50,width=1200,height=600");
+ window.open("<?php echo Url::toRoute('/monitoring/fuel/report/view?reportid=') ?>"+rid, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=50,width=1200,height=600");
 }
 
     //modal//
-function Detail(labNumber){
- /* $.ajax({
-    url: '',
+function edit(reportid){
+  $('#typeSubmit').val('edit');
+  $.ajax({
+    url: "<?php echo Url::toRoute('/monitoring/fuel/action/by_report_id?reportId=');?>"+reportid,
     type: 'GET',
-    data: {labNumber: labNumber}
+    data: {reportid: reportid}
   })
   .done(function(data) {
+    $('#report_id').val(data.report_id);
+    $('#report_date').val(data.report_date);
+    $('#receive_date').val(data.receive_date);
+    $('#sample_date').val(data.sample_date);
+    $('#group').val(data.group);
+    $('#customer_name').val(data.customer_id);
+    $('#departement').val(data.departement_id);
+    $('#lab_number').val(data.lab_number);
+    $('#job_number').val(data.Job_number);
+    $('#detail_of_sample').val(data.detail_of_sample);
+    $('#target_lead_time').val(data.target_lead_time);
+    $('#actual_lead_time').val(data.actual_lead_time);
+    $('#alert').val(data.Alert);
 
     console.log("complete");
   })
@@ -430,18 +445,10 @@ function Detail(labNumber){
     console.log("error");
   })
   .always(function() {
-    console.log("complete");
-    if ($("#status").text()=='Attention') {
-    $("#status").css('background-color','#ffff33');
-}else if($("#status").text()=='Urgent'){
-  $("#status").css('background-color','#ff0000');
-}else if($("#status").text()=='Normal'){
-  $("#status").css('background-color','#00ff00');
-}
-  });
 
-  $("#Mtitle").html(labNumber).css('color','#800000');
-  $("#modalDetail").modal('show');*/
+  });
+$('#modalTitle').html('Edit Data');
+$('#modal1').modal('show');
 }
 function deleteData(rid){
 swal({
@@ -456,12 +463,12 @@ swal({
 function(){
    $.ajax({
    url: '<?php echo Url::toRoute('/monitoring/fuel/api/delete')?>',
-   type: 'POST',
+   type: 'GET',
    data: {report_id: rid}
  })
  .done(function(json) {
 swal(json.responses, json.message, json.status);
-document.location="<?php echo  Url::current(['lg'=>NULL], TRUE); ?>";
+window.location.reload();
  })
  .fail(function() {
    console.log("error");
@@ -469,15 +476,33 @@ document.location="<?php echo  Url::current(['lg'=>NULL], TRUE); ?>";
  .always(function() {
    console.log("complete");
  });
-  
+
 });
 }
 
+
+//clear modal
+function clear(){
+  $('#report_id').val("<?php echo Random::reportId(); ?>");
+    $('#report_date').val("");
+    $('#receive_date').val("");
+    $('#sample_date').val("");
+    $('#group').val("");
+    $('#customer_name').val("select");
+    $('#departement').val("select");
+    $('#lab_number').val("");
+    $('#job_number').val("");
+    $('#detail_of_sample').val("");
+    $('#target_lead_time').val("");
+    $('#actual_lead_time').val("");
+    $('#alert').val("");
+}
+
 $('#date1').datepicker({
-format: 'dd-mm-yyyy',
+format: 'yyyy-mm-dd',
             });
 $('#date2').datepicker({
-format: 'dd-mm-yyyy',
+format: 'yyyy-mm-dd',
             });
 
 function dateDis(){
@@ -514,6 +539,23 @@ function(){
 });
 }
 
+
+//vue validasi
+var vm=new Vue({
+el:'#modal1',
+data:{
+v_report_id:"<?php echo Random::reportId(); ?>",
+v_file_upload:""
+},
+computed:{
+  aaa:function(value){
+    if (this.v_report_id=="") {
+    alert('Report Id tidak boleh kosong');
+return '  Report Id tidak boleh kosong';
+  }
+}
+}
+});
+
 </script>
 <?php JSRegister::end(); ?>
-

@@ -21,24 +21,6 @@ return array (
       '@kartik/sidenav' => $vendorDir . '/kartik-v/yii2-widget-sidenav',
     ),
   ),
-  'nullref/yii2-datatables' => 
-  array (
-    'name' => 'nullref/yii2-datatables',
-    'version' => '1.0.2.0',
-    'alias' => 
-    array (
-      '@nullref/datatable' => $vendorDir . '/nullref/yii2-datatables/src',
-    ),
-  ),
-  'cyneek/yii2-blade' => 
-  array (
-    'name' => 'cyneek/yii2-blade',
-    'version' => '1.1.2.0',
-    'alias' => 
-    array (
-      '@cyneek/yii2/blade' => $vendorDir . '/cyneek/yii2-blade',
-    ),
-  ),
   'yiisoft/yii2-twig' => 
   array (
     'name' => 'yiisoft/yii2-twig',
@@ -93,24 +75,6 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
-  'yiisoft/yii2-swiftmailer' => 
-  array (
-    'name' => 'yiisoft/yii2-swiftmailer',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
-    ),
-  ),
-  'yiisoft/yii2-debug' => 
-  array (
-    'name' => 'yiisoft/yii2-debug',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
-    ),
-  ),
   'kartik-v/yii2-krajee-base' => 
   array (
     'name' => 'kartik-v/yii2-krajee-base',
@@ -129,6 +93,15 @@ return array (
       '@yii2assets/pdfjs' => $vendorDir . '/yii2assets/yii2-pdfjs',
     ),
   ),
+  'yiisoft/yii2-debug' => 
+  array (
+    'name' => 'yiisoft/yii2-debug',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
+    ),
+  ),
   'yiisoft/yii2-gii' => 
   array (
     'name' => 'yiisoft/yii2-gii',
@@ -136,6 +109,24 @@ return array (
     'alias' => 
     array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii',
+    ),
+  ),
+  'yiisoft/yii2-swiftmailer' => 
+  array (
+    'name' => 'yiisoft/yii2-swiftmailer',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
+    ),
+  ),
+  'nullref/yii2-datatables' => 
+  array (
+    'name' => 'nullref/yii2-datatables',
+    'version' => '1.0.3.0',
+    'alias' => 
+    array (
+      '@nullref/datatable' => $vendorDir . '/nullref/yii2-datatables/src',
     ),
   ),
 );

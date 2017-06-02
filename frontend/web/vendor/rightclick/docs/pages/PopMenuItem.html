@@ -1,0 +1,470 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!-- Copyright (C) 2014 Fajar Chandra <contact@jar2.net> -->
+
+<head>
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../js/content.js"></script>
+	<link type="text/css" rel="stylesheet" href="../css/content.css" />
+</head>
+
+<body>
+<h1>PopMenuItem Class</h1>
+
+<h2>Constructor</h2>
+
+<pre class="inline-code">
+PopMenuItem(options)
+</pre>
+<p>
+	A PopMenuItem object represents a menu item on a context menu.
+</p>
+<ul>
+	<li>
+		<b>options</b>: Object<br />
+		Menu item options. See <a href="#options">Options</a> section for the 
+		list of available options.
+	</li>
+</ul>
+<pre class="code hidden">
+// EXAMPLE //
+var menuItem = new PopMenuItem({
+	id: 'new', 
+	label: 'New', 
+	icon: 'new'
+});
+</pre>
+
+
+<!-- -------------------------------------------------------- -->
+
+<a name="options"></a>
+<h2>Options</h2>
+
+<a name="action"></a>
+<h3>action: function</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	A callback to be executed when a menu item is selected. Assigning this option 
+	will override any existing 'action' callbacks. To add multiple callbacks, 
+	please use <a href="#on()">on()</a> method instead.
+</p>
+
+<a name="disabled"></a>
+<h3>disabled: boolean = false</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Disable menu item.
+</p>
+
+<a name="href"></a>
+<h3>href: string</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	URL to open when the item is selected.
+</p>
+
+<a name="icon"></a>
+<h3>icon: string</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Icon common name or icon path to use. When specifying relative path, the path 
+	is relative to the directory of the HTML page.
+</p>
+
+<a name="id"></a>
+<h3>id: string</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	ID of the menu item.
+</p>
+
+<a name="label"></a>
+<h3>label: string</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Label of the menu item. If not specified, the menu item will act as a 
+	separator.
+</p>
+<!--
+<a name="key"></a>
+<h3>key: string</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	A letter to be used as access key.
+</p>
+-->
+
+<a name="submenu"></a>
+<h3>submenu: PopMenu</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	An item can have a submenu. In this case, a collection of PopMenuItems or an 
+	instance of PopMenu can be assigned to this option.
+</p>
+<pre class="code hidden">
+// Example usage of inline submenu creation
+var item = new PopMenuItem({
+	id: 'view',
+	label: 'View Mode',
+	submenu: {
+		viewThumb: {label: 'Thumbnails'},
+		viewIcon: {label: 'Icons'},
+		viewList: {label: 'List'},
+		viewTree: {label: 'Tree'}
+	}
+});
+
+// Example usage of a submenu created beforehand
+var submenu = new PopMenu({
+	viewThumb: {label: 'Thumbnails'},
+	viewIcon: {label: 'Icons'},
+	viewList: {label: 'List'},
+	viewTree: {label: 'Tree'}
+});
+
+var item = new PopMenuItem({
+	id: 'view',
+	label: 'View Mode',
+	submenu: submenu
+});
+</pre>
+
+<a name="target"></a>
+<h3>target: string</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Open the URL specified in <a href="#href()">href</a> on the specified target window.
+	Specify <span class="inline-code">_blank</span> to open in a new window.
+</p>
+
+<a name="type"></a>
+<h3>type: string = "item"</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+item|separator
+</pre>
+<p>
+	Specify the type of the menu.
+</p>
+
+<a name="visible"></a>
+<h3>visible: boolean = true</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Toggle visibility.
+</p>
+
+
+
+<!-- -------------------------------------------------------- -->
+
+<h2>Properties</h2>
+
+<a name="dollar-sign"></a>
+<h3>$: jQuery</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Reference to DOM (jQuery) representation of the menu item.
+</p>
+
+<a name="dollar-icon"></a>
+<h3>$icon: jQuery</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Reference to DOM (jQuery) representation of the menu item's icon (PopMenu-Icon).
+</p>
+
+<a name="dollar-link"></a>
+<h3>$link: jQuery</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Reference to DOM (jQuery) representation of the menu item's label (PopMenu-Link).
+</p>
+
+<a name="data"></a>
+<h3>data: Object</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Internally stores the menu item options. Please use <a href="#options()">options()</a> method 
+	to get/set menu item options.
+</p>
+
+<a name="callbacks"></a>
+<h3>callbacks: Object</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Stores event callbacks internally. Please use <a href="#on()">on()</a> or <a href="#off()">off()</a> to 
+	bind or unbind callbacks instead.
+</p>
+
+<a name="submenu"></a>
+<h3>submenu: PopMenu</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Access to the submenu object.
+</p>
+
+<!-- -------------------------------------------------------- -->
+
+<h2>Events</h2>
+
+<a name="onaction"></a>
+<h3>action</h3>
+<p class="h-tag">since 1.0</p>
+<p>
+	Triggered when a menu item is selected.
+</p>
+<pre class="code hidden">
+$(elm).popmenu().find('item_id').on('action', callback);
+</pre>
+
+<!-- -------------------------------------------------------- -->
+
+<h2>Methods</h2>
+
+<a name="disable()"></a>
+<h3>disable: boolean</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+disable([disabled])
+</pre>
+<p>
+	Enable/disable menu item, or check current disable state.
+</p>
+<ul>
+	<li>
+		<b>disable</b>: boolean<br />
+		Assign true/false to enable/disable menu item. Leave blank to get current state.
+	</li>
+</ul>
+<pre class="code hidden">
+// To disable an item
+$(elm).popmenu().find('item_id').disable(true);
+
+// To get current state
+var state = $(elm).popmenu().find('item_id').disable();
+</pre>
+
+<a name="hide()"></a>
+<h3>hide: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+hide()
+</pre>
+<p>
+	Set menu item visibility to hidden. Use <a href="#show()">show()</a> to show.
+</p>
+<pre class="code hidden">
+// To hide an item
+$(elm).popmenu().find('item_id').hide();
+</pre>
+
+<a name="href()"></a>
+<h3>href: string</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+href([url])
+</pre>
+<p>
+	Get/set href property, a URL to open when the item is selected.
+</p>
+<ul>
+	<li>
+		<b>url</b>: string<br />
+		URL to open when the item is selected.
+	</li>
+</ul>
+<pre class="code hidden">
+// To assign a link
+$(elm).popmenu().find('item_id').href("http://www.doublejar.com");
+
+// To get currently assigned link
+var link = $(elm).popmenu().find('item_id').href();
+</pre>
+
+<a name="icon()"></a>
+<h3>icon: string</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+icon([icon])
+</pre>
+<p>
+	Get/set icon for the menu item.
+</p>
+<ul>
+	<li>
+		<b>icon</b>: string<br />
+		Icon name or path.
+	</li>
+</ul>
+<pre class="code hidden">
+// To set common icon (icons defined in CSS file, such as jquery.popmenu.icons.css)
+$(elm).popmenu().find('item_id').icon('add');
+
+// To set a specific icon file
+$(elm).popmenu().find('item_id').icon('img/home.png');
+
+// To get current icon name/path
+var icon = $(elm).popmenu().find('item_id').icon();
+</pre>
+
+<a name="label()"></a>
+<h3>label: string</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+label([label])
+</pre>
+<p>
+	Get/set label for the menu item.
+</p>
+<ul>
+	<li>
+		<b>label</b>: string<br />
+		Label for the menu item.
+	</li>
+</ul>
+<pre class="code hidden">
+// To set item label
+$(elm).popmenu().find('item_id').icon('Open...');
+
+// To get current label
+var label = $(elm).popmenu().find('item_id').label();
+</pre>
+
+<a name="off()"></a>
+<h3>off: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+off(event)
+</pre>
+<p>
+	Unbind event callbacks.
+</p>
+<ul>
+	<li>
+		<b>event</b>: string<br />
+		Event name.
+	</li>
+</ul>
+<pre class="code hidden">
+// To remove events
+$(elm).popmenu().find('item_id').off('action');
+</pre>
+
+<a name="on()"></a>
+<h3>on: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+on(event, callback)
+</pre>
+<p>
+	Bind a callback to an event.
+</p>
+<ul>
+	<li>
+		<b>event</b>: string<br />
+		Event name.
+	</li>
+	<li>
+		<b>callback</b>: function<br />
+		Callback to be executed when the event is triggered.
+	</li>
+</ul>
+<pre class="code hidden">
+// To assign 'action' event callback
+$(elm).popmenu().find('helloItem').on('action', function() {
+	alert("Hello");
+});
+</pre>
+
+<a name="options()"></a>
+<h3>options: object</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+options([options])
+</pre>
+<p>
+	Get/set menu item options. The options set or returned from this methods are 
+	from <a href="#data">data</a> property, which contains options bound to the 
+	PopMenu object.
+</p>
+<ul>
+	<li>
+		<b>options</b>: object<br />
+		Options to be set, please refer to Options section for list of available options. 
+		If none is specified, the method will act as getter.
+	</li>
+</ul>
+<pre class="code hidden">
+// To retrieve options
+var options = $(elm).popmenu().find('new').options();
+
+// To set the item label via options() method
+$(elm).popmenu().find('new').options({label: 'New File'});
+</pre>
+
+<a name="show()"></a>
+<h3>show: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+show()
+</pre>
+<p>
+	Set menu item visibility to visible. Use <a href="#hide()">hide()</a> to hide.
+</p>
+<pre class="code hidden">
+// To show an item
+$(elm).popmenu().find('item_id').show();
+</pre>
+
+<a name="updateLabel()"></a>
+<h3>updateLabel: void</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+updateLabel([force])
+</pre>
+<p>
+	Update menu label. Particularly used when a function is assigned to the item 
+	label instead of string. To assign a new label, please use <a href="#label()">label()</a> 
+	instead.
+</p>
+<ul>
+	<li>
+		<b>force</b>: boolean = false<br />
+		If set to false, only item with dynamic label (ie. function) will be updated.
+	</li>
+</ul>
+<pre class="code hidden">
+// To update current label
+$(elm).popmenu().find('item_id').updateLabel();
+</pre>
+
+<a name="visible()"></a>
+<h3>visible: boolean</h3>
+<p class="h-tag">since 1.0</p>
+<pre class="inline-code">
+visible([value])
+</pre>
+<p>
+	Toggle visibility of the menu item, or check current disable state.
+</p>
+<ul>
+	<li>
+		<b>visible</b>: boolean<br />
+		Assign true/false to show/hide menu item. Leave blank to get current state.
+	</li>
+</ul>
+<pre class="code hidden">
+// To hide an item
+$(elm).popmenu().find('item_id').visible(false);
+
+// To get current state
+var state = $(elm).popmenu().find('item_id').visible();
+</pre>
+
+</body>
+
+</html> 

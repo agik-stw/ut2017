@@ -6,14 +6,14 @@ use yii\web\AssetBundle;
 
 class PluginsAsset extends AssetBundle
 {
-   public $sourcePath = '@web/plugins';
+   public $sourcePath = '@web/plugins/StickyTableHeaders-master';
     public $css = [
-       'StickyTableHeaders-master/css/custom.css',
-       'StickyTableHeaders-master/css/tablesorter.css',
+       'css/custom.css',
+       'css/tablesorter.css',
     ];
     public $js = [
-   'StickyTableHeaders-master/js/jquery.stickytableheaders.min.js',
-   'StickyTableHeaders-master/js/jquery.tablesorter.js',
+   'js/jquery.stickytableheaders.min.js',
+   'js/jquery.tablesorter.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

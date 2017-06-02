@@ -42,4 +42,8 @@ font-weight: bold;
 /* td.highlight {
     background-color: whitesmoke !important;
 } */
-
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }

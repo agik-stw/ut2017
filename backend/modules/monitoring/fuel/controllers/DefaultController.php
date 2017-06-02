@@ -2,10 +2,10 @@
 
 namespace app\modules\monitoring\fuel\controllers;
 use yii\web\Controller;
-use app\storeprocedure\UsedOil;
-use yii\helpers\Json;
 use app\models\Customers;
 use app\models\Departement;
+use Yii;
+use yii\helpers\Url;
 
 /**
  * Default controller for the `fuel` module
@@ -16,6 +16,14 @@ class DefaultController extends Controller
      * Renders the index view for the module
      * @return string
      */
+public function beforeAction($action){
+    $session=Yii::$app->session;
+        if (!$session['username']) {
+            return Yii::$app->getResponse()->redirect(Url::toRoute('/login'));
+        }
+        return parent::beforeAction($action);
+}
+
     public function actionIndex()
     {
     	       $customers=Customers::find()->all();
@@ -24,5 +32,5 @@ class DefaultController extends Controller
         return $this->render('index',['customers'=>$customers,'departement'=>$departement]);
     }
 
-    
+
 }

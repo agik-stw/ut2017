@@ -32,6 +32,12 @@ use backend\assets\SweetAlertAsset;
 SweetAlertAsset::register($this);
 use backend\assets\AjaxAnimation;
 AjaxAnimation::register($this);
+use backend\assets\Jqdock;
+Jqdock::register($this);
+/*use backend\assets\Dockmenu;
+Dockmenu::register($this);*/
+use backend\assets\VueAssets;
+VueAssets::register($this);
 use backend\components\inspinia\InsBreadcrumbs;
 $moduleurl=Yii::$app->urlManager->parseRequest(Yii::$app->request);
 $url=$moduleurl[0];
@@ -114,7 +120,7 @@ $url=$moduleurl[0];
 
                         <li class="<?php if ($url=='monitoring/new_oil') {
                         echo 'active';
-                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/new_oil')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">New Oil & Others</span></a></li>
+                    }else{echo 'inactive';} ?>"><a href="<?php echo Url::toRoute('/monitoring/new_oil') ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">New Oil & Others</span></a></li>
 
                         <li class="<?php if ($url=='monitoring/unit_no_history') {
                         echo 'active';
@@ -129,6 +135,30 @@ $url=$moduleurl[0];
                            <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Comp.</span></a></li>
 
                            <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Consistency History</span></a></li>
+
+                    </ul>
+                </li>
+
+                </li>
+
+                <li class="<?php if ($url=='utility/import') {
+                        echo 'active';
+                    }
+                        ?>" id="menu">
+                    <a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/wrench-screwdriver.png';?>" /> <span class="nav-label">Utility</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+
+                    <li class="<?php if ($url=='utility/import') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>" id="view_data"><a href="<?php echo Url::toRoute('/utility/import') ?>" data-toggle="tooltip" title="Please click for Action"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/database-import.png';?>" />  <span class="nav-label">Import Data</span></a></li>
+
+                    <li class="<?php if ($url=='monitoring/used_oil') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>" id="view_data"><a href="#<?php echo Url::toRoute('/monitoring/used_oil') ?>" data-toggle="tooltip" title="Please click for Action"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/database-insert.png';?>" />  <span class="nav-label">Backup Data</span></a></li>
+
+                    <li class="<?php if ($url=='monitoring/used_oil') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>" id="view_data"><a href="#<?php echo Url::toRoute('/monitoring/used_oil') ?>" data-toggle="tooltip" title="Please click for Action"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/database.png';?>" />  <span class="nav-label">Restore Data</span></a></li>
 
                     </ul>
                 </li>

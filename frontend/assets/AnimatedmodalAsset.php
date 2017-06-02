@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class AnimatedmodalAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/main/vendor/bower/animatedmodal';
+    public $sourcePath = '@f_bower/animatedmodal';
     public $css = [
         'demo/css/normalize.min.css',
         'demo/css/animate.min.css',

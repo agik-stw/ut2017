@@ -7,9 +7,12 @@ use app\models\TbTransaction;
 use kartik\mpdf\Pdf;
 /*use app\plugins\fpdf181\FPDF;*/
 use Yii;
+use app\access\UsedOilAccess;
 
-use app\assets\AppAsset;
-use app\assets\ChartAsset;
+//datatables
+use db2\config\Configdb;
+//doctrine lib
+use Doctrine\DataTables;
 
 
 class ActionController extends \yii\web\Controller
@@ -19,195 +22,344 @@ class ActionController extends \yii\web\Controller
         /*return $this->render('index');*/
     }
 
-    public function actionTestdata()
-    {
-     $requestData = $_REQUEST;
-        
-        $columns = array(
-            0 => 'id',
-            1 => 'employee_name',
-            2 => 'employee_salary',
-            3 => 'employee_age'
-             );
-        
-       $sql = "SELECT  * from tbl_transaction where 1=1 limit 100";
-       
-        $data = Yii::$app->db->createCommand($sql)->queryAll();
-        
-        $totalData = count($data);
-        $totalFiltered = $totalData;
-     
-        // $sql.="WHERE 1=1";
-        
-       /* if (!empty($requestData['search']['value']))
+    //get all data
+        public function actionGetdata()
         {
-            $sql.=" AND ( employee_name LIKE '" . $requestData['search']['value'] . "%' ";
-            $sql.=" OR employee_salary LIKE '" . $requestData['search']['value'] . "%'";
-            $sql.=" OR employee_age LIKE '" . $requestData['search']['value'] . "%')";
-          
-        }*/
-        $data = Yii::$app->db->createCommand($sql)->queryAll();
-        $totalFiltered = count($data);
-       
-        $sql.=" ORDER BY " . $columns[$requestData['order'][0]['column']] . "   " . $requestData['order'][0]['dir'] . "  LIMIT " . $requestData['start'] . " ," . 
-        $requestData['length'] . "   ";
-       
-        $result = Yii::$app->db->createCommand($sql)->queryAll();
-       
-        $data = array();
-        $i=1;
-        
-        foreach ($result as $key => $row)
-        {
-          
-            $nestedData = array();
-            $url = Url::to(['employee/update', 'id' => $row['id']]);
-            $nestedData[] = $i;
-            $nestedData[] = $row["grouploc"];
-            $nestedData[] = '<a href="'.$url.'"><span class="glyphicon glyphicon-pencil"></span></a>';
-             $data[] = $nestedData;
-             $i++;
+          \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+
+          $this->enableCsrfValidation = false;
+          $session=Yii::$app->session;
+          $dataId=$session->get('data_id');
+/*return ['data'=>UsedOilAccess::accessData($dataId)];*/
+
+      //admin and ho role
+if ($dataId=="admin" || $dataId=="ho") {
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->limit(10000);
+return $query->all();
+}
+
+//data fmcpusat
+elseif ($dataId=="fmcpusat") {
+$sql="tbl_transaction.grouploc,tbl_transaction.branch,tbl_transaction.name,tbl_transaction.Lab_No,
+tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
+tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
+tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
+$where="substring(tbl_transaction.grouploc,1,3)='FMC' and tbl_transaction.grouploc!='' and tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
+
+
+$config = new \Doctrine\DBAL\Configuration();
+$connectionParams =Configdb::$params;
+$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+
+$datatables = (new DataTables\Builder())
+    ->withQueryBuilder(
+        $conn->createQueryBuilder()
+            ->select($sql)
+            ->from('tbl_transaction')
+            ->where($where)
+    )
+    ->withRequestParams($_REQUEST);
+return $datatables->getResponse();
+ 
+}
+
+//data fmc apa saja
+elseif (substr($dataId,0,3)=="fmc" && strlen($dataId)>3) {
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['tbl_transaction.grouploc'=>$dataId])
+  ->limit(10000);
+  return $query->all();
+}
+
+//branch,customer,grouploc
+else{
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['tbl_transaction.grouploc'=>$dataId])
+  ->orWhere(['tbl_transaction.customer_id'=>$dataId])
+  ->orWhere(['tbl_transaction.branch'=>$dataId]);
+  return $query->all();
+}
         }
-        
-        $json_data = array(
-            "draw" => intval($requestData['draw']), 
-            "recordsTotal" => intval($totalData),
-            "recordsFiltered" => intval($totalFiltered),
-            "data" => $data   // total data array
-        );
 
-        echo json_encode($json_data);
-    }
+    //get data by receive date
+        public function actionGet_by_receive_date()
+        {
+          \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
 
-//get data berdasarkan lab number
-    public function actionGetdata_by_labnumber($labNumber)
-    {
-$connection = Yii::$app->db;
-$command = $connection->createCommand('call usedOilby_labNumber("'.$labNumber.'")');     
-$data=$command->queryOne();
-return Json::encode($data);
-
-    }
-
-      public function actionGetdata_by_date($date1,$date2)
-    {
-     \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
-
-      $session = Yii::$app->session;
-      $data_id=$session->get('data_id');
-$connection = Yii::$app->db;
-$command = $connection->createCommand('call getTransactionByReceiveDate("'.$data_id.'"'.',"'.$date1.'"'.',"'.$date2.'")');     
-$data=$command->queryAll();
-$totalData=count($data);
-$totalFiltered=$totalData;
-
-
-$json_data = array(
-            /*"draw"            => 1, */
-            "recordsTotal"    => intval( $totalData ),
-            "recordsFiltered" => intval( $totalFiltered ),
-            "data"            => $data
-            );
-return $json_data;
-
-    }
-
-
-    public function actionReport($type,$labNumber){
-      $data=TbTransaction::find()
-      ->where(['lab_no'=>$labNumber])
-      ->one();
-
-  $content2=\yii2mod\c3\chart\Chart::widget([
-    'options' => [
-            'id' => 'popularity_chart'
-    ],
-    'clientOptions' => [
-       'data' => [
-            'x' => 'x',
-            'columns' => [
-                ['x', 'week 1', 'week 2', 'week 3', 'week 4'],
-                ['Popularity', 10, 20, 30, 50]
-            ],
-            'colors' => [
-                'Popularity' => '#4EB269',
-            ],
-        ],
-        'axis' => [
-            'x' => [
-                'label' => 'Month',
-                'type' => 'category'
-            ],
-            'y' => [
-                'label' => [
-                    'text' => 'Popularity',
-                    'position' => 'outer-top'
-                ],
-                'min' => 0,
-                'max' => 100,
-                'padding' => ['top' => 10, 'bottom' => 0]
-            ]
-        ]
-    ]
-]);
-
-      switch ($type) {
-        case 'pdf':
-        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-        $connt=$this->renderPartial('report_process_others',['labNumber'=>$labNumber,'data'=>$data]);
-return $connt;
-      $htmlContent=$this->renderAjax('pdf4',['labNumber'=>$labNumber,'data'=>$data]);
-     $pdf = new Pdf([
-        // set to use core fonts only
-        /*'mode' => Pdf::MODE_UTF8, */
-        // A4 paper format
-        'format' => Pdf::FORMAT_A4, 
-        // portrait orientation
-        'orientation' => Pdf::ORIENT_PORTRAIT, 
-        // stream to browser inline
-        /*'destination' => Pdf::DEST_BROWSER,*/ 
-        // your html content input
-        'content' => $htmlContent,  
-        // format content from your own css file if needed or use the
-        // enhanced bootstrap css built by Krajee for mPDF formatting 
-        'cssFile' =>'@web/report/pdf.css',
-         // call mPDF methods on the fly
-        'methods' => [ 
-            /*'SetHeader'=>['Oil Analysis Report'],*/ 
-            'SetFooter'=>['Page. {PAGENO}'],
-        ]
-    ]);
-return $pdf->render();
-          break;
-          case 'excel':
+          $this->enableCsrfValidation = true;
+          $session=Yii::$app->session;
+          $dataId=$session->get('data_id');
           $date1=$_REQUEST['date1'];
           $date2=$_REQUEST['date2'];
-           $session = Yii::$app->session;
-      $data_id=$session->get('data_id');
-$connection = Yii::$app->db;
-$command = $connection->createCommand('call getTransactionByReceiveDate("'.$data_id.'"'.',"'.$date1.'"'.',"'.$date2.'")');     
-$data=$command->queryAll();
-/*\Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
-return $data;*/
-/*return $this->renderPartial('excel',['data'=>$data]);*/
+   /* return ['data'=>UsedOilAccess::accessDataByReceiveDate($dataId,$date1,$date2)];*/
+   //admin and ho role
+if ($dataId=="admin" || $dataId=="ho") {
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['between','tbl_transaction.recv_dt1',$date1,$date2]);
+return $query->all();
+}
 
-          $filename = 'report-'.$date1.'/'.'sd/'.$date2.'.xls';
-          header("Content-type: application/vnd-ms-excel");
-           header("Content-Disposition: attachment; filename=".$filename);
-return $this->renderPartial('excel',['data'=>$data]);
-          break;
-          case 'critical_item':
-          /*Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;*/
-          /*return 'aaa';*/
-          return $this->renderPartial('export/exportxls');
-          break;
-        
-        default:
-          
-          break;
-      }
+//data fmcpusat
+elseif ($dataId=="fmcpusat") {
+$sql="tbl_transaction.grouploc,tbl_transaction.branch,tbl_transaction.name,tbl_transaction.Lab_No,
+tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
+tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
+tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
+$where="(tbl_transaction.RECV_DT1 between '$date1' and '$date2') and substring(tbl_transaction.grouploc,1,3)='FMC' and tbl_transaction.grouploc !='' and tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
 
-    }
+$config = new \Doctrine\DBAL\Configuration();
+$connectionParams =Configdb::$params;
+$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+
+$datatables = (new DataTables\Builder())
+    ->withQueryBuilder(
+        $conn->createQueryBuilder()
+            ->select($sql)
+            ->from('tbl_transaction')
+            ->where($where)
+    )
+    ->withRequestParams($_GET);
+return $datatables->getResponse();
+}
+
+//data fmc apa saja
+elseif (substr($dataId,0,3)=="fmc" && strlen($dataId)>3) {
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['tbl_transaction.grouploc'=>$dataId])
+  ->andWhere(['between','tbl_transaction.recv_dt1',$date1,$date2]);
+  return $query->all();
+}
+
+//branch,customer,grouploc
+else{
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['tbl_transaction.grouploc'=>$dataId])
+  ->orWhere(['tbl_transaction.customer_id'=>$dataId])
+  ->orWhere(['tbl_transaction.branch'=>$dataId])
+  ->andWhere(['between','tbl_transaction.recv_dt1',$date1,$date2]);
+  return $query->all();
+}
+
+        }
+
+        //get data by sample date
+            public function actionGet_by_sample_date()
+            {
+              \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+
+              $this->enableCsrfValidation = true;
+              $session=Yii::$app->session;
+              $dataId=$session->get('data_id');
+              $date1=$_REQUEST['date1'];
+              $date2=$_REQUEST['date2'];
+        /*return ['data'=>UsedOilAccess::accessDataBySampleDate($dataId,$date1,$date2)];*/
+        //admin and ho role
+if ($dataId=="admin" || $dataId=="ho") {
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['between','tbl_transaction.sampl_dt1',$date1,$date2]);
+return $query->all();
+}
+
+//data fmcpusat
+elseif ($dataId=="fmcpusat") {
+  $sql="tbl_transaction.grouploc,tbl_transaction.branch,tbl_transaction.name,tbl_transaction.Lab_No,
+tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
+tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
+tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
+$where="(tbl_transaction.SAMPL_DT1 between '$date1' and '$date2') and substring(tbl_transaction.grouploc,1,3)='FMC' and tbl_transaction.grouploc !='' and tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
+
+$config = new \Doctrine\DBAL\Configuration();
+$connectionParams =Configdb::$params;
+$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+
+$datatables = (new DataTables\Builder())
+    ->withQueryBuilder(
+        $conn->createQueryBuilder()
+            ->select($sql)
+            ->from('tbl_transaction')
+            ->where($where)
+    )
+    ->withRequestParams($_GET);
+return $datatables->getResponse();
+}
+
+//data fmc apa saja
+elseif (substr($dataId,0,3)=="fmc" && strlen($dataId)>3) {
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['tbl_transaction.grouploc'=>$dataId])
+  ->andWhere(['between','tbl_transaction.sampl_dt1',$date1,$date2]);
+  return $query->all();
+}
+
+//branch,customer,grouploc
+else{
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['tbl_transaction.grouploc'=>$dataId])
+  ->orWhere(['tbl_transaction.customer_id'=>$dataId])
+  ->orWhere(['tbl_transaction.branch'=>$dataId])
+  ->andWhere(['between','tbl_transaction.sampl_dt1',$date1,$date2]);
+  return $query->all();
+}
+
+            }
+
+            //get data by report date
+                public function actionGet_by_report_date()
+                {
+                  \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+
+                  $this->enableCsrfValidation = true;
+                  $session=Yii::$app->session;
+                  $dataId=$session->get('data_id');
+                  $date1=$_REQUEST['date1'];
+                  $date2=$_REQUEST['date2'];
+            /*return ['data'=>UsedOilAccess::accessDataByReportDate($dataId,$date1,$date2)];*/
+            //admin and ho role
+if ($dataId=="admin" || $dataId=="ho") {
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['between','tbl_transaction.rpt_dt1',$date1,$date2]);
+return $query->all();
+}
+
+//data fmcpusat
+elseif ($dataId=="fmcpusat") {
+  $sql="tbl_transaction.grouploc,tbl_transaction.branch,tbl_transaction.name,tbl_transaction.Lab_No,
+tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
+tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
+tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
+$where="(tbl_transaction.RPT_DT1 between '$date1' and '$date2') and substring(tbl_transaction.grouploc,1,3)='FMC' and tbl_transaction.grouploc !='' and tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
+
+$config = new \Doctrine\DBAL\Configuration();
+$connectionParams =Configdb::$params;
+$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+
+$datatables = (new DataTables\Builder())
+    ->withQueryBuilder(
+        $conn->createQueryBuilder()
+            ->select("*")
+            ->from('tbl_transaction')
+            ->where($where)
+    )
+    ->withRequestParams($_GET);
+return $datatables->getResponse();
+}
+
+//data fmc apa saja
+elseif (substr($dataId,0,3)=="fmc" && strlen($dataId)>3) {
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['tbl_transaction.grouploc'=>$dataId])
+  ->andWhere(['between','tbl_transaction.rpt_dt1',$date1,$date2]);
+ return $query->all();
+}
+
+//branch,customer,grouploc
+else{
+  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['tbl_transaction.grouploc'=>$dataId])
+  ->orWhere(['tbl_transaction.customer_id'=>$dataId])
+  ->orWhere(['tbl_transaction.branch'=>$dataId])
+  ->andWhere(['between','tbl_transaction.rpt_dt1',$date1,$date2]);
+  return $query->all();
+}
+
+                }
 
 
 

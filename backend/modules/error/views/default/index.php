@@ -1,0 +1,1 @@
+<h1>INI ERROR 404 YAA</h1>

@@ -7,7 +7,7 @@ use yii\web\AssetBundle;
 class InspiniaAsset extends AssetBundle
 {
 
-    public $sourcePath = '@vendor/main/inspinia';
+    public $sourcePath = '@b_inspinia';
     public $css = [
        'font-awesome/css/font-awesome.css',
        'css/plugins/toastr/toastr.min.css',

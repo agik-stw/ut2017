@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<!-- Copyright (C) 2014 Fajar Chandra <contact@jar2.net> -->
+
+<head>
+	<title>PopMenu Examples</title>
+	<meta name="author" content="Fajar Chandra" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.popmenu.js"></script>
+	<script type="text/javascript" src="../js/content.js"></script>
+	<link type="text/css" rel="stylesheet" href="../css/jquery.popmenu.css" />
+	<link type="text/css" rel="stylesheet" href="../css/jquery.popmenu.icons.css" />
+	<link type="text/css" rel="stylesheet" href="../css/content.css" />
+	<script type="text/javascript">
+		$(function() {
+			$('.code').each(function() {
+				var elm = '#'+$(this).attr('data-elm');
+				eval($(this).text());
+			});
+		});
+	</script>
+</head>
+
+<body>
+<h1>PopMenu Examples</h1>
+    
+<h2>Basic Context Menu</h2>
+<p>
+	This example demonstrates how easy it is to create a 
+	basic context menu that just works. You could assign a link to a menu item 
+	by specifying <span class="inline-code">href</span> option, or a callback 
+	by specifying <span class="inline-code">action</span> option.
+</p>
+<p>
+	You could also navigate the context menu using keyboard! Try clicking on the 
+	button, and press [context menu] button on the keyboard. Navigate using [up] 
+	and [down] arrow buttons. Press [enter] or [space] bar to select.
+</p>
+<p>
+	<input id="BasicBtn" type="button" value="Right Click Here" />
+</p>
+<pre class="code hidden" id="BasicCode" data-elm="BasicBtn">
+$(elm).popmenu({
+	hello: {label: 'Say Hello', action: function() { alert('Hello!'); }},
+	doublejar: {label: 'Visit doublejar.com', href: 'http://www.doublejar.com', target: '_blank' }
+});
+</pre>
+
+<br /><br />
+<!-- --------------------------------------------------------------------- -->
+    
+<h2>More Options for Context Menu Item</h2>
+<p>
+	This example demonstrates a context menu creation with various options, 
+	such as:
+</p>
+<ul>
+	<li>icons,</li>
+	<li>disabled item,</li>
+	<li>separator.</li>
+</ul>
+<p>
+	<input id="OptionBtn" type="button" value="Right Click Here" />
+</p>
+<pre class="code hidden" id="BasicCode" data-elm="OptionBtn">
+$(elm).popmenu({
+	add: {label: 'Add', icon: 'add'},
+	remove: {label: 'Remove', icon: 'remove', disabled: true},
+	separator: {type: 'separator'},
+	favorite: {label: 'Favorite', icon: 'favorite'},
+	home: {label: 'Visit Homepage', icon: '../img/home.png'}
+});
+</pre>
+
+<br /><br />
+<!-- --------------------------------------------------------------------- -->
+
+<h2>Dynamic Labels</h2>
+<p>
+	A function instead of string can be assigned as menu item labels. 
+</p>
+<p>
+	<input id="DynamicBtn" type="button" value="Right Click Here" />
+</p>
+<pre class="code hidden" id="DynamicCode" data-elm="DynamicBtn">
+$(elm).popmenu({
+	dateLabel: {label: 'Current Date &amp; Time', disabled: true},
+	date: {label: getCurrentDate}
+});
+
+function getCurrentDate() {
+	var date = new Date();
+	return date.toString();
+}
+</pre>
+
+<br /><br />
+<!-- --------------------------------------------------------------------- -->
+
+<h2>Alternative Menu Item Creation</h2>
+<p>
+	Beginning with an empty context menu, this example demonstrates various 
+	methods to add/remove menu items after a context menu is initialized.
+</p>
+<ul>
+	<li>append</li>
+	<li>prepend</li>
+	<li>insert</li>
+	<li>remove</li>
+</ul>
+<p>
+	<input id="ModBtn" type="button" value="Right Click Here" />
+</p>
+<pre class="code hidden" id="ModCode" data-elm="ModBtn">
+$(elm).popmenu();
+
+// Insert at the end
+$(elm).popmenu().append('open', {label: 'Open...'});
+$(elm).popmenu().append('saveAs', {label: 'Save As...'});
+$(elm).popmenu().append('exit', {label: 'Exit'});
+
+// Insert at the beginning
+$(elm).popmenu().prepend('new', {label: 'New'});
+
+// Insert after a specified item
+$(elm).popmenu().insert('save', {label: 'Save'}, 'open');
+
+// Remove an item
+$(elm).popmenu().remove('exit');
+</pre>
+
+<br /><br />
+<!-- --------------------------------------------------------------------- -->
+
+<h2>Single Context Menu Assigned to Multiple Elements</h2>
+<p>
+	Multiple elements can share a single instance of context menu. 
+	In this way, any operations made to the context menu of an element will 
+	affect others as well.
+</p>
+<p>
+	<input id="MultiBtn1" type="button" value="Right Click Here" />
+	<input id="MultiBtn2" type="button" value="...or Here" />
+	<label>
+		<input id="MultiToggle" type="checkbox" />
+		Disable Save and Save As
+	</label>
+</p>
+<pre class="code hidden" id="MultiCode" data-elm="MultiBtn">
+// Create a PopMenu instance
+var menu = new PopMenu({
+	newItem: {label: 'New'},
+	open: {label: 'Open...'},
+	save: {label: 'Save'},
+	saveAs: {label: 'Save As...'}
+});
+
+// Assign menu to both buttons
+$('#MultiBtn1').popmenu(menu);
+$('#MultiBtn2').popmenu(menu);
+
+// The checkbox will try to modify context menu items
+$('#MultiToggle').change(function() {
+	if($(this).is(':checked')) {
+		// Accessing PopMenu instance from 'menu' variable
+		menu.find('save').disable(true);
+		menu.find('saveAs').disable(true);
+	}
+	else {
+		// Accessing PopMenu instance from #MultiBtn1 (the first button)
+		$('#MultiBtn1').popmenu().find('save').disable(false);
+		$('#MultiBtn1').popmenu().find('saveAs').disable(false);
+	}
+});
+</pre>
+
+<br /><br />
+<!-- --------------------------------------------------------------------- -->
+
+<h2>Submenus and Long Menu List</h2>
+<p>
+	PopMenu is able to handle long list of menu items and unlimited submenus.
+</p>
+<p>
+	<input id="SubBtn" type="button" value="Right Click Here" />
+</p>
+<pre class="code hidden" id="SubCode" data-elm="SubBtn">
+$(elm).popmenu({
+	newItem: {label: 'New', submenu: {
+		newFolder: {label: 'Folder'},
+		newSep: {type: 'separator'},
+		newFile: {label: 'Blank File'},
+		newPng: {label: 'Image File (png)'},
+		newDoc: {label: 'Text Document (doc)'},
+		newXls: {label: 'Spreadsheet (xls)'}
+	}},
+	options: {label: 'Options', submenu: {
+		sort: {label: 'Sort By', submenu: {
+			sortName: {label: 'Name'},
+			sortType: {label: 'Type'},
+			sortSize: {label: 'Size'},
+			sortDate: {label: 'Date'},
+			sortSep: {type: 'separator'},
+			sortOpt: {label: 'Sort Options', submenu: {
+				sortOptOrder: {label: 'Ordering', submenu: {
+					sortOptOrderAsc: {label: 'Ascending'},
+					sortOptOrderDesc: {label: 'Descending'}
+				}},
+				sortOptFolder: {label: 'Folder First'}
+			}}
+		}},
+		view: {label: 'View Mode', submenu: {
+			viewThumb: {label: 'Thumbnails'},
+			viewIcon: {label: 'Icons', submenu: {
+				viBig: {label: 'Large Icons'},
+				viMed: {label: 'Medium Icons'},
+				viSml: {label: 'Small Icons'},
+				viTny: {label: 'Tiny Icons'},
+			}},
+			viewList: {label: 'List'},
+			viewTree: {label: 'Tree'}
+		}}
+	}},
+	provinces: {label: 'Provinces', submenu: {
+		idac: {label: 'Aceh'},
+		idba: {label: 'Bali'},
+		idbt: {label: 'Banten'},
+		idbe: {label: 'Bengkulu'},
+		idgo: {label: 'Gorontalo'},
+		idjk: {label: 'Jakarta'},
+		idja: {label: 'Jambi'},
+		idjb: {label: 'Jawa Barat'},
+		idjt: {label: 'Jawa Tengah'},
+		idji: {label: 'Jawa Timur'},
+		idkb: {label: 'Kalimantan Barat'},
+		idks: {label: 'Kalimantan Selatan'},
+		idkt: {label: 'Kalimantan Tengah'},
+		idki: {label: 'Kalimantan Timur'},
+		idku: {label: 'Kalimantan Utara'},
+		idbb: {label: 'Kepulauan Bangka Belitung'},
+		idkr: {label: 'Kepulauan Riau'},
+		idla: {label: 'Lampung'},
+		idma: {label: 'Maluku'},
+		idmu: {label: 'Maluku Utara'},
+		idnb: {label: 'Nusa Tenggara Barat'},
+		idnt: {label: 'Nusa Tenggara Timur'},
+		idpa: {label: 'Papua'},
+		idpb: {label: 'Papua Barat'},
+		idri: {label: 'Riau'},
+		idsr: {label: 'Sulawesi Barat'},
+		idsn: {label: 'Sulawesi Selatan'},
+		idst: {label: 'Sulawesi Tengah'},
+		idsg: {label: 'Sulawesi Tenggara'},
+		idsa: {label: 'Sulawesi Utara'},
+		idsb: {label: 'Sumatera Barat'},
+		idss: {label: 'Sumatera Selatan'},
+		idsu: {label: 'Sumatera Utara'},
+		idyo: {label: 'Yogyakarta'}
+	}}
+});
+</pre>
+
+<br /><br />
+<!-- --------------------------------------------------------------------- -->
+
+<h2>Showing Context Menu with Left Click</h2>
+<p>
+	Context menu can be triggered using left click by calling 
+	<span class="inline-code">$(elm).popmenu('show')</span> and optionally passing 
+	onclick event argument to position the menu under mouse cursor.
+</p>
+<p>
+	<input id="LeftBtn1" type="button" value="Left Click Here" />
+	<input id="LeftBtn2" type="button" value="Show Under Cursor" />
+</p>
+<pre class="code hidden" id="LeftCode" data-elm="LeftBtn1">
+// Create a PopMenu instance
+var menu = new PopMenu({
+	newItem: {label: 'New'},
+	open: {label: 'Open...'},
+	save: {label: 'Save'},
+	saveAs: {label: 'Save As...'}
+});
+
+// Assign menu to both buttons
+$('#LeftBtn1').popmenu(menu);
+$('#LeftBtn2').popmenu(menu);
+
+// Show context menu using left click
+$('#LeftBtn1').click(function() {
+	$(this).popmenu('show');
+});
+// Show context menu using left click
+$('#LeftBtn2').click(function(e) {
+	$(this).popmenu('show', e);
+});
+</pre>
+
+<br /><br />
+<!-- --------------------------------------------------------------------- -->
+
+</body>
+
+</html>

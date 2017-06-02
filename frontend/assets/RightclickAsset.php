@@ -9,9 +9,9 @@ use yii\web\AssetBundle;
  */
 class RightclickAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/main/vendor/rightclick2';
+    public $sourcePath = '@f_vendor/rightclick2';
     public $css = [
-        
+
     ];
     public $js = [
     'jquery.contextmenu.min.js',

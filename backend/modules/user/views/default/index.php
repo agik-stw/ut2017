@@ -417,5 +417,21 @@ function dateEn(){
  $("#btn-refresh").removeAttr('disabled')
 }
 
+//logout
+function Logout(){
+swal({
+  title: "Are you sure?",
+  text: "You will Logout",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes!",
+  closeOnConfirm: false
+},
+function(){
+  document.location="<?php echo Url::toRoute('/login/proces/logout'); ?>";
+});
+}
+
 </script>
 <?php JSRegister::end(); ?>

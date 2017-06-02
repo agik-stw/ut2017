@@ -22,8 +22,8 @@ use frontend\assets\DatatableAsset4;
 DatatableAsset4::register($this);
 use frontend\assets\DatatableAsset5;
 DatatableAsset5::register($this);
-use frontend\assets\BowerwebAsset;
-BowerwebAsset::register($this);
+use frontend\assets\AnimatedmodalAsset;
+AnimatedmodalAsset::register($this);
 use frontend\assets\AlertAsset;
 AlertAsset::register($this);
 use frontend\assets\RightclickAsset;
@@ -32,6 +32,8 @@ use frontend\assets\SweetAlertAsset;
 SweetAlertAsset::register($this);
 use frontend\assets\AjaxAnimation;
 AjaxAnimation::register($this);
+use frontend\assets\Select2Asset;
+Select2Asset::register($this);
 use frontend\components\inspinia\InsBreadcrumbs;
 use richardfan\widget\JSRegister;
 $moduleurl=Yii::$app->urlManager->parseRequest(Yii::$app->request);
@@ -90,7 +92,7 @@ $url=$moduleurl[0];
                         <li><a href="ecommerce_products_grid.html"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" /> <span class="nav-label">Dashboard MFC 2</span></a></li>
                     </ul>
                 </li>
-                       
+
                        <li class="<?php if ($url=='monitoring/used_oil') {
                         echo 'active';
                     }elseif($url=='monitoring/fuel'){
@@ -118,15 +120,16 @@ $url=$moduleurl[0];
 
                         <li class="<?php if ($url=='monitoring/new_oil') {
                         echo 'active';
-                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/new_oil')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">New Oil & Others</span></a></li>
+                    }else{echo 'inactive';} ?>"><a href="<?php echo Url::toRoute('/monitoring/new_oil') ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">New Oil & Others</span></a></li>
 
-                        <li class="<?php if ($url=='monitoring/unit_no_history') {
-                        echo 'active';
-                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/unit_no_history')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" /> </i> <span class="nav-label">UnitNo History</span></a></li>
 
                          <li class="<?php if ($url=='monitoring/machine_health') {
                         echo 'active';
                     }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/machine_health')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Health</span></a></li>
+
+                    <li class="<?php if ($url=='monitoring/unit_no_history') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/unit_no_history')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" /> </i> <span class="nav-label">UnitNo History</span></a></li>
 
                           <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Component Health</span></a></li>
 
@@ -151,7 +154,7 @@ $url=$moduleurl[0];
         <nav class="navbar navbar-fixed-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-link" href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/chocolate-milk.png';?>" /></i> </a>
-           
+
         </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -194,10 +197,7 @@ $url=$moduleurl[0];
 
     </div>
 
-     <?php $this->endBody() ?> 
+     <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
-
-
-

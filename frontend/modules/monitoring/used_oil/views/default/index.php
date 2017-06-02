@@ -14,7 +14,7 @@ use richardfan\widget\JSRegister;
         </div>
         <div class="row col-md-12">
 
-        <div class="col-md-6">   
+        <div class="col-md-6">
         <ul class="list-group clear-list m-t">
                    <li class="list-group-item fist-item">
                                 <span class="pull-right" id="grouploc"></span>
@@ -347,7 +347,8 @@ use richardfan\widget\JSRegister;
 <div ng-app="">
 
 <div class="ibox-title">
-
+<h3>Used Oil</h3>
+<div style="height: 2px; width: 100%; background-color: black;"></div>
 
 <div id="bloadify4"></div>
 
@@ -368,9 +369,9 @@ use richardfan\widget\JSRegister;
  <div class="form-group" id="daterange">
 <label class="font-noraml">Range select</label>
 <div class="input-daterange input-group">
- <input id="date1" type="text" class="input-sm form-control" placeholder="00-00-0000" name="start"/>
+ <input id="date1" type="text" class="input-sm form-control" placeholder="yyyy-mm-dd" name="start"/>
  <span class="input-group-addon">to</span>
-<input id="date2" type="text" class="input-sm form-control" placeholder="00-00-0000" name="end"/>
+<input id="date2" type="text" class="input-sm form-control" placeholder="yyyy-mm-dd" name="end"/>
 </div>
 </div>
 </div>
@@ -401,7 +402,7 @@ use richardfan\widget\JSRegister;
                 <table id="tb_used_oil" class="table table-striped table-hover" >
                     <thead>
                         <tr>
-                        <th class="th_table"></th>
+                        <th class="th_table">Actions</th>
                             <th class="th_table">Group</th>
                             <th class="th_table">Branch</th>
                             <th class="th_table">Customer Name</th>
@@ -414,12 +415,28 @@ use richardfan\widget\JSRegister;
                             <th class="th_table">Model</th>
                             <th class="th_table">Serial No.</th>
                             <th class="th_table">Oil Chg</th>
-                       <!--      <th class="th_table">Comp Chg</th>
-                            <th class="th_table">FC</th>
-                            <th class="th_table">MP</th> -->
                             <th class="th_table">Status</th>
                         </tr>
                     </thead>
+                    <tfoot>
+            <tr>
+                <th class=""></th>
+                            <th class="">Group</th>
+                            <th class="">Branch</th>
+                            <th class="">Customer Name</th>
+                            <th class="">Lab Number</th>
+                            <th class="">Sample Date</th>
+                            <th class="">Receive Date</th>
+                            <th class="">Report Date</th>
+                            <th class="">Unit Number</th>
+                            <th class="">Component</th>
+                            <th class="">Model</th>
+                            <th class="">Serial No.</th>
+                            <th class=""></th>
+                            <th class=""></th>
+            </tr>
+        </tfoot>
+
                     <tbody>
 
                                     </tbody>
@@ -441,11 +458,17 @@ use richardfan\widget\JSRegister;
 
 <?php JSRegister::begin(); ?>
 <script>
-var tb=$("#tb_used_oil").DataTable({
+//filter footer per kolom
+ $('#tb_used_oil tfoot th').not(":eq(0),:eq(12),:eq(13)").each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" />' );
+    } );
+
+tb=$("#tb_used_oil").DataTable({
 
        "columnDefs": [
-    { "width": "70px", "targets": 0 },
-    { "width": "80px", "targets": 1 },
+    { "width": "75px", "targets": 0 },
+    { "width": "100px", "targets": 1 },
     { "width": "150px", "targets": 2 },
     { "width": "250px", "targets": 3 },
     { "width": "100px", "targets": 4 },
@@ -456,7 +479,7 @@ var tb=$("#tb_used_oil").DataTable({
     { "width": "100px", "targets": 9 },
     { "width": "100px", "targets": 10},
     { "width": "100px", "targets": 11 },
-    { "width": "60px", "targets": 12 },
+    { "width": "50px", "targets": 12 },
 
   ],
         select: {
@@ -473,41 +496,53 @@ var tb=$("#tb_used_oil").DataTable({
         "responsive": true,
         "autoWidth": true,
         "ajax": {
-          "url": "<?php echo Url::toRoute('/api/usedoil/getdata?token=itpetrolab');?>",
-          'type':'post'
+          "url": "<?php echo Url::toRoute('/monitoring/used_oil/action/getdata');?>",
+          'type':'get'
         },
     columns: [
     {
                 "className":      'details-control',
                 "orderable":      false,
-                "data":           'lab_no',
-                /*"defaultContent": '<a href="#" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF">PDF</a>'+'&nbsp;<a href="#" class="btn btn-xs btn-info" data-toggle="tooltip" title="Please click row for view data">View</a>',*/
+                "data":           'Lab_No',
                 "render": function ( data, type, full, meta ) {
-      return '<a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF" target="_blank" href="'+"<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=pdf&labNumber='); ?>"+data+'">PDF</a>'+'&nbsp;<a class="btn btn-xs btn-info viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="Detail('+"'"+data+"'"+')">View</a>';
+      return '<a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF" target="_blank" href="'+"<?php echo Url::toRoute('/monitoring/used_oil/report/pdf?labNumber='); ?>"+data+'">PDF</a>'+'&nbsp;<a class="btn btn-xs btn-info viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="Detail('+"'"+data+"'"+')">View</a>';
     }
             },
     {data:'grouploc'},
     {data:'branch'},
-    {data:'customer_name'},
-    {data:'lab_no'},
-    {data:'sample_date'},
-    {data:'receive_date'},
-    {data:'report_date'},
-    {data:'unit_number'},
-    {data:'component_name'},
-    {data:'model'},
-    {data:'lab_no'},
+    {data:'name'},
+    {data:'Lab_No'},
+    {data:'SAMPL_DT1'},
+    {data:'RECV_DT1'},
+    {data:'RPT_DT1'},
+    {data:'UNIT_NO'},
+    {data:'COMPONENT'},
+    {data:'MODEL'},
+    {data:'Lab_No'},
     {data:'oil_change'},
-   /* {data:'cmp'},
-    {data:'filter_code'},
-    {data:'mp'},*/
-    {data:'eval_code'}
+    {
+                "className":      'details-control',
+                "orderable":      true,
+                "data":           'EVAL_CODE',
+                "render": function ( data, type, full, meta ) {
+                    //status code
+if (data=='') {
+return 'Normal';
+}else if(data=='N'){
+return 'Normal';
+}else if(data=='B'){
+return 'Attention';
+}else if(data=='C'){
+return 'Urgent';
+}
+    }
+            }
     ],
-    scrollY:'65vh',
+    scrollY:'370px',
         scrollCollapse: true,
         "scrollX": true,
         processing: true,
-        serverSide: false,
+        serverSide: true,
         select: {
             style: 'single'
         },
@@ -515,22 +550,22 @@ var tb=$("#tb_used_oil").DataTable({
   "rowCallback": function( row, data, index ) {
     $(row).find('td:eq(0)').css('background-color', '60   #ffffb3');
         /*alert(data.eval_code);*/
- if (data.eval_code=='Urgent') {
+ if (data.EVAL_CODE=='C') {
 /*$('td', row).css('background-color', '#ff6666');*/
 $(row).find('td:eq(13)').css('color', '#0033cc');
  $(row).find('td:eq(13)').css('background-color', '#ff0000');
  $(row).find('td:eq(0)').css('border-right', '4px solid #ff0000');
- }else if(data.eval_code=='Attention'){
+ }else if(data.EVAL_CODE=='B'){
   /* $('td', row).css('background-color', '#ffa31a'); */
    $(row).find('td:eq(13)').css('color', '#0033cc');
    $(row).find('td:eq(13)').css('background-color', '#ffff33');
    $(row).find('td:eq(0)').css('border-right', '4px solid #ffff33');
- }else if(data.eval_code=='Normal'){
+ }else if(data.EVAL_CODE=='N'){
   /* $('td', row).css('background-color', '#ffa31a'); */
    $(row).find('td:eq(13)').css('color', '#0033cc');
    $(row).find('td:eq(13)').css('background-color', '#00ff00');
    $(row).find('td:eq(0)').css('border-right', '4px solid #00ff00');
- }else if(data.eval_code==' '){
+ }else if(data.EVAL_CODE==''){
 /*   $('td', row).css('background-color', '#ffa31a'); */
    $(row).find('td:eq(13)').css('color', '#0033cc');
    $(row).find('td:eq(13)').css('background-color', '#00ff00');
@@ -541,20 +576,36 @@ $(row).find('td:eq(13)').css('color', '#0033cc');
 
 });
 
+ // Apply the search
+    tb.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+
 
 $("#btn-refresh").on('click',function(event) {
     var dateStart=$("#date1").val();
     var dateEnd=$("#date2").val();
 
    if ($("#select-date").val()=='all_date') {
-tb.ajax.url('<?php echo Url::toRoute('/api/usedoil/getdata?token=itpetrolab');?>').load();
+tb.ajax.url('<?php echo Url::toRoute('/monitoring/used_oil/action/getdata');?>').load();
+
    }else if($("#select-date").val()=='receive_date'){
-tb.ajax.url( "<?php echo Url::toRoute('/monitoring/used_oil/action/getdata_by_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
-/*tb.ajax.reload(null, false).draw();*/
-console.log("ajax table");
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/used_oil/action/get_by_receive_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
+
    }else if($("#select-date").val()=='report_date'){
+    tb.ajax.url( "<?php echo Url::toRoute('/monitoring/used_oil/action/get_by_report_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
 
    }else if($("#select-date").val()=='sample_date'){
+    tb.ajax.url( "<?php echo Url::toRoute('/monitoring/used_oil/action/get_by_sample_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
 
    }
 });
@@ -587,13 +638,19 @@ $(".select2").select2();
 $("#export").on('change',function(event) {
 var type=$(this).val();
 var labno=$("#labno").val();
-window.open("<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=');?>"+type+'&labNumber=0'+'&'+'date1='+$("#date1").val()+'&'+'date2='+$("#date2").val(),'_blank');
+
+if (type=='excel') {
+window.open("<?php echo Url::toRoute('/monitoring/used_oil/report/excel?date1=');?>"+$("#date1").val()+'&date2='+$("#date2").val()+'&by='+$("#select-date").val(),'_blank');
 $("#export").val('Select_Export');
+}else if(type=='critical_item'){
+window.open("<?php echo Url::toRoute('/monitoring/used_oil/report/critical_item?date1=');?>"+$("#date1").val()+'&date2='+$("#date2").val()+'&by='+$("#select-date").val(),'_blank');
+}
+
 });
 
 
 $("#select-date").on('change',function(event) {
-    
+
  dateEn();
  if ($(this).val()=="all_date") {
     $("#date1").val("");
@@ -642,12 +699,12 @@ HoldOn.close();
     //modal//
 function Detail(labNumber){
   $.ajax({
-    url: '<?php echo Url::toRoute("/monitoring/used_oil/action/getdata_by_labnumber");?>',
+    url: '<?php echo Url::toRoute("/monitoring/used_oil/report/getdata_by_labnumber");?>',
     type: 'GET',
     data: {labNumber: labNumber}
   })
   .done(function(data) {
-    var isi=JSON.parse(data);
+    var isi=data;
 $("#grouploc").html(isi.grouploc).css('color','#800000');
 $("#lab_no").html(isi.Lab_No).css('color','#800000');
 $("#branch").html(isi.branch).css('color','#800000');
@@ -719,10 +776,10 @@ $("#rec2").html(isi.RECOMM2).css('color','#800000');/*analisis*/
 }
 
 $('#date1').datepicker({
-format: 'dd-mm-yyyy',
+format: 'yyyy-mm-dd',
             });
 $('#date2').datepicker({
-format: 'dd-mm-yyyy',
+format: 'yyyy-mm-dd',
             });
 
 function dateDis(){
@@ -766,4 +823,3 @@ function(){
 
 </script>
 <?php JSRegister::end(); ?>
-

@@ -7,9 +7,9 @@ use app\models\TbTransaction;
 use kartik\mpdf\Pdf;
 /*use app\plugins\fpdf181\FPDF;*/
 use Yii;
+use yii\db\Query;
 
-use app\assets\AppAsset;
-use app\assets\ChartAsset;
+
 
 
 class ActionController extends \yii\web\Controller
@@ -91,13 +91,20 @@ return Json::encode($data);
 
       public function actionGetdata_by_date($date1,$date2)
     {
+        \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+        $query=new Query;
      
-      $session = Yii::$app->session;
-      $data_id=$session->get('data_id');
-$connection = Yii::$app->db;
-$command = $connection->createCommand('call getTransactionByReceiveDate("'.$data_id.'"'.',"'.$date1.'"'.',"'.$date2.'")');     
-$data=$command->queryAll();
-return Json::encode($data);
+        $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
+    'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
+'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
+'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
+when "B" then "Attention"
+when "C" then "Urgent"
+when " " then "Normal"
+when null then "Normal" end) as eval_code','(select "")as blank'])
+  ->from('tbl_transaction')
+  ->where(['between','tbl_transaction.recv_dt1',$date1,$date2]);
+return ['data'=>$query->all()];
 
     }
 

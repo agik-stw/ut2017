@@ -344,9 +344,199 @@ use richardfan\widget\JSRegister;
   <!--modal-->
 
 
+  <!--modal edit-->
+  <div class="modal fade" id="modal_edit" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Data</h4>
+        </div>
+        <div class="modal-body">
+
+        
+          <form>
+          <h3>General</h3>
+          <div style="width: 100%; height: 2px; background-color: black;"></div>
+<div class="row">
+          <div class="col-md-6">
+              <div class="form-group">
+              <label>Grouploc</label>
+              <input type="text" class="form-control" name="edit_grouploc" id="edit_grouploc">
+              </div>
+
+              <div class="form-group">
+              <label>Lab Number</label>
+              <input type="text" class="form-control" name="edit_lab_no" id="edit_lab_no">
+              </div>
+
+              <div class="form-group">
+              <label>Branch</label>
+              <input type="text" class="form-control" name="edit_branch" id="edit_branch">
+              </div>
+
+              <div class="form-group">
+              <label>Customer Id</label>
+              <input type="text" class="form-control" name="edit_customer_id" id="edit_customer_id">
+              </div>
+
+              <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control" name="edit_name" id="edit_name">
+              </div>
+
+              <div class="form-group">
+              <label>Address</label>
+              <input type="text" class="form-control" name="edit_address" id="edit_address">
+              </div>
+
+              <div class="form-group">
+              <label>Unit id</label>
+              <input type="text" class="form-control" name="edit_unit_id" id="edit_unit_id">
+              </div>
+
+              <div class="form-group">
+              <label>Unit No</label>
+              <input type="text" class="form-control" name="edit_unit_no" id="edit_unit_no">
+              </div>
+              </div>
+
+              <div class="col-md-6">
+              <div class="form-group">
+              <label>Model</label>
+              <input type="text" class="form-control" name="edit_model" id="edit_model">
+              </div>
+
+              <div class="form-group">
+              <label>Serial Number</label>
+              <input type="text" class="form-control" name="edit_serial_number" id="edit_serial_number">
+              </div>
+
+              <div class="form-group">
+              <label>Oil Change</label>
+              <input type="text" class="form-control" name="edit_oil_change" id="edit_oil_change">
+              </div>
+
+              <div class="form-group">
+              <label>Status</label>
+              <input type="text" class="form-control" name="edit_status" id="edit_status">
+              </div>
+
+               <div class="form-group">
+              <label>Receive Date</label>
+              <input type="text" class="form-control" name="edit_receive_date" id="edit_receive_date">
+              </div>
+
+               <div class="form-group">
+              <label>Sample Date</label>
+              <input type="text" class="form-control" name="edit_sample_date" id="edit_sample_date">
+              </div>
+
+               <div class="form-group">
+              <label>Report Date</label>
+              <input type="text" class="form-control" name="edit_report_date" id="edit_report_date">
+              </div>
+              </div>
+
+              </div>
+
+              <h3>Lab Analysis</h3>
+<div style="width: 100%; height: 2px; background-color: black;"></div>
+              <div class="row">
+          <div class="col-md-6">
+              <div class="form-group">
+              <label>Visc@40C (*)</label>
+              <input type="text" class="form-control" name="edit_visc_40" id="edit_visc_40">
+              </div>
+
+              <div class="form-group">
+              <label>Visc@100C (*)</label>
+              <input type="text" class="form-control" name="edit_visc_100" id="edit_visc_100">
+              </div>
+
+              <div class="form-group">
+              <label>TAN</label>
+              <input type="text" class="form-control" name="edit_tan" id="edit_tan">
+              </div>
+
+              <div class="form-group">
+              <label>TBN</label>
+              <input type="text" class="form-control" name="edit_tbn" id="edit_tbn">
+              </div>
+
+              <div class="form-group">
+              <label>Magnesium (Mg)</label>
+              <input type="text" class="form-control" name="edit_magnesium" id="edit_magnesium">
+              </div>
+
+              <div class="form-group">
+              <label>Address</label>
+              <input type="text" class="form-control" name="edit_address" id="edit_address">
+              </div>
+
+              <div class="form-group">
+              <label>Unit id</label>
+              <input type="text" class="form-control" name="edit_unit_id" id="edit_unit_id">
+              </div>
+              </div>
+
+              <div class="col-md-6">
+              <div class="form-group">
+              <label>Model</label>
+              <input type="text" class="form-control" name="edit_model" id="edit_model">
+              </div>
+
+              <div class="form-group">
+              <label>Serial Number</label>
+              <input type="text" class="form-control" name="edit_serial_number" id="edit_serial_number">
+              </div>
+
+              <div class="form-group">
+              <label>Oil Change</label>
+              <input type="text" class="form-control" name="edit_oil_change" id="edit_oil_change">
+              </div>
+
+              <div class="form-group">
+              <label>Status</label>
+              <input type="text" class="form-control" name="edit_status" id="edit_status">
+              </div>
+
+               <div class="form-group">
+              <label>Receive Date</label>
+              <input type="text" class="form-control" name="edit_receive_date" id="edit_receive_date">
+              </div>
+
+               <div class="form-group">
+              <label>Sample Date</label>
+              <input type="text" class="form-control" name="edit_sample_date" id="edit_sample_date">
+              </div>
+
+               <div class="form-group">
+              <label>Report Date</label>
+              <input type="text" class="form-control" name="edit_report_date" id="edit_report_date">
+              </div>
+              </div>
+
+              </div>
+          </form>
+          
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--modal edit-->
+
+
 <div ng-app="">
 
 <div class="ibox-title">
+<h3>Used Oil</h3>
+<div style="height: 2px; width: 100%; background-color: black;"></div>
 
 <div class="col-md-2 pull-left">
 <div class="form-group">
@@ -481,7 +671,7 @@ var tb=$("#tb_used_oil").DataTable({
                 "data":           'lab_no',
                 /*"defaultContent": '<a href="#" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF">PDF</a>'+'&nbsp;<a href="#" class="btn btn-xs btn-info" data-toggle="tooltip" title="Please click row for view data">View</a>',*/
                 "render": function ( data, type, full, meta ) {
-      return '<a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF" target="_blank" href="'+"<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=pdf&labNumber='); ?>"+data+'">PDF</a>'+'&nbsp;<a class="btn btn-xs btn-info viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="Detail('+"'"+data+"'"+')">View</a>'+'&nbsp;<a class="btn btn-xs btn-success viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="Detail('+"'"+data+"'"+')">Edit</a>';
+      return '<a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF" target="_blank" href="'+"<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=pdf&labNumber='); ?>"+data+'">PDF</a>'+'&nbsp;<a class="btn btn-xs btn-info viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="Detail('+"'"+data+"'"+')">View</a>'+'&nbsp;<a class="btn btn-xs btn-success viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="edit('+"'"+data+"'"+')">Edit</a>';
     }
             },
     {data:'grouploc'},
@@ -613,6 +803,11 @@ complete:function(){
     HoldOn.close();
 }
 });
+
+//function edit data
+function edit(id){
+    $('#modal_edit').modal('show');
+}
 
     //modal//
 function Detail(labNumber){
