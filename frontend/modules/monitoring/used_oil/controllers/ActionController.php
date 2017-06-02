@@ -32,7 +32,7 @@ class ActionController extends \yii\web\Controller
           $dataId=$session->get('data_id');
 /*return ['data'=>UsedOilAccess::accessData($dataId)];*/
 
-
+/*return $dataId;*/
 $conn=Configdb::connections();
 
       //admin and ho role
@@ -88,19 +88,22 @@ when null then "Normal" end) as eval_code','(select "")as blank'])
 
 //branch,customer,grouploc
 else{
-  $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
-  'tbl_transaction.lab_no','tbl_transaction.sampl_dt1 as sample_date','tbl_transaction.recv_dt1 as receive_date',
-'tbl_transaction.rpt_dt1 as report_date','tbl_transaction.unit_no as unit_number','tbl_transaction.COMPONENT as component_name','tbl_transaction.model','tbl_transaction.oil_change','tbl_transaction.filter_code','(select "") as cmp',
-'(select "") as mp','(select case tbl_transaction.eval_code when "N" then "Normal"
-when "B" then "Attention"
-when "C" then "Urgent"
-when " " then "Normal"
-when null then "Normal" end) as eval_code','(select "")as blank'])
-  ->from('tbl_transaction')
-  ->where(['tbl_transaction.grouploc'=>$dataId])
-  ->orWhere(['tbl_transaction.customer_id'=>$dataId])
-  ->orWhere(['tbl_transaction.branch'=>$dataId]);
-  return $query->all();
+  $sql="tbl_transaction.grouploc,tbl_transaction.branch,tbl_transaction.name,tbl_transaction.Lab_No,
+tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
+tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
+tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
+$where="tbl_transaction.grouploc='$dataId' or tbl_transaction.customer_id='$dataId' or tbl_transaction.branch='$dataId' and tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
+
+$datatables = (new DataTables\Builder())
+    ->withQueryBuilder(
+        $conn->createQueryBuilder()
+            ->select($sql)
+            ->from('tbl_transaction')
+            ->where($where)
+    )
+    ->withRequestParams($_REQUEST);
+return $datatables->getResponse();
+
 }
         }
 
@@ -183,6 +186,8 @@ when null then "Normal" end) as eval_code','(select "")as blank'])
   ->orWhere(['tbl_transaction.branch'=>$dataId])
   ->andWhere(['between','tbl_transaction.recv_dt1',$date1,$date2]);
   return $query->all();
+
+
 }
 
         }
