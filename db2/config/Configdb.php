@@ -10,4 +10,13 @@ class Configdb extends Action{
     'driver' => 'pdo_mysql',
 	];
 
+
+public static function connections(){
+$connection = \Doctrine\DBAL\DriverManager::getConnection(
+	Configdb::$params,
+	new \Doctrine\DBAL\Configuration()
+	);
+return $connection;
+}
+
 }

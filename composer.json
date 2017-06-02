@@ -48,6 +48,12 @@
         }
     },
     "scripts": {
-        "post-install-cmd": "php init --env=Development --overwrite=n"
+        "post-install-cmd": [
+"php init --env=Development --overwrite=n",
+"bower install"
+],
+"post-update-cmd": [
+"bower update"
+]
     }
 }

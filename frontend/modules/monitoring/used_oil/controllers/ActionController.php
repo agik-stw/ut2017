@@ -32,6 +32,9 @@ class ActionController extends \yii\web\Controller
           $dataId=$session->get('data_id');
 /*return ['data'=>UsedOilAccess::accessData($dataId)];*/
 
+
+$conn=Configdb::connections();
+
       //admin and ho role
 if ($dataId=="admin" || $dataId=="ho") {
   $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
@@ -54,11 +57,6 @@ tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
 tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
 tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
 $where="substring(tbl_transaction.grouploc,1,3)='FMC' and tbl_transaction.grouploc!='' and tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
-
-
-$config = new \Doctrine\DBAL\Configuration();
-$connectionParams =Configdb::$params;
-$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
 
 $datatables = (new DataTables\Builder())
     ->withQueryBuilder(
@@ -117,6 +115,8 @@ when null then "Normal" end) as eval_code','(select "")as blank'])
           $date1=$_REQUEST['date1'];
           $date2=$_REQUEST['date2'];
    /* return ['data'=>UsedOilAccess::accessDataByReceiveDate($dataId,$date1,$date2)];*/
+$conn=Configdb::connections();
+
    //admin and ho role
 if ($dataId=="admin" || $dataId=="ho") {
   $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
@@ -139,10 +139,6 @@ tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
 tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
 tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
 $where="(tbl_transaction.RECV_DT1 between '$date1' and '$date2') and substring(tbl_transaction.grouploc,1,3)='FMC' and tbl_transaction.grouploc !='' and tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
-
-$config = new \Doctrine\DBAL\Configuration();
-$connectionParams =Configdb::$params;
-$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
 
 $datatables = (new DataTables\Builder())
     ->withQueryBuilder(
@@ -202,6 +198,8 @@ when null then "Normal" end) as eval_code','(select "")as blank'])
               $date1=$_REQUEST['date1'];
               $date2=$_REQUEST['date2'];
         /*return ['data'=>UsedOilAccess::accessDataBySampleDate($dataId,$date1,$date2)];*/
+$conn=Configdb::connections();
+
         //admin and ho role
 if ($dataId=="admin" || $dataId=="ho") {
   $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
@@ -224,10 +222,6 @@ tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
 tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
 tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
 $where="(tbl_transaction.SAMPL_DT1 between '$date1' and '$date2') and substring(tbl_transaction.grouploc,1,3)='FMC' and tbl_transaction.grouploc !='' and tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
-
-$config = new \Doctrine\DBAL\Configuration();
-$connectionParams =Configdb::$params;
-$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
 
 $datatables = (new DataTables\Builder())
     ->withQueryBuilder(
@@ -287,6 +281,8 @@ when null then "Normal" end) as eval_code','(select "")as blank'])
                   $date1=$_REQUEST['date1'];
                   $date2=$_REQUEST['date2'];
             /*return ['data'=>UsedOilAccess::accessDataByReportDate($dataId,$date1,$date2)];*/
+$conn=Configdb::connections();
+
             //admin and ho role
 if ($dataId=="admin" || $dataId=="ho") {
   $query->select(['tbl_transaction.grouploc','tbl_transaction.branch','tbl_transaction.name as customer_name',
@@ -309,10 +305,6 @@ tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
 tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
 tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
 $where="(tbl_transaction.RPT_DT1 between '$date1' and '$date2') and substring(tbl_transaction.grouploc,1,3)='FMC' and tbl_transaction.grouploc !='' and tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
-
-$config = new \Doctrine\DBAL\Configuration();
-$connectionParams =Configdb::$params;
-$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
 
 $datatables = (new DataTables\Builder())
     ->withQueryBuilder(
