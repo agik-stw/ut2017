@@ -22,7 +22,8 @@ use richardfan\widget\JSRegister;
    <div class="container">
         <div class="card card-container">
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <img width="380" id="" class="img-responsive" src="<?php echo Url::base('') . '/' . 'img/icon/pcr.png'; ?>" />
+            <!-- <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> -->
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin" method="post" action="<?php echo Url::toRoute('/login/proces/auth') ?>">
                 <span id="reauth-email" class="reauth-email"></span>
