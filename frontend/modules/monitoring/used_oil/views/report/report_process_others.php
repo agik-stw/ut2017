@@ -362,7 +362,7 @@ function fSeq_I($seq_I) {
   return $vchar;
 }
 function  hitung_others($col1,$col2,$col3,$col4,$col5){
-include_once("ewcfg12.php");
+include("ewcfg12.php");
 
   $dbserver   = $EW_CONN["DB"]["host"];
   $dbuser   = $EW_CONN["DB"]["user"];
@@ -370,7 +370,7 @@ include_once("ewcfg12.php");
   $dbdatabase = $EW_CONN["DB"]["db"];
 
 
-  $conn = mysqli_connect('localhost', $dbuser, $dbpassword,$dbdatabase);
+  $conn = mysqli_Connect('localhost', $dbuser, $dbpassword,$dbdatabase);
 /*  $pilih     = mysql_select_db($dbdatabase, $conn);*/
 
   $colomn[1]=$col1;
@@ -385,8 +385,8 @@ include_once("ewcfg12.php");
   $colomnname[4]='col4';
   $colomnname[5]='col5';
 
-  	$sqlupdate="update tbl_otherorder_lu set col1='',col2='',col3='',col4='',col5=''";
-	$hasil=mysqli_query($conn,$sqlupdate);
+    $sqlupdate="update tbl_otherorder_lu set col1='',col2='',col3='',col4='',col5=''";
+  $hasil=mysqli_query($conn,$sqlupdate);
 
   $i=1;
   while ($i<=5) {
@@ -396,8 +396,8 @@ include_once("ewcfg12.php");
 
   while ($rowresume = mysqli_fetch_row($hasil)) {
     list($unsur,$unit,$methode,$value,$attention,$urgent) = $rowresume;
-	$sqlupdate="update tbl_otherorder_lu set $colomnname[$i]=$value where unsur='$unsur'";
-	$hasilupdate=mysqli_query($conn,$sqlupdate);
+  $sqlupdate="update tbl_otherorder_lu set $colomnname[$i]=$value where unsur='$unsur'";
+  $hasilupdate=mysqli_query($conn,$sqlupdate);
   }
   $i++;
 
@@ -406,8 +406,8 @@ include_once("ewcfg12.php");
 }
 
 
-function Cari_Other1($data9, $lab_no,$Others,$Jml,$ke){
-   include_once("ewcfg12.php");
+function Cari_Other1(&$data9, $lab_no,&$Others,&$Jml,$ke){
+   include("ewcfg12.php");
 
   $dbserver   = $EW_CONN["DB"]["host"];
   $dbuser   = $EW_CONN["DB"]["user"];
@@ -425,36 +425,36 @@ function Cari_Other1($data9, $lab_no,$Others,$Jml,$ke){
   $i=900;
   $Temp=0;
     while ($rowresume = mysql_fetch_row($hasilresume)) {
-	 $i++;
+   $i++;
     list($unsur,$unit,$methode,$value,$attention,$urgent) = $rowresume;
     $Temp=1;
-	if ($ke==1)
+  if ($ke==1)
     $data9[$i] = array($unsur,$unit,$methode,$value,'','','','',$attention,$urgent);
 
-	if ($ke==2)
+  if ($ke==2)
     $data9[$i] = array($unsur,$unit,$methode,'',$value,'','','',$attention,$urgent);
 
-	if ($ke==3)
+  if ($ke==3)
     $data9[$i] = array($unsur,$unit,$methode,'','',$value,'','',$attention,$urgent);
 
     if ($ke==4)
     $data9[$i] = array($unsur,$unit,$methode,'','','',$value,'',$attention,$urgent);
 
-	    if ($ke==5)
+      if ($ke==5)
     $data9[$i] = array($unsur,$unit,$methode,'','','','',$value,$attention,$urgent);
-	}
+  }
 
-	 while ($i<903)
-	 {
-	 $i++;
+   while ($i<903)
+   {
+   $i++;
     $data9[$i] = array('','','','','','','','','','');
-	 }
-	$Others=$Temp;
-	$Jml=$i-900;
+   }
+  $Others=$Temp;
+  $Jml=$i-900;
 }
 
 function Cari_Other(&$data9, $lab_no,&$Others,&$Jml,$ke){
-   include_once("ewcfg12.php");
+   include("ewcfg12.php");
 
   $dbserver   = $EW_CONN["DB"]["host"];
   $dbuser   = $EW_CONN["DB"]["user"];
@@ -478,22 +478,22 @@ function Cari_Other(&$data9, $lab_no,&$Others,&$Jml,$ke){
   $i=900;
 
     while ($rowresume = mysql_fetch_row($hasilresume)) {
-	 $i++;
+   $i++;
     list($unsur,$unit,$methode,$attention,$urgent,$col1,$col2,$col3,$col4,$col5,$attention,$urgent) = $rowresume;
    $data9[$i] = array($unsur,$unit,$methode,$col1,$col2,$col3,$col4,$col5,$attention,$urgent);
 //  $data9[$i] = array($unsur,$unit,$methode,$col1,$col2,$col3,$col4,$col5,5,6);
-	}
+  }
 
 
-	$Others=$Temp;
-	$Jml=$i-900;
-	$Jml=5;
+  $Others=$Temp;
+  $Jml=$i-900;
+  $Jml=5;
 }
 
 
 function show_rpt_5($lab_no, $vtgl_1, $vtgl_2, $vgroup, $vcust_id) {
   define('FPDF_FONTPATH', 'fpdf/font/');
-  include_once("ewcfg12.php");
+  include("ewcfg12.php");
 
 // define("EW_USE_ADODB", FALSE, TRUE); // Use ADOdb
 if (!defined("EW_USE_MYSQLI"))
@@ -512,7 +512,7 @@ if (!defined("EW_USE_MYSQLI"))
   $pdf->AliasNbPages();
 
 /*  $conn = mysql_Connect($dbserver.':3306', $dbuser, $dbpassword);*/
-$conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
+$conn=mysqli_connect('localhost', $dbuser, $dbpassword,$dbdatabase);
 
   if ($vcust_id != '') {
     $cond_cust_id = " and customer_id=" . $vcust_id . " ";
@@ -530,7 +530,7 @@ $conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
   $sqlstrresume = "select grouploc,lab_no  from tbl_transaction " . $conditionresume;
 
 /*  $pilih     = mysql_select_db($dbdatabase, $conn);*/
-  $hasilresume = mysqli_query($conn,$sqlstrresume);
+  $hasilresume = $conn->query($sqlstrresume);
 
   $ii = 0;
   while ($rowresume = mysqli_fetch_row($hasilresume)) {
@@ -634,10 +634,10 @@ $conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
         $i--;
       }
 
-	  hitung_others($cell[1][101],$cell[2][101],$cell[3][101],$cell[4][101],$cell[5][101]);
+    hitung_others($cell[1][101],$cell[2][101],$cell[3][101],$cell[4][101],$cell[5][101]);
       $sqlstr = "select '','','','','','','',VISC_40_CODE,CST_CODE,TAN_CODE,TBN_CODE,MG_CODE,CA_CODE,ZN_CODE,NA_CODE,SI_CODE,FE_CODE,CU_CODE,AL_CODE,CR_CODE,NI_CODE,SN_CODE,PB_CODE,TRANS_CODE,OXID_CODE,NITR_CODE,SOX_CODE,DILUT_CODE, WTR_CODE, GLY_CODE,4um_code,6um_code,15um_code,ISO4406_CODE,seq_I_code,seq_II_code,seq_III_code  from tbl_transaction " . $condition;
       $hasil  = mysqli_query($conn,$sqlstr);
-      $i    = $jml;`
+      $i    = $jml;
 
       while ($row = mysqli_fetch_row($hasil)) {
         list($cell_c[$i][101], $cell_c[$i][102], $cell_c[$i][103], $cell_c[$i][104], $cell_c[$i][105], $cell_c[$i][106], $cell_c[$i][107], $cell_c[$i][201], $cell_c[$i][202], $cell_c[$i][203], $cell_c[$i][204], $cell_c[$i][301], $cell_c[$i][302], $cell_c[$i][303], $cell_c[$i][401], $cell_c[$i][402], $cell_c[$i][501], $cell_c[$i][502], $cell_c[$i][503], $cell_c[$i][504], $cell_c[$i][505], $cell_c[$i][506], $cell_c[$i][507], $cell_c[$i][601], $cell_c[$i][602], $cell_c[$i][603], $cell_c[$i][604],$cell_c[$i][605], $cell_c[$i][606], $cell_c[$i][607], $cell_c[$i][701], $cell_c[$i][702], $cell_c[$i][703], $cell_c[$i][704], $cell_c[$i][801], $cell_c[$i][802], $cell_c[$i][803]) = $row;
@@ -691,20 +691,20 @@ $conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
       }
 
 
-	  	$sqlstrcolor="select B, C from  tbl_color" ;
-		$hasilcolor=mysqli_query($conn,$sqlstrcolor) or die(mysqli_error($conn));
-		$rowcol=mysqli_fetch_row($hasilcolor);
-		list($B,$C)=$rowcol;
-		$minmatrix[509]=$B;
-	    $matrix[509]=$C;
+      $sqlstrcolor="select B, C from  tbl_color" ;
+    $hasilcolor=mysqli_query($conn,$sqlstrcolor) or die(mysqli_error($conn));
+    $rowcol=mysqli_fetch_row($hasilcolor);
+    list($B,$C)=$rowcol;
+    $minmatrix[509]=$B;
+      $matrix[509]=$C;
 
 
-	  	$sqlstrseq="select B1,B2,C1,C2 from  tbl_sequence" ;
-		$hasilseq=mysqli_query($conn,$sqlstrseq) or die(mysqli_error($conn));
-		$rowseq=mysqli_fetch_row($hasilseq);
-		list($B1,$B2,$C1,$C2)=$rowseq;
-		$minmatrix[801]=$B1.'/'.$B2;
-		$matrix[801]=$C1.'/'.$C2;
+      $sqlstrseq="select B1,B2,C1,C2 from  tbl_sequence" ;
+    $hasilseq=mysqli_query($conn,$sqlstrseq) or die(mysqli_error($conn));
+    $rowseq=mysqli_fetch_row($hasilseq);
+    list($B1,$B2,$C1,$C2)=$rowseq;
+    $minmatrix[801]=$B1.'/'.$B2;
+    $matrix[801]=$C1.'/'.$C2;
 
       $condition1 = " where Matrix='" . $matrik . "'";
       $sqlstr   = "select 6attention, 14attention, 6urgent, 14urgent from  tbl_wear_ftir_matrix " . $condition1;
@@ -1129,7 +1129,7 @@ $conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
     $j = 203;
 
 
-//	  if (((strtoupper($component) <> "ENGINE") and (strtoupper($component) <> "ENGINE UPPER") and (strtoupper($component) <> "ENGINE LOWER") and (strtoupper($component) <> "NEW OIL B")) and ($j == 203)) {
+//    if (((strtoupper($component) <> "ENGINE") and (strtoupper($component) <> "ENGINE UPPER") and (strtoupper($component) <> "ENGINE LOWER") and (strtoupper($component) <> "NEW OIL B")) and ($j == 203)) {
       $data2[$j - 200] = array(
         $cellTitle[$j],
         $cellunit[$j],
@@ -1425,7 +1425,7 @@ $conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
 
     }
 
-	      $header9 = array(
+        $header9 = array(
         'OTHERS',
         '',
         '',
@@ -1438,9 +1438,9 @@ $conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
         ''
       );
 
-	$Others=0;
-	//$ke=3;
-	Cari_Other($data9,$lab_no,$Others,$Jml,$jmlkolom);
+  $Others=0;
+  //$ke=3;
+  Cari_Other($data9,$lab_no,$Others,$Jml,$jmlkolom);
 //$Jml=5;
       $pdf->Ln();
       $pdf->SetFillColor(235);
@@ -1448,7 +1448,7 @@ $conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
       $pdf->Ln(-0.5);
       $pdf->ImprovedTable($header9, $data9, $Jml);
 
-	$coeff=0;
+  $coeff=0;
 
     $pdf->SetDrawColor(0);
     $pdf->SetLineWidth(0.05);
@@ -1459,7 +1459,7 @@ $conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
     $pdf->Image('image/' . $graph2, 11.3, $coeff + 0.1, 9.2);
    // $pdf->Image('image/' . $graph3, 1, $coeff + 22.2, 9.2);
   //  $pdf->Image('image/' . $graph4, 11.3, $coeff + 22.2, 9.2);
-	$pdf->SetXY(16,29.4);
+  $pdf->SetXY(16,29.4);
     $pdf->Ln(-2.5);
     $mcfile = 'upload/gambar/MC_'.$lab_no.'.jpg';
     $edit = 'http://'.$_SERVER['HTTP_HOST'].'tbl_transactionedit.php?Lab_No='.$lab_no;
@@ -1505,75 +1505,75 @@ $conn=mysqli_connect( 'localhost', $dbuser, $dbpassword,$dbdatabase);
   }
            $pdf->Ln(1);
       $pdf->SetFont('Arial', 'BU', 7.5);
-	  $pdf->Cell(15, 0.8, '', 0, 0, 'L');
-	  $pdf->SetXY(16,29.4);
+    $pdf->Cell(15, 0.8, '', 0, 0, 'L');
+    $pdf->SetXY(16,29.4);
       $pdf->Cell(10, 0.8, 'Manager Teknis', 0, 0, 'L');
-	  	include_once("ewcfg12.php");
-	$dbserver   = $EW_CONN["DB"]["host"];
-	$dbuser   = $EW_CONN["DB"]["user"];
-	$dbpassword = $EW_CONN["DB"]["pass"];
-	$dbdatabase = $EW_CONN["DB"]["db"];
-	@$lab_no = $_GET['vlab_no'];
-	$conn = mysql_Connect($dbserver.':3306', $dbuser, $dbpassword);
-	$pilih   = mysql_select_db($dbdatabase, $conn);
+      include("ewcfg12.php");
+  $dbserver   = $EW_CONN["DB"]["host"];
+  $dbuser   = $EW_CONN["DB"]["user"];
+  $dbpassword = $EW_CONN["DB"]["pass"];
+  $dbdatabase = $EW_CONN["DB"]["db"];
+  @$lab_no = $_GET['vlab_no'];
+  $conn = mysql_Connect($dbserver.':3306', $dbuser, $dbpassword);
+  $pilih   = mysql_select_db($dbdatabase, $conn);
 
-		 $query = "SELECT * FROM tbl_transaction WHERE Lab_No='$lab_no';";
-		$result = mysql_query($query) or die(mysql_error());
-		 while($row = mysql_fetch_array($result)){
-		$verifikasi =$row['verifikasi'];
-		if(($verifikasi == "") or ($verifikasi == "0000-00-00")){
+     $query = "SELECT * FROM tbl_transaction WHERE Lab_No='$lab_no';";
+    $result = mysql_query($query) or die(mysql_error());
+     while($row = mysql_fetch_array($result)){
+    $verifikasi =$row['verifikasi'];
+    if(($verifikasi == "") or ($verifikasi == "0000-00-00")){
     //  $pdf->Ln(1);
-	  // $pdf->Image('image/TTD+STMPL.jpg', 14.7, 28.1, 5);
-		}else{
+    // $pdf->Image('image/TTD+STMPL.jpg', 14.7, 28.1, 5);
+    }else{
     $pdf->Ln(1);
-	   $pdf->Image('image/TTD+STMPL.jpg', 14.7, 30, 5);
+     $pdf->Image('image/TTD+STMPL.jpg', 14.7, 30, 5);
 
-		}}
+    }}
 
-	   $pdf->Ln(2.2);
-	   $pdf->Cell(15, 0.8, '', 0, 0, 'L');
-	  $pdf->SetXY(16,32.2);
+     $pdf->Ln(2.2);
+     $pdf->Cell(15, 0.8, '', 0, 0, 'L');
+    $pdf->SetXY(16,32.2);
       $pdf->Cell(10, 0.8, 'Reko Sayogo, S.Si', 0, 0, 'L','', '/others_npmp12/tbl_transactionlist.php?psearch='.$lab_no);
 
-	    $pdf->SetFont('Arial', '', 7);
-	     $pdf->Ln(0.8);
+      $pdf->SetFont('Arial', '', 7);
+       $pdf->Ln(0.8);
 $pdf->SetXY(1,30);
-		  $pdf->Cell(25, 2.6, '(*) Berdasarkan ISO VG Grade dan SAE Viscocity Grade', 0, 0, 'L');
-		  	     $pdf->Ln(0.3);
-		  $pdf->Cell(25, 2.6, '(*) Catatan   : Data analisa hanya berlaku untuk sample yang diuji di laboratorium PT. Petrolab Services', 0, 0, 'L');
- 		  	     $pdf->Ln(0.3);
-		  $pdf->Cell(10, 2.6, '     Pengaduan tidak dilayani setelah 30 hari dari tanggal report di terbitkan ', 0, 0, 'L');
-	include_once("ewcfg12.php");
-	$dbserver   = $EW_CONN["DB"]["host"];
-	$dbuser   = $EW_CONN["DB"]["user"];
-	$dbpassword = $EW_CONN["DB"]["pass"];
-	$dbdatabase = $EW_CONN["DB"]["db"];
-	@$lab_no = $_GET['vlab_no'];
-	$conn = mysql_Connect($dbserver.':3306', $dbuser, $dbpassword);
-	$pilih   = mysql_select_db($dbdatabase, $conn);
+      $pdf->Cell(25, 2.6, '(*) Berdasarkan ISO VG Grade dan SAE Viscocity Grade', 0, 0, 'L');
+             $pdf->Ln(0.3);
+      $pdf->Cell(25, 2.6, '(*) Catatan   : Data analisa hanya berlaku untuk sample yang diuji di laboratorium PT. Petrolab Services', 0, 0, 'L');
+             $pdf->Ln(0.3);
+      $pdf->Cell(10, 2.6, '     Pengaduan tidak dilayani setelah 30 hari dari tanggal report di terbitkan ', 0, 0, 'L');
+  include("ewcfg12.php");
+  $dbserver   = $EW_CONN["DB"]["host"];
+  $dbuser   = $EW_CONN["DB"]["user"];
+  $dbpassword = $EW_CONN["DB"]["pass"];
+  $dbdatabase = $EW_CONN["DB"]["db"];
+  @$lab_no = $_GET['vlab_no'];
+  $conn = mysql_Connect($dbserver.':3306', $dbuser, $dbpassword);
+  $pilih   = mysql_select_db($dbdatabase, $conn);
 
-		 $query = "SELECT * FROM tbl_transaction WHERE Lab_No='$lab_no';";
-		$result = mysql_query($query) or die(mysql_error());
-		 while($row = mysql_fetch_array($result)){
-		$verifikasi =$row['verifikasi'];
-		if(($verifikasi == "") or ($verifikasi == "0000-00-00")) {
-//		$pdf->SetFont('Arial', 'BU', 7.5);
-//		$pdf->SetXY(16,30);
-//		$pdf->Cell(10, 0.8, 'Reko Sayogo, S.Si', 0, 0, 'L','', '/others_npmp12/tbl_transactionlist.php');
-//		$pdf->SetFont('Arial', '', 7);
-	$pdf->Ln(2);
-		  $pdf->Cell(25, 0.9, '                                                                                                             Page 1 Of 1                                                                                                                RK/5.10/01/01/02', 0, 0, 'L');
+     $query = "SELECT * FROM tbl_transaction WHERE Lab_No='$lab_no';";
+    $result = mysql_query($query) or die(mysql_error());
+     while($row = mysql_fetch_array($result)){
+    $verifikasi =$row['verifikasi'];
+    if(($verifikasi == "") or ($verifikasi == "0000-00-00")) {
+//    $pdf->SetFont('Arial', 'BU', 7.5);
+//    $pdf->SetXY(16,30);
+//    $pdf->Cell(10, 0.8, 'Reko Sayogo, S.Si', 0, 0, 'L','', '/others_npmp12/tbl_transactionlist.php');
+//    $pdf->SetFont('Arial', '', 7);
+  $pdf->Ln(2);
+      $pdf->Cell(25, 0.9, '                                                                                                             Page 1 Of 1                                                                                                                RK/5.10/01/01/02', 0, 0, 'L');
 
-	  }else{
-		  		$pdf->SetFont('Arial', '', 7);
-			$pdf->Ln(0.3);
-		  $pdf->Cell(10, 2.6, '(*) Verifikasi : '.$verifikasi, 0, 0, 'L','');
-			$pdf->SetFont('Arial', '', 7);
-//			$pdf->SetY(32.4);
-		  	     $pdf->Ln(1.8);
-		  $pdf->Cell(25, 0.8, '                                                                                                             Page 1 Of 1                                                                                                                RK/5.10/01/01/02', 0, 0, 'L');
+    }else{
+          $pdf->SetFont('Arial', '', 7);
+      $pdf->Ln(0.3);
+      $pdf->Cell(10, 2.6, '(*) Verifikasi : '.$verifikasi, 0, 0, 'L','');
+      $pdf->SetFont('Arial', '', 7);
+//      $pdf->SetY(32.4);
+             $pdf->Ln(1.8);
+      $pdf->Cell(25, 0.8, '                                                                                                             Page 1 Of 1                                                                                                                RK/5.10/01/01/02', 0, 0, 'L');
 
-		 }}
+     }}
 
 
     //Page number
@@ -1613,11 +1613,11 @@ $pdf->SetXY(1,30);
     */
   }
 
-  $pdf->Output( 'Used Oil-'.$_GET["labNumber"].'.'.'pdf','D');
+  $pdf->Output();
 }
 
-function find_rec($code1, $code2, $code3, $owner, $company, $lab_no) {
-  include_once("ewcfg12.php");
+function find_rec(&$code1, &$code2, &$code3, &$owner, &$company, &$lab_no) {
+  include("ewcfg12.php");
   $dbserver   = $EW_CONN["DB"]["host"];
   $dbuser   = $EW_CONN["DB"]["user"];
   $dbpassword = $EW_CONN["DB"]["pass"];
