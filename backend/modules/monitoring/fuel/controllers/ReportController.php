@@ -60,7 +60,7 @@ class ReportController extends \yii\web\Controller
   public function actionOpenpdf(){
 
     $file=$_REQUEST['file'];
-    $path="./uploads/fuel/";
+    $path=Url::base('/')."./uploads/fuel/";
      Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
               // Set up PDF headers
               /*header('Content-type: application/pdf');
