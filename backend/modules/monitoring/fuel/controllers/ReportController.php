@@ -60,16 +60,16 @@ class ReportController extends \yii\web\Controller
   public function actionOpenpdf(){
 
     $file=$_REQUEST['file'];
-    $path=Url::base('/')."./uploads/fuel/";
-     Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+    $path=Url::base('/')."/uploads/fuel/";
+     /*Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;*/
               // Set up PDF headers
-              /*header('Content-type: application/pdf');
-              header('Content-Disposition: inline; filename="' . '09003395-.pdf' . '"');
+              header('Content-type: application/pdf');
+              header('Content-Disposition: inline; filename="' . $file . '"');
               header('Content-Transfer-Encoding: binary');
-              header('Content-Length: ' . filesize('./09003395-.pdf'));
+              header('Content-Length: ' . filesize("./uploads/fuel/$file"));
               header('Accept-Ranges: bytes');
-              @readfile('./09003395-.pdf');*/
-    return Yii::$app->response->sendFile($path.$file, $file, ['inline'=>true]);
+              @readfile("./uploads/fuel/$file");
+    /*return Yii::$app->response->sendFile($path.$file, $file, ['inline'=>true]);*/
   }
 
 }
