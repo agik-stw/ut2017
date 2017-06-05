@@ -530,7 +530,7 @@ $conn=mysqli_connect('localhost', $dbuser, $dbpassword,$dbdatabase);
   $sqlstrresume = "select grouploc,lab_no  from tbl_transaction " . $conditionresume;
 
 /*  $pilih     = mysql_select_db($dbdatabase, $conn);*/
-  $hasilresume = $conn->query($sqlstrresume);
+  $hasilresume = mysqli_query($conn,$sqlstrresume);
 
   $ii = 0;
   while ($rowresume = mysqli_fetch_row($hasilresume)) {
