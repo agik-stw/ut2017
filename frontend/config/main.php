@@ -19,7 +19,7 @@ return [
  ],
     'backendDoor' => [
                 'class' => 'yii\web\urlManager',
-                'baseUrl' => 'http://admin.ut2017.dev:84/',//i.e. $_SERVER['DOCUMENT_ROOT'] .'/yiiapp/web/'
+                'baseUrl' => 'http://admin.ut2017.dev:84/index.php/',//i.e. $_SERVER['DOCUMENT_ROOT'] .'/yiiapp/web/'
                 'enablePrettyUrl' => true,
                 'showScriptName' => false,
         ],
