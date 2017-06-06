@@ -1398,12 +1398,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3c132d066a151dd28529aa46e1e6540f7573855a"
+                "reference": "c071a2e36cd08bab3cb09fabe773c2026c394a43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3c132d066a151dd28529aa46e1e6540f7573855a",
-                "reference": "3c132d066a151dd28529aa46e1e6540f7573855a",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/c071a2e36cd08bab3cb09fabe773c2026c394a43",
+                "reference": "c071a2e36cd08bab3cb09fabe773c2026c394a43",
                 "shasum": ""
             },
             "require": {
@@ -1455,7 +1455,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-06-02 14:37:47"
+            "time": "2017-06-06 03:57:21"
         },
         {
             "name": "vaibhavpandeyvpz/doctrine-datatables",
@@ -1597,12 +1597,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "d723850676dd1ad59342c3e6f2d92ad516d3ccf4"
+                "reference": "19b9bfad5995cbfdd832db0de8645c15813bd89a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/d723850676dd1ad59342c3e6f2d92ad516d3ccf4",
-                "reference": "d723850676dd1ad59342c3e6f2d92ad516d3ccf4",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/19b9bfad5995cbfdd832db0de8645c15813bd89a",
+                "reference": "19b9bfad5995cbfdd832db0de8645c15813bd89a",
                 "shasum": ""
             },
             "require": {
@@ -1689,7 +1689,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-06-02 18:19:38"
+            "time": "2017-06-06 05:54:21"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -3908,12 +3908,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "08f24b3969755fc682c177d77e07a7e382313883"
+                "reference": "d582eb3f548bb9b975f89d910ac846a197e49123"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/08f24b3969755fc682c177d77e07a7e382313883",
-                "reference": "08f24b3969755fc682c177d77e07a7e382313883",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/d582eb3f548bb9b975f89d910ac846a197e49123",
+                "reference": "d582eb3f548bb9b975f89d910ac846a197e49123",
                 "shasum": ""
             },
             "require": {
@@ -3963,7 +3963,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-02 09:54:06"
+            "time": "2017-06-06T04:51:36+00:00"
         },
         {
             "name": "symfony/finder",
