@@ -46,7 +46,7 @@ use richardfan\widget\JSRegister;
 </div>
 <div style="width: 100%; height: 3px; background-color: black;"></div>
 <h5>PDF</h5>
-<embed src="<?php echo Url::base().'/monitoring/fuel/report/openpdf?file='.$data['file_upload']; ?>" width="1200" height="800" />
+<embed src="<?php echo Url::toRoute('/monitoring/fuel/report/openpdf?file=').$data['file_upload']; ?>" width="1200" height="800" />
 </div>
 
 <?php $this->endBody() ?>
