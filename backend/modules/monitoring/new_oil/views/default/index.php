@@ -278,7 +278,7 @@ var tb=$("#tb_used_oil").DataTable({
         scrollCollapse: true,
         "scrollX": true,
         processing: true,
-        serverSide: false,
+        serverSide: true,
         select: {
             style: 'single'
         },

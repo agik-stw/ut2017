@@ -6,6 +6,9 @@ use Yii;
 use yii\db\Query;
 use app\components\Random;
 use yii\helpers\Url;
+use db2\config\Configdb;
+//doctrine lib
+use Doctrine\DataTables;
 
 class ActionController extends \yii\web\Controller
 {
@@ -42,18 +45,21 @@ public function beforeAction($action){
  }
 
     public function actionGet(){
-Yii::$app->controller->enableCsrfValidation = false;
 \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+    $conn=Configdb::connections();
+    $sql="tx.*,cus.Name,cus.Branch";
+$where="tx.analysis_date > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
 
-/*$access=$_REQUEST['access'];*/
-
-$query=new Query;
-$query->select(['tbl_new_oil.*','tbl_customers.Name','tbl_customers.Branch'])
-->from('tbl_new_oil')
-->join('JOIN',
-'tbl_customers','
-tbl_customers.CustomerID=tbl_new_oil.customer_id');
-return ['data'=>$query->all()];
+$datatables = (new DataTables\Builder())
+    ->withQueryBuilder(
+        $conn->createQueryBuilder()
+            ->select($sql)
+            ->from('tbl_new_oil','tx')
+            ->join('tx','tbl_customers','cus','tx.customer_id=cus.CustomerID')
+            ->where($where)
+    )
+    ->withRequestParams($_REQUEST);
+return $datatables->getResponse();
 }
 
 //get data by reportid

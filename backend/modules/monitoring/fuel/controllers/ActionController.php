@@ -6,6 +6,9 @@ use Yii;
 use yii\db\Query;
 use app\components\Random;
 use yii\helpers\Url;
+use db2\config\Configdb;
+//doctrine lib
+use Doctrine\DataTables;
 
 class ActionController extends \yii\web\Controller
 {
@@ -42,21 +45,23 @@ public function beforeAction($action){
  }
 
     public function actionGet(){
-Yii::$app->controller->enableCsrfValidation = false;
 \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
 
-/*$access=$_REQUEST['access'];*/
+    $conn=Configdb::connections();
+    $sql="tx.*,dept.departement_name,cus.Name,cus.Branch";
+$where="tx.report_date > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
 
-$query=new Query;
-$query->select(['tbl_fuel.*','tbl_departement.departement_name','tbl_customers.Name','tbl_customers.Branch'])
-->from('tbl_fuel')
-->join('JOIN',
-'tbl_departement','
-tbl_departement.departement_id=tbl_fuel.departement_id')
-->join('JOIN',
-'tbl_customers','
-tbl_customers.CustomerID=tbl_fuel.customer_id');
-return ['data'=>$query->all()];
+$datatables = (new DataTables\Builder())
+    ->withQueryBuilder(
+        $conn->createQueryBuilder()
+            ->select($sql)
+            ->from('tbl_fuel','tx')
+            ->join('tx','tbl_departement','dept','tx.departement_id=dept.departement_id')
+            ->join('tx','tbl_customers','cus','tx.customer_id=cus.CustomerID')
+            ->where($where)
+    )
+    ->withRequestParams($_REQUEST);
+return $datatables->getResponse();
 }
 
 //get data by reveive date

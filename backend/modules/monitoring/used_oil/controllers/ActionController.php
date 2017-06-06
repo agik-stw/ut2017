@@ -8,6 +8,10 @@ use kartik\mpdf\Pdf;
 /*use app\plugins\fpdf181\FPDF;*/
 use Yii;
 use yii\db\Query;
+    //datatables
+use db2\config\Configdb;
+//doctrine lib
+use Doctrine\DataTables;
 
 
 
@@ -19,65 +23,26 @@ class ActionController extends \yii\web\Controller
         /*return $this->render('index');*/
     }
 
-    public function actionTestdata()
-    {
-     $requestData = $_REQUEST;
-        
-        $columns = array(
-            0 => 'id',
-            1 => 'employee_name',
-            2 => 'employee_salary',
-            3 => 'employee_age'
-             );
-        
-       $sql = "SELECT  * from tbl_transaction where 1=1 limit 100";
-       
-        $data = Yii::$app->db->createCommand($sql)->queryAll();
-        
-        $totalData = count($data);
-        $totalFiltered = $totalData;
-     
-        // $sql.="WHERE 1=1";
-        
-       /* if (!empty($requestData['search']['value']))
-        {
-            $sql.=" AND ( employee_name LIKE '" . $requestData['search']['value'] . "%' ";
-            $sql.=" OR employee_salary LIKE '" . $requestData['search']['value'] . "%'";
-            $sql.=" OR employee_age LIKE '" . $requestData['search']['value'] . "%')";
-          
-        }*/
-        $data = Yii::$app->db->createCommand($sql)->queryAll();
-        $totalFiltered = count($data);
-       
-        $sql.=" ORDER BY " . $columns[$requestData['order'][0]['column']] . "   " . $requestData['order'][0]['dir'] . "  LIMIT " . $requestData['start'] . " ," . 
-        $requestData['length'] . "   ";
-       
-        $result = Yii::$app->db->createCommand($sql)->queryAll();
-       
-        $data = array();
-        $i=1;
-        
-        foreach ($result as $key => $row)
-        {
-          
-            $nestedData = array();
-            $url = Url::to(['employee/update', 'id' => $row['id']]);
-            $nestedData[] = $i;
-            $nestedData[] = $row["grouploc"];
-            $nestedData[] = '<a href="'.$url.'"><span class="glyphicon glyphicon-pencil"></span></a>';
-             $data[] = $nestedData;
-             $i++;
-        }
-        
-        $json_data = array(
-            "draw" => intval($requestData['draw']), 
-            "recordsTotal" => intval($totalData),
-            "recordsFiltered" => intval($totalFiltered),
-            "data" => $data   // total data array
-        );
+public function actionGetdata(){
+    \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+    $conn=Configdb::connections();
+    $sql="tbl_transaction.grouploc,tbl_transaction.branch,tbl_transaction.name,tbl_transaction.Lab_No,
+tbl_transaction.SAMPL_DT1,tbl_transaction.RECV_DT1,tbl_transaction.RPT_DT1,
+tbl_transaction.UNIT_NO,tbl_transaction.COMPONENT,tbl_transaction.MODEL,
+tbl_transaction.oil_change,tbl_transaction.EVAL_CODE";
+$where="tbl_transaction.rpt_dt1 > (DATE_SUB(CURDATE(), INTERVAL 3 YEAR))";
 
-        echo json_encode($json_data);
-    }
+$datatables = (new DataTables\Builder())
+    ->withQueryBuilder(
+        $conn->createQueryBuilder()
+            ->select($sql)
+            ->from('tbl_transaction')
+            ->where($where)
+    )
+    ->withRequestParams($_REQUEST);
+return $datatables->getResponse();
+
+}
 
 //get data berdasarkan lab number
     public function actionGetdata_by_labnumber($labNumber)
