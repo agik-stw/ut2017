@@ -38,8 +38,8 @@ class AuthForm
                     'number' => 5,
                     'lifetime' => 1000,
                 ];
-                $usr = usr::findOne(['username' => $username]);
-                Yii::$app->user->login($usr,  3600 * 24 * 30 );
+                /*$usr = usr::findOne(['username' => $username]);
+                Yii::$app->user->login($usr,  3600 * 24 * 30 );*/
                 return Yii::$app->getResponse()->redirect(Url::Base(''));
             } else {
                 Yii::$app->session->setFlash('error', "Incorrect username or password.");

@@ -654,7 +654,7 @@ use richardfan\widget\JSRegister;
 var tb=$("#tb_used_oil").DataTable({
 
        "columnDefs": [
-    { "width": "110px", "targets": 0 },
+    { "width": "140px", "targets": 0 },
     { "width": "80px", "targets": 1 },
     { "width": "150px", "targets": 2 },
     { "width": "250px", "targets": 3 },
@@ -693,7 +693,7 @@ var tb=$("#tb_used_oil").DataTable({
                 "data":           'Lab_No',
                 /*"defaultContent": '<a href="#" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF">PDF</a>'+'&nbsp;<a href="#" class="btn btn-xs btn-info" data-toggle="tooltip" title="Please click row for view data">View</a>',*/
                 "render": function ( data, type, full, meta ) {
-      return '<a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF" target="_blank" href="'+"<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=pdf&labNumber='); ?>"+data+'">PDF</a>'+'&nbsp;<a class="btn btn-xs btn-info viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="Detail('+"'"+data+"'"+')">View</a>'+'&nbsp;<a class="btn btn-xs btn-success viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="edit('+"'"+data+"'"+')">Edit</a>';
+      return '<a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF" target="_blank" href="'+"<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=pdf&labNumber='); ?>"+data+'">PDF</a>'+'&nbsp;<a class="btn btn-xs btn-info viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="Detail('+"'"+data+"'"+')">View</a>'+'&nbsp;<a class="btn btn-xs btn-success viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="edit('+"'"+data+"'"+')">Edit</a>'+'&nbsp;<a class="btn btn-xs btn-warning viewDetail" data-toggle="tooltip" title="Please click row for view data" href="#" onclick="Delete('+"'"+data+"'"+')">Del</a>';
     }
             },
     {data:'grouploc'},
@@ -936,6 +936,8 @@ $("#rec2").html(isi.RECOMM2).css('color','#800000');/*analisis*/
   $("#modalDetail").modal('show');
 }
 
+
+
 $('#date1').datepicker({
 format: 'dd-mm-yyyy',
             });
@@ -974,6 +976,23 @@ swal({
 },
 function(){
   document.location="<?php echo Url::toRoute('/login/proces/logout'); ?>";
+});
+}
+
+//delete
+function Delete(id){
+swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this imaginary file!",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes, delete it!",
+  closeOnConfirm: false
+},
+function(){
+ 
+  
 });
 }
 
