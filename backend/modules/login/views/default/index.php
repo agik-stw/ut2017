@@ -5,110 +5,45 @@ use yii\widgets\Breadcrumbs;
 use yii\widgets\Menu;
 use yii\helpers\Url;
 use kartik\sidenav\SideNav;
-use backend\assets\AppAsset;
-AppAsset::register($this);
+use backend\assets\LoginAsset;
+LoginAsset::register($this);
 use richardfan\widget\JSRegister;
-use backend\assets\VueAssets;
-VueAssets::register($this);
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin | Login</title>
-    <link rel="icon" href="<?php echo Url::base('').'/'.'img/icon/books.png';?>">
-    <?php $this->head() ?>
-</head>
-<body>
-<?php $this->beginBody() ?>
- <div class="container" style="margin-top:150px" id="vue">
-        <div class="row">
-            <div class="col-sm-6 col-md-4 col-md-offset-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong> Sign in to continue</strong>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form" action="<?php echo Url::toRoute('/login/proces/auth') ?>" method="POST">
-                            <fieldset>
-                                <div class="row">
-                                    <div class="center-block">
-                                        <img class="profile-img"
-                                            src="<?php echo Url::base('').'/'.'img/user.png';?>" alt="">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-10  col-md-offset-1 ">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-user"></i>
-                                                </span> 
-                                                <input class="form-control" placeholder="Username" name="username" type="text" autofocus v-model="username">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-lock"></i>
-                                                </span>
-                                                <input class="form-control" placeholder="Password" name="password" type="password" value="" v-model="password">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in" id="btnSubmit">
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
-<h5 style="color: red;">{{aaa}}</h5>
-<h5 style="color: red;">{{bbb}}</h5>
-                    </div>
-                    <div class="panel-footer ">
-                       <!--  Don't have an account! <a href="#" onClick=""> Sign Up Here </a> -->
-                       <b>Petrolab Report</b>
-                    </div>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>User | Login</title>
+        <link rel="icon" href="<?php echo Url::base('') . '/' . 'img/icon/books.png'; ?>">
+        <?php $this->head() ?>
+    </head>
+    <body>
+    <?php $this->beginBody() ?>
+   <div class="container">
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img width="380" id="" class="img-responsive" src="<?php echo Url::base('') . '/' . 'img/icon/pcr.png'; ?>" />
+            <!-- <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> -->
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin" method="post" action="<?php echo Url::toRoute('/login/proces/auth') ?>">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" id="inputEmail" class="form-control" name="username" placeholder="username" required autofocus>
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
                 </div>
-            </div>
-        </div>
-    </div>
-    <?php JSRegister::begin([
-    'key' => 'bootstrap-modal',
-    'position' => \yii\web\View::POS_END
-]); ?>
-<script>
-    var vm=new Vue({
-el:'#vue',
-data:{
-username:'',
-password:''
-    },
-    computed:{
-  aaa:function(value){
-    if (this.username=="") {
-return '  Username tidak boleh kosong';
-$('#btnSubmit').addClass('disabled');
-  }
-},
- bbb:function(value){
-    if (this.password=="") {
-return '  Password tidak boleh kosong';
-$('#btnSubmit').addClass('disabled');
-  }
-}
-},
-ready:function(){
-  if (this.username=="" || this.password=="") {
-$('#btnSubmit').addClass('disabled');
-  }
-}
-    });
-</script>
-
-<?php JSRegister::end(); ?>
-
-<?php $this->endBody() ?> 
-</body>
-</html>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+            </form><!-- /form -->
+             <?= Yii::$app->session->hasFlash('error') ? "<p class=\"help-block help-block-error\">
+                                                " . Yii::$app->session->getFlash('error') . "</p>" : '' ?>
+            <!-- <a href="#" class="forgot-password">
+                Forgot the password?
+            </a> -->
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+    <?php $this->endBody() ?>
+    </body>
+    </html>
 <?php $this->endPage() ?>
