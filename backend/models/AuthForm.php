@@ -22,7 +22,7 @@ class AuthForm
 
         if (!$check) {
             Yii::$app->session->setFlash('error', "Incorrect username or password.");
-            return Yii::$app->getResponse()->redirect('/login');
+            return Yii::$app->getResponse()->redirect(Url::toRoute('/login'));
         } elseif ($check) {
             $hash = $check->password;
             $pass = Yii::$app->getSecurity()->validatePassword($password, $hash);
