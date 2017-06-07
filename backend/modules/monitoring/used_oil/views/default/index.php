@@ -853,7 +853,37 @@ complete:function(){
 });
 
 //function edit data
-function edit(id){
+function edit(labNumber){
+  $.ajax({
+    url: '<?php echo Url::toRoute("/monitoring/used_oil/action/getdata_by_labnumber");?>',
+    type: 'GET',
+    data: {labNumber: labNumber}
+  })
+  .done(function(isi) {
+$("#edit_grouploc").val(isi.grouploc).css('color','#800000');
+$("#edit_lab_no").val(isi.Lab_No).css('color','#800000');
+$("#edit_branch").val(isi.branch).css('color','#800000');
+$("#edit_customer_id").val(isi.customer_id).css('color','#800000');
+$("#edit_name").val(isi.name).css('color','#800000');
+$("#edit_address").val(isi.address).css('color','#800000');
+$("#edit_unit_id").val(isi.unit_id).css('color','#800000');
+$("#edit_unit_no").val(isi.UNIT_NO).css('color','#800000');
+$("#edit_model").val(isi.MODEL).css('color','#800000');
+$("#edit_serial_number").val(isi.serialno).css('color','#800000');
+$("#edit_oil_change").val(isi.oil_change).css('color','#800000');
+$("#edit_status").val(isi.statuscode).css('color','#800000');
+$("#edit_receive_date").val(isi.RECV_DT1).css('color','#800000');
+$("#edit_report_date").val(isi.RPT_DT1).css('color','#800000');
+$("#edit_sample_date").val(isi.SAMPL_DT1).css('color','#800000');
+    console.log("success");
+  })
+  .fail(function() {
+    console.log("error");
+  })
+  .always(function() {
+    console.log("complete");
+  });
+  
     $('#modal_edit').modal('show');
 }
 
@@ -864,8 +894,8 @@ function Detail(labNumber){
     type: 'GET',
     data: {labNumber: labNumber}
   })
-  .done(function(data) {
-    var isi=JSON.parse(data);
+  .done(function(isi) {
+    /*var isi=JSON.parse(data);*/
 $("#grouploc").html(isi.grouploc).css('color','#800000');
 $("#lab_no").html(isi.Lab_No).css('color','#800000');
 $("#branch").html(isi.branch).css('color','#800000');

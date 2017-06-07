@@ -47,10 +47,11 @@ return $datatables->getResponse();
 //get data berdasarkan lab number
     public function actionGetdata_by_labnumber($labNumber)
     {
+        \Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
 $connection = Yii::$app->db;
 $command = $connection->createCommand('call usedOilby_labNumber("'.$labNumber.'")');     
 $data=$command->queryOne();
-return Json::encode($data);
+return $data;
 
     }
 
