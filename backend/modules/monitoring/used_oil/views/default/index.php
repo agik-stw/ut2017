@@ -721,7 +721,7 @@ use richardfan\widget\JSRegister;
         $(this).html( '<input type="text" />' );
     } );
 
-var tb=$("#tb_used_oil").DataTable({
+tb=$("#tb_used_oil").DataTable({
 
        "columnDefs": [
     { "width": "140px", "targets": 0 },
@@ -1113,7 +1113,7 @@ function(){
 }
 
 //delete
-function Delete(id){
+function Delete(labNumber){
 swal({
   title: "Are you sure?",
   text: "You will not be able to recover this imaginary file!",
@@ -1124,9 +1124,28 @@ swal({
   closeOnConfirm: false
 },
 function(){
+ $.ajax({
+   url: "<?php echo Url::toRoute('/monitoring/used_oil/action/destroy/');?>",
+   type: 'POST',
+   data: {labNumber: labNumber},
+ })
+ .done(function(json) {
+  swal(json.responses, json.message, json.status);
+  tb_load();
+ })
+ .fail(function() {
+   console.log("error");
+ })
+ .always(function() {
+   console.log("complete");
+ });
  
   
 });
+}
+
+function tb_load(){
+  tb.ajax.reload();
 }
 
 </script>

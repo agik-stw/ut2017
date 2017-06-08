@@ -152,6 +152,18 @@ return $pdf->render();
 
     }
 
+    public function actionDestroy(){
+\Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+
+$labNumber=$_REQUEST['labNumber'];
+$delete=TbTransaction::deleteAll('Lab_No = :Lab_No ', [':Lab_No'=>$labNumber]);
+  if ($delete) {
+        return ['responses'=>'Deleted!','message'=>'Your data has been deleted','status'=>'success'];
+      }else{
+        return ['responses'=>'Error!','message'=>'Your data Not deleted','status'=>'error'];
+      }
+    }
+
 
 
 }
