@@ -466,56 +466,126 @@ use richardfan\widget\JSRegister;
 
               <div class="form-group">
               <label>Magnesium (Mg)</label>
-              <input type="text" class="form-control" name="edit_magnesium" id="edit_magnesium">
+              <input type="text" class="form-control" name="edit_mg" id="edit_mg">
               </div>
 
               <div class="form-group">
-              <label>Address</label>
-              <input type="text" class="form-control" name="edit_address" id="edit_address">
+              <label>Calcium (Ca)</label>
+              <input type="text" class="form-control" name="edit_ca" id="edit_ca">
               </div>
 
               <div class="form-group">
-              <label>Unit id</label>
-              <input type="text" class="form-control" name="edit_unit_id" id="edit_unit_id">
+              <label>Zinc (Zn)</label>
+              <input type="text" class="form-control" name="edit_zn" id="edit_zn">
               </div>
+
+              <div class="form-group">
+              <label>Boron</label>
+              <input type="text" class="form-control" name="edit_br" id="edit_br">
+              </div>
+
+              <div class="form-group">
+              <label>Phosphor</label>
+              <input type="text" class="form-control" name="edit_psp" id="edit_psp">
+              </div>
+
+              <div class="form-group">
+              <label>Natrium (Na)</label>
+              <input type="text" class="form-control" name="edit_na" id="edit_na">
+              </div>
+
+              <div class="form-group">
+              <label>Silicon (Si)</label>
+              <input type="text" class="form-control" name="edit_si" id="edit_si">
+              </div>
+
+               <div class="form-group">
+              <label>Iron (Fe)</label>
+              <input type="text" class="form-control" name="edit_fe" id="edit_fe">
+              </div>
+
+               <div class="form-group">
+              <label>Copper (Cu)</label>
+              <input type="text" class="form-control" name="edit_cu" id="edit_cu">
+              </div>
+
               </div>
 
               <div class="col-md-6">
-              <div class="form-group">
-              <label>Model</label>
-              <input type="text" class="form-control" name="edit_model" id="edit_model">
-              </div>
-
-              <div class="form-group">
-              <label>Serial Number</label>
-              <input type="text" class="form-control" name="edit_serial_number" id="edit_serial_number">
-              </div>
-
-              <div class="form-group">
-              <label>Oil Change</label>
-              <input type="text" class="form-control" name="edit_oil_change" id="edit_oil_change">
-              </div>
-
-              <div class="form-group">
-              <label>Status</label>
-              <input type="text" class="form-control" name="edit_status" id="edit_status">
-              </div>
-
                <div class="form-group">
-              <label>Receive Date</label>
-              <input type="text" class="form-control" name="edit_receive_date" id="edit_receive_date">
+              <label>Alumunium (Al)</label>
+              <input type="text" class="form-control" name="edit_al" id="edit_al">
+              </div>
+              <div class="form-group">
+              <label>Chromium (Cr)</label>
+              <input type="text" class="form-control" name="edit_crm" id="edit_crm">
               </div>
 
-               <div class="form-group">
-              <label>Sample Date</label>
-              <input type="text" class="form-control" name="edit_sample_date" id="edit_sample_date">
+              <div class="form-group">
+              <label>Nickel (Ni)</label>
+              <input type="text" class="form-control" name="edit_ni" id="edit_ni">
               </div>
 
-               <div class="form-group">
-              <label>Report Date</label>
-              <input type="text" class="form-control" name="edit_report_date" id="edit_report_date">
+              <div class="form-group">
+              <label>Tin (Sn)</label>
+              <input type="text" class="form-control" name="edit_sn" id="edit_sn">
+              </div>
+
+              <div class="form-group">
+              <label>Lead (Pb)</label>
+              <input type="text" class="form-control" name="edit_pb" id="edit_pb">
+              </div>
+
+              <div class="form-group">
+              <label>PQ Index</label>
+              <input type="text" class="form-control" name="edit_pq" id="edit_pq">
+              </div>
+
+              <div class="form-group">
+              <label>Soot</label>
+              <input type="text" class="form-control" name="edit_soot" id="edit_soot">
+              </div>
+
+              <div class="form-group">
+              <label>Oxidation</label>
+              <input type="text" class="form-control" name="edit_ox" id="edit_ox">
+              </div>
+
+              <div class="form-group">
+              <label>Nitration</label>
+              <input type="text" class="form-control" name="edit_nt" id="edit_nt">
+              </div>
+
+              <div class="form-group">
+              <label>Sulfation</label>
+              <input type="text" class="form-control" name="edit_sf" id="edit_sf">
+              </div>
+
+              <div class="form-group">
+              <label>Fuel Dilution</label>
+              <input type="text" class="form-control" name="edit_fl" id="edit_fl">
+              </div>
+
+              <div class="form-group">
+              <label>Water Content</label>
+              <input type="text" class="form-control" name="edit_wc" id="edit_wc">
+              </div>
+
+              <div class="form-group">
+              <label>Glycol</label>
+              <input type="text" class="form-control" name="edit_al" id="edit_al">
               </div>
               </div>
+
+              <div class="form-group">
+  <label for="rec1">Source of Abnormality:</label>
+  <textarea class="form-control" rows="3" name="edit_rec1" id="edit_rec1"></textarea>
+</div>
+
+       <div class="form-group">
+  <label for="rec2">Action to be taken:</label>
+  <textarea class="form-control" rows="3" name="edit_rec2" id="edit_rec2"></textarea>
+</div>
 
               </div>
           </form>
@@ -875,6 +945,39 @@ $("#edit_status").val(isi.statuscode).css('color','#800000');
 $("#edit_receive_date").val(isi.RECV_DT1).css('color','#800000');
 $("#edit_report_date").val(isi.RPT_DT1).css('color','#800000');
 $("#edit_sample_date").val(isi.SAMPL_DT1).css('color','#800000');
+
+$("#edit_visc_100").val(isi.VISC_CST).css('color','#800000');/*analisis*/
+$("#edit_tan").val(isi.T_A_N).css('color','#800000');/*analisis*/
+$("#edit_tbn").val(isi.T_B_N).css('color','#800000');/*analisis*/
+$("#edit_mg").val(isi.MAGNESIUM).css('color','#800000');/*analisis*/
+$("#edit_ca").val(isi.CALCIUM).css('color','#800000');/*analisis*/
+$("#edit_zn").val(isi.ZINC).css('color','#800000');/*analisis*/
+$("#edit_br").val(isi.Boron).css('color','#800000');/*analisis*/
+$("#edit_psp").val(isi.phosphor).css('color','#800000');/*analisis*/
+$("#edit_na").val(isi.SODIUM).css('color','#800000');/*analisis*/
+$("#edit_si").val(isi.SILICON).css('color','#800000');/*analisis*/
+$("#edit_fe").val(isi.IRON).css('color','#800000');/*analisis*/
+$("#edit_cu").val(isi.COPPER).css('color','#800000');/*analisis*/
+$("#edit_al").val(isi.ALUMINIUM).css('color','#800000');/*analisis*/
+$("#edit_crm").val(isi.CHROMIUM).css('color','#800000');/*analisis*/
+$("#edit_ni").val(isi.NICKEL).css('color','#800000');/*analisis*/
+$("#edit_sn").val(isi.TIN).css('color','#800000');/*analisis*/
+$("#edit_pb").val(isi.LEAD).css('color','#800000');/*analisis*/
+$("#edit_pq").val(isi.PQIndex).css('color','#800000');/*analisis*/
+$("#edit_clr").val(isi.colourcode).css('color','#800000');/*analisis*/
+
+$("#edit_soot").val(isi.SOX).css('color','#800000');/*analisis*/
+$("#edit_ox").val(isi.OXIDATION).css('color','#800000');/*analisis*/
+$("#edit_nt").val(isi.NITRATION).css('color','#800000');/*analisis*/
+$("#edit_sf").val(isi.SOX).css('color','#800000');/*analisis*/
+$("#edit_fl").val(isi.DILUTION).css('color','#800000');/*analisis*/
+$("#edit_wc").val(isi.WATER).css('color','#800000');/*analisis*/
+$("#edit_gy").val(isi.GLYCOL).css('color','#800000');/*analisis*/
+$("#edit_14um").val("").css('color','#800000');/*analisis*/
+$("#edit_15um").val("").css('color','#800000');/*analisis*/
+$("#edit_cd").val("").css('color','#800000');/*analisis*/
+$("textarea#edit_rec1").val(isi.RECOMM1).css('color','#800000');/*analisis*/
+$("textarea#edit_rec2").val(isi.RECOMM2).css('color','#800000');/*analisis*/
     console.log("success");
   })
   .fail(function() {
