@@ -1,0 +1,7 @@
+td.details-control {
+    background: url('icon/icon-plus.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('icon/icon-minus.png') no-repeat center center;
+}

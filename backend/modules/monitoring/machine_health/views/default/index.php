@@ -45,15 +45,16 @@ use app\components\Random;
 </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
 <button id="btn_add" class="btn btn-sm th_table" style="margin-bottom: 5px;" ng-click="add()"><span class="glyphicon glyphicon-plus"></span>Add New</button>
-</div>
+</div> -->
 
 
 <div class="row">
                 <table id="tb_used_oil" class="table table-striped table-hover" >
                     <thead>
                         <tr>
+                        <th class="th_table"></th>
                         <th class="th_table">Unit Id</th>
                         <th class="th_table">Model</th>
                             <th class="th_table">Unit No</th>
@@ -92,13 +93,14 @@ format: 'yyyy-mm-dd',
 tb=$("#tb_used_oil").DataTable({
 
        "columnDefs": [
-    { "width": "70px", "targets": 0 },
+    /*{ "width": "70px", "targets": 0 },*/
     { "width": "100px", "targets": 1 },
     { "width": "120px", "targets": 2 },
     { "width": "100px", "targets": 3 },
     { "width": "100px", "targets": 4 },
     { "width": "100px", "targets": 5 },
     { "width": "100px", "targets": 6 },
+    { "width": "100px", "targets": 7 },
     { "width": "100px", "targets": 7 },
   ],
         select: {
@@ -115,18 +117,24 @@ tb=$("#tb_used_oil").DataTable({
         "responsive": true,
         "autoWidth": true,
         "ajax": {
-          "url": "<?php echo Url::toRoute('/monitoring/fuel/action/get');?>",
+          "url": "<?php echo Url::toRoute('/monitoring/machine_health/action/get');?>",
           'type':'get'
         },
     columns: [
-    {data:'lab_number'},
-            {data:'report_id'},
-    {data:'group'},
-    {data:'Branch'},
-    {data:'Name'},
-    {data:'sample_date'},
-    {data:'receive_date'},
-    {data:'report_date'}
+     {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
+    {data:'UnitID'},
+    {data:'Model'},
+    {data:'UnitNo'},
+    {data:'tgl1'},
+    {data:'tgl2'},
+    {data:'tgl3'},
+    {data:'tgl4'},
+    {data:'tgl5'}
     ],
     /*scrollY:'65vh',*/
         scrollCollapse: true,
@@ -138,7 +146,21 @@ tb=$("#tb_used_oil").DataTable({
         },
         select: true,
   "rowCallback": function( row, data, index ) {
-    
+    if (data.tgl1!='0000-00-00') {
+$(row).find('td:eq(4)').css('background-color', '#90e38f');
+ }
+   if (data.tgl2!='0000-00-00') {
+$(row).find('td:eq(5)').css('background-color', '#90e38f');
+ }
+  if (data.tgl3!='0000-00-00') {
+$(row).find('td:eq(6)').css('background-color', '#90e38f');
+ }
+  if (data.tgl4!='0000-00-00') {
+$(row).find('td:eq(7)').css('background-color', '#90e38f');
+ }
+  if (data.tgl5!='0000-00-00') {
+$(row).find('td:eq(8)').css('background-color', '#90e38f');
+ }
 
 }
 
@@ -146,18 +168,21 @@ tb=$("#tb_used_oil").DataTable({
 
 
 /*fungsi jika table body di klik*/
-$('#tb_used_oil tbody').on( 'click', 'tr', function () {
-var data=( tb.row( this ).data() );
-/*alert(data.lab_no);*/
-$("#labno").val(data.lab_no);
-$("#export").removeAttr('disabled');
-/*ymz.jq_toast({text:"Lab Number: "+data.lab_no+"", type: "notice", sec: 1});*/
-
-$("#ex_pdf").attr('href',"<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=pdf');?>"+'&'+'labNumber='+data.lab_no)
-
-$('#tb_used_oil tbody').contextMenu('myMenu1', {});
-
-});
+$('#tb_used_oil tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = tb.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
 
 /*tooltip plugin*/
 $('#tb_used_oil tbody').attr({
@@ -228,6 +253,25 @@ var typeSubmit=$('#typeSubmit').val();
     'position' => \yii\web\View::POS_END
 ]); ?>
 <script>
+
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<h4>Component <span class="badge"><b>12</b></span></h4>'+'<table id="tb_sub" class="table table-striped table-bordered">'+
+'<tr>'+
+'<th class="th_table_sub">Actions</th>'+
+'<th class="th_table_sub">No</th>'+
+'<th class="th_table_sub">Id</th>'+
+'<th class="th_table_sub">Component</th>'+
+'<th class="th_table_sub">Report 1</th>'+
+'<th class="th_table_sub">Report 2</th>'+
+'<th class="th_table_sub">Report 3</th>'+
+'<th class="th_table_sub">Report 4</th>'+
+'<th class="th_table_sub">Report 5</th>'+
+'</tr>'+
+    '</table>';
+
+    $("#tb_sub").DataTable();
+}
 
 //function refresh
 function refresh(){
