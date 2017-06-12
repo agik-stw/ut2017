@@ -270,7 +270,7 @@ function format ( d ) {
 '</tr>'+
     '</table>';
 
-    $("#tb_sub").DataTable();
+    $("#tb_sub").DataTable({});
 }
 
 //function refresh
