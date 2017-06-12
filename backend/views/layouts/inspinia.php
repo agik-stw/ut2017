@@ -34,10 +34,6 @@ use backend\assets\AjaxAnimation;
 AjaxAnimation::register($this);
 use backend\assets\Jqdock;
 Jqdock::register($this);
-/*use backend\assets\Dockmenu;
-Dockmenu::register($this);*/
-use backend\assets\VueAssets;
-VueAssets::register($this);
 use backend\components\inspinia\InsBreadcrumbs;
 $moduleurl=Yii::$app->urlManager->parseRequest(Yii::$app->request);
 $url=$moduleurl[0];
@@ -122,13 +118,13 @@ $url=$moduleurl[0];
                         echo 'active';
                     }else{echo 'inactive';} ?>"><a href="<?php echo Url::toRoute('/monitoring/new_oil') ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">New Oil & Others</span></a></li>
 
-                        <li class="<?php if ($url=='monitoring/unit_no_history') {
-                        echo 'active';
-                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/unit_no_history')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" /> </i> <span class="nav-label">UnitNo History</span></a></li>
-
                          <li class="<?php if ($url=='monitoring/machine_health') {
                         echo 'active';
-                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/machine_health')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Health</span></a></li>
+                    }else{echo 'inactive';} ?>"><a href="<?php echo Url::toRoute('/monitoring/machine_health'); ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Health</span></a></li>
+
+                                           <li class="<?php if ($url=='monitoring/unit_no_history') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/unit_no_history')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" /> </i> <span class="nav-label">UnitNo History</span></a></li>
 
                           <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Component Health</span></a></li>
 

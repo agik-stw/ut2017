@@ -910,17 +910,6 @@ dateDis();
     'position' => \yii\web\View::POS_END
 ]); ?>
 <script>
-$.ajaxSetup({
-beforeSend:function(){
-HoldOn.open({
-    theme:'sk-rect',
-    message:"<h4>"+"Please Wait..."+"</h4>"
-});
-},
-complete:function(){
-    HoldOn.close();
-}
-});
 
 //function edit data
 function edit(labNumber){
@@ -1094,22 +1083,6 @@ function dateEn(){
   $('#date1').removeAttr('disabled')
   $('#date2').removeAttr('disabled')
   $("#btn-refresh").removeAttr('disabled')
-}
-
-
-function Logout(){
-swal({
-  title: "Are you sure?",
-  text: "You will Logout",
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#DD6B55",
-  confirmButtonText: "Yes!",
-  closeOnConfirm: false
-},
-function(){
-  document.location="<?php echo Url::toRoute('/login/proces/logout'); ?>";
-});
 }
 
 //delete

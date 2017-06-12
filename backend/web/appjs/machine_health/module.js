@@ -1,0 +1,1 @@
+var Machine_health=angular.module('Machine_health',[]);

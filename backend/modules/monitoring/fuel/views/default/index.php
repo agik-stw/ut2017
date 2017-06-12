@@ -107,8 +107,6 @@ use richardfan\widget\JSRegister;
  <!--modal-->
 
 
-<div ng-app="">
-
 <div class="ibox-title">
 <h3>Fuel</h3>
 <div style="height: 2px; width: 100%; background-color: black;"></div>
@@ -190,8 +188,6 @@ use richardfan\widget\JSRegister;
 <li id="open"><a id="ex_pdf" href="" target="_blank"><img src="<?php echo Url::base('').'/'.'img/rightclick/pdf.png';?>" /> PDF</a></li>
 <li id="email"><img src="<?php echo Url::base('').'/'.'img/rightclick/excel.png';?>" /> Excel</li>
 </ul>
-</div>
-
 </div>
 
 <?php JSRegister::begin(); ?>
@@ -399,18 +395,6 @@ var typeSubmit=$('#typeSubmit').val();
 ]); ?>
 <script>
 
-$.ajaxSetup({
-beforeSend:function(){
-HoldOn.open({
-    theme:'sk-rect',
-    message:"<h4>"+"Please Wait..."+"</h4>"
-});
-},
-complete:function(){
-    HoldOn.close();
-}
-});
-
     //modal//
 function view(rid){
  window.open("<?php echo Url::toRoute('/monitoring/fuel/report/view?reportid=') ?>"+rid, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=50,width=1200,height=600");
@@ -521,22 +505,6 @@ function dateEn(){
   $('#date1').removeAttr('disabled')
   $('#date2').removeAttr('disabled')
   $("#btn-refresh").removeAttr('disabled')
-}
-
-
-function Logout(){
-swal({
-  title: "Are you sure?",
-  text: "You will Logout",
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#DD6B55",
-  confirmButtonText: "Yes!",
-  closeOnConfirm: false
-},
-function(){
-  document.location="<?php echo Url::toRoute('/login/proces/logout'); ?>";
-});
 }
 
 
