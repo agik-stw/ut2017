@@ -9,27 +9,27 @@ use kartik\mpdf\Pdf;
 
 return [
     'id' => 'app-frontend',
-    'layout'=>'inspinia',
+    'layout' => 'inspinia',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
-    'assetManager' => [
+        'assetManager' => [
             'linkAssets' => true,
- ],
-    'backendDoor' => [
-                'class' => 'yii\web\urlManager',
-                'baseUrl' => 'http://admin.ut2017.dev:84/index.php/',//i.e. $_SERVER['DOCUMENT_ROOT'] .'/yiiapp/web/'
-                'enablePrettyUrl' => true,
-                'showScriptName' => false,
         ],
-    'pdf' => [
-        'class' => Pdf::classname(),
-        'format' => Pdf::FORMAT_A4,
-        'orientation' => Pdf::ORIENT_PORTRAIT,
-        'destination' => Pdf::DEST_BROWSER,
-        // refer settings section for all configuration options
-    ],
+        'backendDoor' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => 'http://admin.ut2017.dev:84/index.php/',//i.e. $_SERVER['DOCUMENT_ROOT'] .'/yiiapp/web/'
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+        'pdf' => [
+            'class' => Pdf::classname(),
+            'format' => Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            'destination' => Pdf::DEST_BROWSER,
+            // refer settings section for all configuration options
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
             /*'baseUrl'=>'',*/
@@ -65,33 +65,33 @@ return [
             ],
             /*'scriptUrl'=>'/index.php',*/
         ],
-       'view' => [
-      /*  'renderers' => [
-            'twig' => [
-                'class' => 'yii\twig\ViewRenderer',
-                // set cachePath to false in order to disable template caching
-                'cachePath' => false, //'@runtime/Twig/cache',
-                // Array of twig options:
-                'options' => [
-                    'auto_reload' => true,
-                ],
-                // add Yii helpers or widgets here
-                'globals' => [
-                    'html' => '\yii\helpers\Html',
-                ]
-            ]
-        ]*/
-    ],
+        'view' => [
+            /*  'renderers' => [
+                  'twig' => [
+                      'class' => 'yii\twig\ViewRenderer',
+                      // set cachePath to false in order to disable template caching
+                      'cachePath' => false, //'@runtime/Twig/cache',
+                      // Array of twig options:
+                      'options' => [
+                          'auto_reload' => true,
+                      ],
+                      // add Yii helpers or widgets here
+                      'globals' => [
+                          'html' => '\yii\helpers\Html',
+                      ]
+                  ]
+              ]*/
+        ],
 
     ],
     'modules' => [
-          'dashboard' => [
+        'dashboard' => [
             'class' => 'app\modules\dashboard\Module',
         ],
         'monitoring' => [
             'class' => 'app\modules\monitoring\Module',
         ],
-'fuel' => [
+        'fuel' => [
             'class' => 'app\modules\monitoring\fuel\Module',
         ],
         'used_oil' => [
@@ -104,12 +104,15 @@ return [
             'class' => 'app\modules\login\Module',
         ],
         'pdfjs' => [
-       'class' => '\yii2assets\pdfjs\Module',
-   ],
-     'error' => [
-       'class' => 'app\modules\error\Module',
-   ]
-   ],
+            'class' => '\yii2assets\pdfjs\Module',
+        ],
+        'error' => [
+            'class' => 'app\modules\error\Module',
+        ],
+        'proses' => [
+            'class' => 'common\modules\transaction\Module',
+        ],
+    ],
     'params' => $params,
     'defaultRoute' => 'dashboard',
 ];

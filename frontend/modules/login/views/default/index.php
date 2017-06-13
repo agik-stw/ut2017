@@ -42,7 +42,7 @@ use richardfan\widget\JSRegister;
             <p style="color:red;">{{aaa}}</p>
             <p style="color:red;">{{bbb}}</p>
 
-             <?= Yii::$app->session->hasFlash('error') ? "<p class=\"help-block help-block-error\">
+             <?= Yii::$app->session->hasFlash('error') ? "<p style=\"color:red;\" class=\"help-block help-block-error\">
                                                 " . Yii::$app->session->getFlash('error') . "</p>" : '' ?>
             <!-- <a href="#" class="forgot-password">
                 Forgot the password?
