@@ -109,6 +109,9 @@ return [
         'error' => [
             'class' => 'app\modules\error\Module',
         ],
+        'proses' => [
+            'class' => 'common\modules\transaction\Module',
+        ],
     ],
     'params' => $params,
     'defaultRoute' => 'dashboard',
