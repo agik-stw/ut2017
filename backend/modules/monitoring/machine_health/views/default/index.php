@@ -83,6 +83,26 @@ use app\components\Random;
 </ul>
 </div>
 
+<div style="display:none">    
+    <h4>Component <span class="badge"><b>12</b></span></h4>
+    <table id="detailsTable" class="table table-striped table-bordered">
+<thead>
+<th class="th_table_sub">Actions</th>
+<th class="th_table_sub">No</th>
+<th class="th_table_sub">Id</th>
+<th class="th_table_sub">Component</th>
+<th class="th_table_sub">Report 1</th>
+<th class="th_table_sub">Report 2</th>
+<th class="th_table_sub">Report 3</th>
+<th class="th_table_sub">Report 4</th>
+<th class="th_table_sub">Report 5</th>
+</thead>
+<tbody>
+  
+</tbody>
+</table>
+</div>
+
 <?php JSRegister::begin(); ?>
 <script>
 $('.datepicker').datepicker({
@@ -144,7 +164,7 @@ tb=$("#tb_used_oil").DataTable({
         select: {
             style: 'single'
         },
-        select: true,
+        select: false,
   "rowCallback": function( row, data, index ) {
     if (data.tgl1!='0000-00-00') {
 $(row).find('td:eq(4)').css('background-color', '#90e38f');
@@ -181,6 +201,7 @@ $('#tb_used_oil tbody').on('click', 'td.details-control', function () {
             // Open this row
             row.child( format(row.data()) ).show();
             tr.addClass('shown');
+            $("#detailsTable > tbody > tr").remove();
         }
     } );
 
@@ -255,22 +276,17 @@ var typeSubmit=$('#typeSubmit').val();
 <script>
 
 function format ( d ) {
-    // `d` is the original data object for the row
-    return '<h4>Component <span class="badge"><b>12</b></span></h4>'+'<table id="tb_sub" class="table table-striped table-bordered">'+
-'<tr>'+
-'<th class="th_table_sub">Actions</th>'+
-'<th class="th_table_sub">No</th>'+
-'<th class="th_table_sub">Id</th>'+
-'<th class="th_table_sub">Component</th>'+
-'<th class="th_table_sub">Report 1</th>'+
-'<th class="th_table_sub">Report 2</th>'+
-'<th class="th_table_sub">Report 3</th>'+
-'<th class="th_table_sub">Report 4</th>'+
-'<th class="th_table_sub">Report 5</th>'+
-'</tr>'+
-    '</table>';
 
-    $("#tb_sub").DataTable({});
+$("#detailsTable").attr('datatable','tb_'+d.UnitID);
+var da=[{nama:'agik setiawan'},{nama:'agus setiawan'}];
+$.each(da,function(index, el) {
+  $( "[datatable="+'tb_'+d.UnitID+"]" ).append('<tr>'+
+'<td>'+el.nama+'</td>'+
+'</tr>');
+});
+var table_detail=$("#detailsTable").html();
+return table_detail;
+
 }
 
 //function refresh

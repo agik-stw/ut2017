@@ -3,6 +3,8 @@ Machine_health.controller('controller_machine_health', ['$scope', function($scop
 	$scope.add=function(){
 		
 	},
+
+
 //btn refresh
 	$scope.btn_refresh=function(){
 refresh();
