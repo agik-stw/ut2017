@@ -86,7 +86,6 @@ Machine_health::register($this);
     <table id="detailsTable" class="table table-striped table-bordered table-sub">
     <caption>Component <span class="badge"><b class="jsonL">0</b></span></caption>
 <thead>
-<th class="th_table_sub">Actions</th>
 <th class="th_table_sub">Id</th>
 <th class="th_table_sub">Component</th>
 <th class="th_table_sub">Report 1</th>
@@ -288,10 +287,6 @@ $.ajax({
 $.each(da,function(index, el) {
   $( "[datatable="+'tb_'+d.UnitID+"]" ).append('<tr>'+
 '<td>'+'Edit/Delete'+'</td>'+
-'<td>'+el.ComponentID+'</td>'+
-'<td>'+el.Component+'</td>'+
-'<td>'+el.tgl1+'</td>'+
-'<td>'+el.tgl2+'</td>'+
 '<td>'+el.tgl3+'</td>'+
 '<td>'+el.tgl4+'</td>'+
 '<td>'+el.tgl5+'</td>'+
