@@ -1,23 +1,23 @@
  <?php
 use yii\helpers\Url;
-$this->title = 'PCR | Fuel';
+$this->title = 'Monitoring | Used Oil';
 use richardfan\widget\JSRegister;
+use backend\assets\Angular;
+Angular::register($this);
+use backend\appjs\machine_health\Module as Machine_health;
+Machine_health::register($this);
 ?>
 
-
-
-<div ng-app="">
-
-<div class="ibox-title">
+<div class="ibox-title" ng-app="Machine_health" ng-controller="controller_machine_health">
+<h3>Machine Health</h3>
+<div style="height: 2px; width: 100%; background-color: black;"></div>
+<div class="row">
 
 <div class="col-md-2 pull-left">
 <div class="form-group">
   <label for="export">Select By:</label>
   <select class="form-control input-sm select2" id="select-date">
-  <option selected="" value="all_date">All Date</option>
-    <option value="receive_date">Receive Date</option>
-    <option value="sample_date">Sample Date</option>
-    <option value="report_date">Report Date</option>
+  <option ng-repeat="n in select_date" value="{{n.value}}">{{n.text}}</option>
   </select>
 </div>
 </div>
@@ -39,35 +39,36 @@ use richardfan\widget\JSRegister;
 <div class="col-md-1 pull-left">
 <div class="form-group input-sm">
   <label></label>
- <button id="btn-refresh" class="btn btn-xs btn-default form-control"><span class="glyphicon glyphicon-refresh"></span></button>
+ <button id="btn-refresh" class="btn btn-xs btn-default form-control" ng-click="btn_refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
+</div>
 </div>
 </div>
 
+<!-- <div class="row">
+<button id="btn_add" class="btn btn-sm th_table" style="margin-bottom: 5px;" ng-click="add()"><span class="glyphicon glyphicon-plus"></span>Add New</button>
+</div> -->
 
+
+<div class="row">
                 <table id="tb_used_oil" class="table table-striped table-hover" >
                     <thead>
                         <tr>
-                        <th class="th_table">Action</th>
-                        <th class="th_table">Report Id</th>
-                            <th class="th_table">Group</th>
-                            <th class="th_table">Branch</th>
-                            <th class="th_table">Customer Name</th>
-                            <th class="th_table">Lab Number</th>
-                            <th class="th_table">Sample Date</th>
-                            <th class="th_table">Receive Date</th>
-                            <th class="th_table">Report Date</th>
-                            <!-- <th class="th_table">Unit Number</th>
-                            <th class="th_table">Component</th>
-                            <th class="th_table">Model</th>
-                            <th class="th_table">Serial No.</th>
-                            <th class="th_table">Oil Chg</th>
-                            <th class="th_table">Status</th> -->
+                        <th class="th_table"></th>
+                        <th class="th_table">Unit Id</th>
+                        <th class="th_table">Model</th>
+                            <th class="th_table">Unit No</th>
+                            <th class="th_table">Report 1</th>
+                            <th class="th_table">Report 2</th>
+                            <th class="th_table">Report 3</th>
+                            <th class="th_table">Report 4</th>
+                            <th class="th_table">Report 5</th>
                         </tr>
                     </thead>
                     <tbody>
 
                                     </tbody>
                                 </table>
+                                </div>
 
                                 </div>
             <div style="margin-top: 50px;"></div>
@@ -81,27 +82,44 @@ use richardfan\widget\JSRegister;
 </ul>
 </div>
 
+<div style="display:none">
+    <table id="detailsTable" class="table table-striped table-bordered table-sub">
+    <caption>Component <span class="badge"><b class="jsonL">0</b></span></caption>
+<thead>
+<th class="th_table_sub">Actions</th>
+<th class="th_table_sub">Id</th>
+<th class="th_table_sub">Component</th>
+<th class="th_table_sub">Report 1</th>
+<th class="th_table_sub">Report 2</th>
+<th class="th_table_sub">Report 3</th>
+<th class="th_table_sub">Report 4</th>
+<th class="th_table_sub">Report 5</th>
+</thead>
+<tbody>
+  
+</tbody>
+</table>
 </div>
 
 <?php JSRegister::begin(); ?>
 <script>
-var tb=$("#tb_used_oil").DataTable({
+$('.datepicker').datepicker({
+format: 'yyyy-mm-dd',
+            });
+
+/*plugin datatables jquery*/
+tb=$("#tb_used_oil").DataTable({
 
        "columnDefs": [
-    { "width": "30px", "targets": 0 },
+    /*{ "width": "70px", "targets": 0 },*/
     { "width": "100px", "targets": 1 },
     { "width": "120px", "targets": 2 },
-    { "width": "150px", "targets": 3 },
-    { "width": "250px", "targets": 4 },
+    { "width": "100px", "targets": 3 },
+    { "width": "100px", "targets": 4 },
     { "width": "100px", "targets": 5 },
     { "width": "100px", "targets": 6 },
     { "width": "100px", "targets": 7 },
-    { "width": "100px", "targets": 8 },
-   /* { "width": "100px", "targets": 9 },
-    { "width": "100px", "targets": 10},
-    { "width": "100px", "targets": 11 },
-    { "width": "60px", "targets": 12 },*/
-
+    { "width": "100px", "targets": 7 },
   ],
         select: {
             style:    'os',
@@ -117,96 +135,84 @@ var tb=$("#tb_used_oil").DataTable({
         "responsive": true,
         "autoWidth": true,
         "ajax": {
-          "url": "<?php echo Url::toRoute('/monitoring/fuel/action/getdata');?>",
+          "url": "<?php echo Url::toRoute('/monitoring/machine_health/action/get');?>",
           'type':'get'
         },
     columns: [
-    {
+     {
                 "className":      'details-control',
                 "orderable":      false,
-                "data":           'report_id',
-                /*"defaultContent": '<a href="#" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Please click row for save to PDF">PDF</a>'+'&nbsp;<a href="#" class="btn btn-xs btn-info" data-toggle="tooltip" title="Please click row for view data">View</a>',*/
-                "render": function ( data, type, full, meta ) {
-      return '&nbsp;<a class="btn btn-xs btn-info viewDetail" data-toggle="tooltip" title="View or download Data" href="#" onclick="view('+"'"+data+"'"+')"><span class="glyphicon glyphicon-eye-open"></span></a>';
-    }
+                "data":           null,
+                "defaultContent": ''
             },
-            {data:'report_id'},
-    {data:'group'},
-    {data:'Branch'},
-    {data:'Name'},
-    {data:'lab_number'},
-    {data:'sample_date'},
-    {data:'receive_date'},
-    {data:'report_date'}/*,
-    {data:'unit_number'},
-    {data:'component_name'},
-    {data:'model'},
-    {data:'lab_no'},
-    {data:'oil_change'},*/
-   /* {data:'cmp'},
-    {data:'filter_code'},
-    {data:'mp'},*/
-    /*{data:'eval_code'}*/
+    {data:'UnitID'},
+    {data:'Model'},
+    {data:'UnitNo'},
+    {data:'tgl1'},
+    {data:'tgl2'},
+    {data:'tgl3'},
+    {data:'tgl4'},
+    {data:'tgl5'}
     ],
-    scrollY:'65vh',
+    /*scrollY:'65vh',*/
         scrollCollapse: true,
-        "scrollX": true,
+        /*"scrollX": true,*/
         processing: true,
-        serverSide: false,
+        serverSide: true,
         select: {
             style: 'single'
         },
-        select: true,
+        select: false,
   "rowCallback": function( row, data, index ) {
-    $(row).find('td:eq(0)').css('border-right', '2px solid red');
-  /*  $(row).find('td:eq(0)').css('background-color', '60   #ffffb3');
- if (data.eval_code=='Urgent') {
-$(row).find('td:eq(13)').css('color', '#0033cc');
- $(row).find('td:eq(13)').css('background-color', '#ff0000');
- $(row).find('td:eq(0)').css('border-right', '4px solid #ff0000');
- }else if(data.eval_code=='Attention'){
-   $(row).find('td:eq(13)').css('color', '#0033cc');
-   $(row).find('td:eq(13)').css('background-color', '#ffff33');
-   $(row).find('td:eq(0)').css('border-right', '4px solid #ffff33');
- }else if(data.eval_code=='Normal'){
-   $(row).find('td:eq(13)').css('color', '#0033cc');
-   $(row).find('td:eq(13)').css('background-color', '#00ff00');
-   $(row).find('td:eq(0)').css('border-right', '4px solid #00ff00');
- }else if(data.eval_code==' '){
-   $(row).find('td:eq(13)').css('color', '#0033cc');
-   $(row).find('td:eq(13)').css('background-color', '#00ff00');
-   $(row).find('td:eq(0)').css('border-right', '4px solid #00ff00');
- }*/
+    if (data.tgl1!='0000-00-00') {
+$(row).find('td:eq(4)').css('background-color', '#90e38f');
+ }
+   if (data.tgl2!='0000-00-00') {
+$(row).find('td:eq(5)').css('background-color', '#90e38f');
+ }
+  if (data.tgl3!='0000-00-00') {
+$(row).find('td:eq(6)').css('background-color', '#90e38f');
+ }
+  if (data.tgl4!='0000-00-00') {
+$(row).find('td:eq(7)').css('background-color', '#90e38f');
+ }
+  if (data.tgl5!='0000-00-00') {
+$(row).find('td:eq(8)').css('background-color', '#90e38f');
+ }
 
 }
 
 });
 
 
+/*fungsi jika table body di klik*/
+$('#tb_used_oil tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = tb.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+            $("#detailsTable > tbody > tr").remove();
+        }
+    } );
 
-$('#tb_used_oil tbody').on( 'click', 'tr', function () {
-var data=( tb.row( this ).data() );
-/*alert(data.lab_no);*/
-$("#labno").val(data.lab_no);
-$("#export").removeAttr('disabled');
-/*ymz.jq_toast({text:"Lab Number: "+data.lab_no+"", type: "notice", sec: 1});*/
-
-$("#ex_pdf").attr('href',"<?php echo Url::toRoute('/monitoring/used_oil/action/report?type=pdf');?>"+'&'+'labNumber='+data.lab_no)
-
-$('#tb_used_oil tbody').contextMenu('myMenu1', {});
-
-});
-
-
+/*tooltip plugin*/
 $('#tb_used_oil tbody').attr({
   'data-toggle': 'tooltip',
   'title': 'Klik Baris, Lalu Klik kanan akan muncul menu export PDF'
 });
 
-
+/*plugin select2 bootstrap*/
 $(".select2").select2();
 
-
+/*fungsi jika button export dirubah*/
 $("#export").on('change',function(event) {
 var type=$(this).val();
 var labno=$("#labno").val();
@@ -215,28 +221,48 @@ $("#export").val('Select_Export');
 });
 
 
+/*jika select tanggal di rubah maka kolom date di enable*/
 $("#select-date").on('change',function(event) {
  dateEn();
- $("#date1").val("");
- $("#date2").val("");
 });
 
-$("#btn-refresh").on('click',function(event) {
-    var dateStart=$("#date1").val();
-    var dateEnd=$("#date2").val();
 
-   if ($("#select-date").val()=='all_date') {
-tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/getdata');?>").load();
-   }else if($("#select-date").val()=='receive_date'){
-tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/get_by_receive_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
-   }else if($("#select-date").val()=='report_date'){
-tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/get_by_report_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
-   }else if($("#select-date").val()=='sample_date'){
-tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/get_by_sample_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
-   }
-});
-
+/*panggil fungsi disable date untuk disable date*/
 dateDis();
+
+/*tampilkan modal tambah data baru*/
+$('#btn_add').click(function(event) {
+  $('#typeSubmit').val('add');
+  clear();
+  $('#modalTitle').html('Add new');
+    $('#modal1').modal('show');
+});
+
+/*ajax serverSide tambah data baru*/
+    $("#form").on('submit',(function(e) {
+        e.preventDefault();
+var typeSubmit=$('#typeSubmit').val();
+        $.ajax({
+            url: "<?php echo Url::toRoute('/monitoring/fuel/action/');?>/"+typeSubmit,
+            type: "POST",
+            data:  new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(res)
+            {
+            swal(res.responses, res.message, res.status);
+            $("#modal1").modal('hide');
+            tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/api/get') ?>").load();
+            $('#form input').val('');
+            },
+            error: function(e)
+            {
+
+            }
+       });
+
+    }));
 </script>
 <?php JSRegister::end(); ?>
 
@@ -247,22 +273,130 @@ dateDis();
 ]); ?>
 <script>
 
-$.ajaxSetup({
-beforeSend:function(){
-HoldOn.open({
-    theme:'sk-rect',
-    message:"<h4>"+"Please Wait..."+"</h4>"
+function format ( d ) {
+
+$("#detailsTable").attr('datatable','tb_'+d.UnitID);
+table_detail=$("#detailsTable").html();
+$.ajax({
+  url: "<?php echo Url::toRoute('/monitoring/machine_health/action/component_by_unit_id');?>",
+  type: 'GET',
+  data: {unitID: d.UnitID},
+})
+.done(function(da) {
+
+  //looping data dengan each
+$.each(da,function(index, el) {
+  $( "[datatable="+'tb_'+d.UnitID+"]" ).append('<tr>'+
+'<td>'+'Edit/Delete'+'</td>'+
+'<td>'+el.ComponentID+'</td>'+
+'<td>'+el.Component+'</td>'+
+'<td>'+el.tgl1+'</td>'+
+'<td>'+el.tgl2+'</td>'+
+'<td>'+el.tgl3+'</td>'+
+'<td>'+el.tgl4+'</td>'+
+'<td>'+el.tgl5+'</td>'+
+'</tr>');
 });
-},
-complete:function(){
-    HoldOn.close();
+$(".jsonL").html(da.length);
+})
+.fail(function() {
+  console.log("error");
+})
+.always(function() {
+  console.log("complete");
+});
+
+return table_detail;
+
 }
-});
+
+//function refresh
+function refresh(){
+     var dateStart=$("#date1").val();
+    var dateEnd=$("#date2").val();
+
+   if ($("#select-date").val()=='all_date') {
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/get');?>" ).load();
+   }else if($("#select-date").val()=='receive_date'){
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/getdata_by_receive_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
+   }else if($("#select-date").val()=='report_date'){
+tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/getdata_by_report_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
+   }else if($("#select-date").val()=='sample_date'){
+    tb.ajax.url( "<?php echo Url::toRoute('/monitoring/fuel/action/getdata_by_sample_date?');?>"+'date1='+dateStart+'&date2='+dateEnd ).load();
+
+   }
+}
 
     //modal//
 function view(rid){
  window.open("<?php echo Url::toRoute('/monitoring/fuel/report/view?reportid=') ?>"+rid, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=50,width=1200,height=600");
 }
+
+    //modal//
+function edit(reportid){
+  $('#typeSubmit').val('edit');
+  $.ajax({
+    url: "<?php echo Url::toRoute('/monitoring/fuel/action/by_report_id?reportId=');?>"+reportid,
+    type: 'GET',
+    data: {reportid: reportid}
+  })
+  .done(function(data) {
+    $('#report_id').val(data.report_id);
+    $('#report_date').val(data.report_date);
+    $('#receive_date').val(data.receive_date);
+    $('#sample_date').val(data.sample_date);
+    $('#group').val(data.group);
+    $('#customer_name').val(data.customer_id);
+    $('#departement').val(data.departement_id);
+    $('#lab_number').val(data.lab_number);
+    $('#job_number').val(data.Job_number);
+    $('#detail_of_sample').val(data.detail_of_sample);
+    $('#target_lead_time').val(data.target_lead_time);
+    $('#actual_lead_time').val(data.actual_lead_time);
+    $('#alert').val(data.Alert);
+
+    console.log("complete");
+  })
+  .fail(function() {
+    console.log("error");
+  })
+  .always(function() {
+
+  });
+$('#modalTitle').html('Edit Data');
+$('#modal1').modal('show');
+}
+function deleteData(rid){
+swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this imaginary file!",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes, delete it!",
+  closeOnConfirm: false
+},
+function(){
+   $.ajax({
+   url: '<?php echo Url::toRoute('/monitoring/fuel/api/delete')?>',
+   type: 'GET',
+   data: {report_id: rid}
+ })
+ .done(function(json) {
+swal(json.responses, json.message, json.status);
+window.location.reload();
+ })
+ .fail(function() {
+   console.log("error");
+ })
+ .always(function() {
+   console.log("complete");
+ });
+
+});
+}
+
+
 
 $('#date1').datepicker({
 format: 'yyyy-mm-dd',
@@ -287,22 +421,6 @@ function dateEn(){
   $('#date1').removeAttr('disabled')
   $('#date2').removeAttr('disabled')
   $("#btn-refresh").removeAttr('disabled')
-}
-
-
-function Logout(){
-swal({
-  title: "Are you sure?",
-  text: "You will Logout",
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#DD6B55",
-  confirmButtonText: "Yes!",
-  closeOnConfirm: false
-},
-function(){
-  document.location="<?php echo Url::toRoute('/login/proces/logout'); ?>";
-});
 }
 
 </script>

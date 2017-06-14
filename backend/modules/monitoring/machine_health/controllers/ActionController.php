@@ -62,6 +62,18 @@ $datatables = (new DataTables\Builder())
 return $datatables->getResponse();
 }
 
+//get component by unit id
+  public function actionComponent_by_unit_id()
+    {
+\Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;
+$unitid=$_REQUEST['unitID'];
+$query=new Query;
+        $query->select(['tx.*'])
+  ->from('tbl_component_control tx')
+  ->where(['tx.unitID'=>$unitid]);
+return $query->all();
+    }
+
 //get data by reveive date
   public function actionGetdata_by_receive_date($date1,$date2)
     {

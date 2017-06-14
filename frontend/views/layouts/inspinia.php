@@ -125,7 +125,7 @@ $url=$moduleurl[0];
 
                          <li class="<?php if ($url=='monitoring/machine_health') {
                         echo 'active';
-                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/machine_health')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Health</span></a></li>
+                    }else{echo 'inactive';} ?>"><a href="<?php echo Url::toRoute('/monitoring/machine_health') ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Health</span></a></li>
 
                     <li class="<?php if ($url=='monitoring/unit_no_history') {
                         echo 'active';

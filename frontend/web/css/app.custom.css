@@ -47,3 +47,10 @@ tfoot input {
         padding: 3px;
         box-sizing: border-box;
     }
+    .th_table_sub{
+	background-color: #de6f2a !important;
+	color: white !important;
+}
+.table_sub tbody{
+	background-color: #71c6c9 !important;
+}

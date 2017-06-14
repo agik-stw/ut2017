@@ -83,12 +83,11 @@ use app\components\Random;
 </ul>
 </div>
 
-<div style="display:none">    
-    <h4>Component <span class="badge"><b>12</b></span></h4>
-    <table id="detailsTable" class="table table-striped table-bordered">
+<div style="display:none">
+    <table id="detailsTable" class="table table-striped table-bordered table-sub">
+    <caption>Component <span class="badge"><b class="jsonL">0</b></span></caption>
 <thead>
 <th class="th_table_sub">Actions</th>
-<th class="th_table_sub">No</th>
 <th class="th_table_sub">Id</th>
 <th class="th_table_sub">Component</th>
 <th class="th_table_sub">Report 1</th>
@@ -278,13 +277,36 @@ var typeSubmit=$('#typeSubmit').val();
 function format ( d ) {
 
 $("#detailsTable").attr('datatable','tb_'+d.UnitID);
-var da=[{nama:'agik setiawan'},{nama:'agus setiawan'}];
+table_detail=$("#detailsTable").html();
+$.ajax({
+  url: "<?php echo Url::toRoute('/monitoring/machine_health/action/component_by_unit_id');?>",
+  type: 'GET',
+  data: {unitID: d.UnitID},
+})
+.done(function(da) {
+
+  //looping data dengan each
 $.each(da,function(index, el) {
   $( "[datatable="+'tb_'+d.UnitID+"]" ).append('<tr>'+
-'<td>'+el.nama+'</td>'+
+'<td>'+'Edit/Delete'+'</td>'+
+'<td>'+el.ComponentID+'</td>'+
+'<td>'+el.Component+'</td>'+
+'<td>'+el.tgl1+'</td>'+
+'<td>'+el.tgl2+'</td>'+
+'<td>'+el.tgl3+'</td>'+
+'<td>'+el.tgl4+'</td>'+
+'<td>'+el.tgl5+'</td>'+
 '</tr>');
 });
-var table_detail=$("#detailsTable").html();
+$(".jsonL").html(da.length);
+})
+.fail(function() {
+  console.log("error");
+})
+.always(function() {
+  console.log("complete");
+});
+
 return table_detail;
 
 }
