@@ -286,7 +286,10 @@ $.ajax({
   //looping data dengan each
 $.each(da,function(index, el) {
   $( "[datatable="+'tb_'+d.UnitID+"]" ).append('<tr>'+
-'<td>'+'Edit/Delete'+'</td>'+
+'<td>'+el.ComponentID+'</td>'+
+'<td>'+el.Component+'</td>'+
+'<td>'+el.tgl1+'</td>'+
+'<td>'+el.tgl2+'</td>'+
 '<td>'+el.tgl3+'</td>'+
 '<td>'+el.tgl4+'</td>'+
 '<td>'+el.tgl5+'</td>'+
