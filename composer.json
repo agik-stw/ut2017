@@ -53,8 +53,7 @@
 "bower install"
 ],
 "post-update-cmd": [
-    "bower install",
-"bower update"
+    "bower install"
 ]
     }
 }
