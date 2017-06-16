@@ -163,20 +163,42 @@ tb=$("#tb_used_oil").DataTable({
         },
         select: false,
   "rowCallback": function( row, data, index ) {
-    if (data.tgl1!='0000-00-00') {
+  if (data.ec1=='A') {
 $(row).find('td:eq(4)').css('background-color', '#90e38f');
+ }else if(data.ec1=='B'){
+$(row).find('td:eq(4)').css('background-color', '#0eb7f6');
+ }else if(data.ec1=='C'){
+$(row).find('td:eq(4)').css('background-color', '#fa4c71');
  }
-   if (data.tgl2!='0000-00-00') {
+    if (data.ec2=='A') {
 $(row).find('td:eq(5)').css('background-color', '#90e38f');
+ }else if(data.ec2=='B'){
+$(row).find('td:eq(5)').css('background-color', '#0eb7f6');
+ }else if(data.ec2=='C'){
+$(row).find('td:eq(5)').css('background-color', '#fa4c71');
  }
-  if (data.tgl3!='0000-00-00') {
+
+    if (data.ec3=='A') {
 $(row).find('td:eq(6)').css('background-color', '#90e38f');
+ }else if(data.ec3=='B'){
+$(row).find('td:eq(6)').css('background-color', '#0eb7f6');
+ }else if(data.ec3=='C'){
+$(row).find('td:eq(6)').css('background-color', '#fa4c71');
  }
-  if (data.tgl4!='0000-00-00') {
+    if (data.ec4=='A') {
 $(row).find('td:eq(7)').css('background-color', '#90e38f');
+ }else if(data.ec4=='B'){
+$(row).find('td:eq(7)').css('background-color', '#0eb7f6');
+ }else if(data.ec4=='C'){
+$(row).find('td:eq(7)').css('background-color', '#fa4c71');
  }
-  if (data.tgl5!='0000-00-00') {
+
+    if (data.ec5=='A') {
 $(row).find('td:eq(8)').css('background-color', '#90e38f');
+ }else if(data.ec5=='B'){
+$(row).find('td:eq(8)').css('background-color', '#0eb7f6');
+ }else if(data.ec5=='C'){
+$(row).find('td:eq(8)').css('background-color', '#fa4c71');
  }
 
 }
