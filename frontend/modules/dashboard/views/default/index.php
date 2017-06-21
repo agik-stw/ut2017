@@ -12,8 +12,11 @@ use richardfan\widget\JSRegister;
 </a>
 </div>
 <div class="col-md-offset-2" style="margin-top: 150px;">
-<h2 class="splash_title">WELCOME TO PETROLAB CLIENT REPORT</h2>
-<p class="splash_title2"><i>Manage your report for fast and easy</i>&nbsp;<span class="fa fa-cogs"></span></p>
+<h3 class="splash_title">WELCOME TO UNITED TRACTOR CLIENT REPORT</h3>
+<p class="splash_title2"><i>Manage your report for fast and easy</i></p>
+<p>
+<img width="250" class="img-responsive" src="<?php echo Url::base('').'/'.'img/icon/ut2.png';?>"></p>
+
 
 </div>
 </div>
