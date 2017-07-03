@@ -15,7 +15,7 @@ use richardfan\widget\JSRegister;
 <h3 class="splash_title">WELCOME TO UNITED TRACTOR CLIENT REPORT</h3>
 <p class="splash_title2"><i>Manage your report for fast and easy</i></p>
 <p>
-<img width="250" class="img-responsive" src="<?php echo Url::base('').'/'.'img/icon/ut2.png';?>"></p>
+<img width="200" class="img-responsive" src="<?php echo Url::base('').'/'.'img/icon/ut2.png';?>"></p>
 
 
 </div>

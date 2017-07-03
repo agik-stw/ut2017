@@ -147,11 +147,46 @@ tb=$("#tb_used_oil").DataTable({
     {data:'UnitID'},
     {data:'Model'},
     {data:'UnitNo'},
-    {data:'tgl1'},
-    {data:'tgl2'},
-    {data:'tgl3'},
-    {data:'tgl4'},
-    {data:'tgl5'}
+     {
+                /*"className":      '',*/
+                /*"orderable":      false,*/
+                "data":           'tgl1',
+                "render": function ( data, type, full, meta ) {
+      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+    }
+            },
+            {
+                /*"className":      '',*/
+                /*"orderable":      false,*/
+                "data":           'tgl2',
+                "render": function ( data, type, full, meta ) {
+      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+    }
+            },
+            {
+                /*"className":      '',*/
+                /*"orderable":      false,*/
+                "data":           'tgl3',
+                "render": function ( data, type, full, meta ) {
+      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+    }
+            },
+            {
+                /*"className":      '',*/
+                /*"orderable":      false,*/
+                "data":           'tgl4',
+                "render": function ( data, type, full, meta ) {
+      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+    }
+            },
+            {
+                /*"className":      '',*/
+                /*"orderable":      false,*/
+                "data":           'tgl5',
+                "render": function ( data, type, full, meta ) {
+      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+    }
+            }
     ],
     /*scrollY:'65vh',*/
         scrollCollapse: true,
@@ -164,41 +199,41 @@ tb=$("#tb_used_oil").DataTable({
         select: false,
   "rowCallback": function( row, data, index ) {
   if (data.ec1=='A') {
-$(row).find('td:eq(4)').css('background-color', '#90e38f');
+$(row).find('td:eq(4)').css('background-color', '#66ff33');
  }else if(data.ec1=='B'){
-$(row).find('td:eq(4)').css('background-color', '#0eb7f6');
+$(row).find('td:eq(4)').css('background-color', '#ffff00');
  }else if(data.ec1=='C'){
-$(row).find('td:eq(4)').css('background-color', '#fa4c71');
+$(row).find('td:eq(4)').css('background-color', '#ff5c33');
  }
     if (data.ec2=='A') {
-$(row).find('td:eq(5)').css('background-color', '#90e38f');
+$(row).find('td:eq(5)').css('background-color', '#66ff33');
  }else if(data.ec2=='B'){
-$(row).find('td:eq(5)').css('background-color', '#0eb7f6');
+$(row).find('td:eq(5)').css('background-color', '#ffff00');
  }else if(data.ec2=='C'){
-$(row).find('td:eq(5)').css('background-color', '#fa4c71');
+$(row).find('td:eq(5)').css('background-color', '#ff5c33');
  }
 
     if (data.ec3=='A') {
-$(row).find('td:eq(6)').css('background-color', '#90e38f');
+$(row).find('td:eq(6)').css('background-color', '#66ff33');
  }else if(data.ec3=='B'){
-$(row).find('td:eq(6)').css('background-color', '#0eb7f6');
+$(row).find('td:eq(6)').css('background-color', '#ffff00');
  }else if(data.ec3=='C'){
-$(row).find('td:eq(6)').css('background-color', '#fa4c71');
+$(row).find('td:eq(6)').css('background-color', '#ff5c33');
  }
     if (data.ec4=='A') {
-$(row).find('td:eq(7)').css('background-color', '#90e38f');
+$(row).find('td:eq(7)').css('background-color', '#66ff33');
  }else if(data.ec4=='B'){
-$(row).find('td:eq(7)').css('background-color', '#0eb7f6');
+$(row).find('td:eq(7)').css('background-color', '#ffff00');
  }else if(data.ec4=='C'){
-$(row).find('td:eq(7)').css('background-color', '#fa4c71');
+$(row).find('td:eq(7)').css('background-color', '#ff5c33');
  }
 
     if (data.ec5=='A') {
-$(row).find('td:eq(8)').css('background-color', '#90e38f');
+$(row).find('td:eq(8)').css('background-color', '#66ff33');
  }else if(data.ec5=='B'){
-$(row).find('td:eq(8)').css('background-color', '#0eb7f6');
+$(row).find('td:eq(8)').css('background-color', '#ffff00');
  }else if(data.ec5=='C'){
-$(row).find('td:eq(8)').css('background-color', '#fa4c71');
+$(row).find('td:eq(8)').css('background-color', '#ff5c33');
  }
 
 }
@@ -227,7 +262,7 @@ $('#tb_used_oil tbody').on('click', 'td.details-control', function () {
 /*tooltip plugin*/
 $('#tb_used_oil tbody').attr({
   'data-toggle': 'tooltip',
-  'title': 'Klik Baris, Lalu Klik kanan akan muncul menu export PDF'
+  'title': 'Klik tanggal untuk lihat hasil'
 });
 
 /*plugin select2 bootstrap*/
