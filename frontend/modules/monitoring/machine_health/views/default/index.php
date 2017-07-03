@@ -148,11 +148,11 @@ tb=$("#tb_used_oil").DataTable({
     {data:'Model'},
     {data:'UnitNo'},
      {
-                /*"className":      '',*/
+                /*"className":      'tgl1',*/
                 /*"orderable":      false,*/
                 "data":           'tgl1',
                 "render": function ( data, type, full, meta ) {
-      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
     }
             },
             {
@@ -319,6 +319,7 @@ var typeSubmit=$('#typeSubmit').val();
        });
 
     }));
+
 </script>
 <?php JSRegister::end(); ?>
 

@@ -17,7 +17,7 @@ use richardfan\widget\JSRegister;
 <?php $this->beginBody() ?>
 <div class="container">
          <div class="thumbnail" style="border: 0 none; box-shadow: none;">
-         <button class="btn btn-link btn-xs pull-left col-sm-1" onclick="history.back()"> Back </button>
+
             <img src="<?php echo Url::base('').'/'.'img/error/404.gif';?>" class="image-responsive" width="650">
          </div>
          <div class="row">
