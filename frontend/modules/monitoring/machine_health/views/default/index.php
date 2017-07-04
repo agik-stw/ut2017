@@ -160,7 +160,7 @@ tb=$("#tb_used_oil").DataTable({
                 /*"orderable":      false,*/
                 "data":           'tgl2',
                 "render": function ( data, type, full, meta ) {
-      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
     }
             },
             {
@@ -168,7 +168,7 @@ tb=$("#tb_used_oil").DataTable({
                 /*"orderable":      false,*/
                 "data":           'tgl3',
                 "render": function ( data, type, full, meta ) {
-      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
     }
             },
             {
@@ -176,7 +176,7 @@ tb=$("#tb_used_oil").DataTable({
                 /*"orderable":      false,*/
                 "data":           'tgl4',
                 "render": function ( data, type, full, meta ) {
-      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
     }
             },
             {
@@ -184,7 +184,7 @@ tb=$("#tb_used_oil").DataTable({
                 /*"orderable":      false,*/
                 "data":           'tgl5',
                 "render": function ( data, type, full, meta ) {
-      return '<a href='+'"'+"#test/"+data+'"'+'>'+data+'</a>';
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
     }
             }
     ],
@@ -242,7 +242,7 @@ $(row).find('td:eq(8)').css('background-color', '#ff5c33');
 
 
 /*fungsi jika table body di klik*/
-$('#tb_used_oil tbody').on('click', 'td.details-control', function () {
+/*$('#tb_used_oil tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = tb.row( tr );
  
@@ -257,7 +257,7 @@ $('#tb_used_oil tbody').on('click', 'td.details-control', function () {
             tr.addClass('shown');
             $("#detailsTable > tbody > tr").remove();
         }
-    } );
+    } );*/
 
 /*tooltip plugin*/
 $('#tb_used_oil tbody').attr({

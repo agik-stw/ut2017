@@ -12,10 +12,10 @@ use richardfan\widget\JSRegister;
 </a>
 </div>
 <div class="col-md-offset-2" style="margin-top: 150px;">
-<h3 class="splash_title">WELCOME TO UNITED TRACTOR CLIENT REPORT</h3>
+<h3 class="splash_title">WELCOME TO UNITED TRACTORS CLIENT REPORT</h3>
 <p class="splash_title2"><i>Manage your report for fast and easy</i></p>
 <p>
-<img width="200" class="img-responsive" src="<?php echo Url::base('').'/'.'img/icon/ut2.png';?>"></p>
+<img width="150" class="img-responsive" src="<?php echo Url::base('').'/'.'img/icon/ut2.png';?>"></p>
 
 
 </div>

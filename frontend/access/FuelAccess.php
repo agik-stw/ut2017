@@ -57,8 +57,7 @@ else{
   'tbl_customers','
   tbl_customers.CustomerID=tbl_fuel.customer_id')
   ->where(['tbl_fuel.group'=>$dataId])
-  ->orWhere(['tbl_fuel.customer_id'=>$dataId])
-  ->orWhere(['tbl_fuel.branch_id'=>$dataId]);
+  ->orWhere(['tbl_fuel.customer_id'=>$dataId]);
   return $query->all();
 }
 

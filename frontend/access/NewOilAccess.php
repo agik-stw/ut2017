@@ -45,8 +45,7 @@ else{
 'tbl_customers','
 tbl_customers.CustomerID=tbl_new_oil.customer_id')
   ->where(['tbl_new_oil.group'=>$dataId])
-  ->orWhere(['tbl_new_oil.customer_id'=>$dataId])
-  ->orWhere(['tbl_new_oil.branch_id'=>$dataId]);
+  ->orWhere(['tbl_new_oil.customer_id'=>$dataId]);
   return $query->all();
 }
 
