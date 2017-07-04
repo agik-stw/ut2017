@@ -67,6 +67,19 @@ Machine_health::register($this);
                     <tbody>
 
                                     </tbody>
+                                    <tfoot>
+                                       <tr>
+                        <th class=""></th>
+                        <th class="">Unit Id</th>
+                        <th class="">Model</th>
+                            <th class="">Unit No</th>
+                            <th class="">Report 1</th>
+                            <th class="">Report 2</th>
+                            <th class="">Report 3</th>
+                            <th class="">Report 4</th>
+                            <th class="">Report 5</th>
+                        </tr>
+                                    </tfoot>
                                 </table>
                                 </div>
 
@@ -106,6 +119,12 @@ $('.datepicker').datepicker({
 format: 'yyyy-mm-dd',
             });
 
+//filter footer per kolom
+ $('#tb_used_oil tfoot th').not(":eq(0)").each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" />' );
+    } );
+
 /*plugin datatables jquery*/
 tb=$("#tb_used_oil").DataTable({
 
@@ -118,7 +137,7 @@ tb=$("#tb_used_oil").DataTable({
     { "width": "100px", "targets": 5 },
     { "width": "100px", "targets": 6 },
     { "width": "100px", "targets": 7 },
-    { "width": "100px", "targets": 7 },
+    { "width": "100px", "targets": 8 },
   ],
         select: {
             style:    'os',
@@ -152,7 +171,11 @@ tb=$("#tb_used_oil").DataTable({
                 /*"orderable":      false,*/
                 "data":           'tgl1',
                 "render": function ( data, type, full, meta ) {
-      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
+                  if(data=='0000-00-00'){
+                    return data;
+                  }else{
+return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'/'+full.ln1+'</a>';
+                  }
     }
             },
             {
@@ -160,32 +183,48 @@ tb=$("#tb_used_oil").DataTable({
                 /*"orderable":      false,*/
                 "data":           'tgl2',
                 "render": function ( data, type, full, meta ) {
-      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
+                  if(data=='0000-00-00'){
+                    return data;
+                  }else{
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'/'+full.ln2+'</a>';
     }
+  }
             },
             {
                 /*"className":      '',*/
                 /*"orderable":      false,*/
                 "data":           'tgl3',
                 "render": function ( data, type, full, meta ) {
-      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
+                  if(data=='0000-00-00'){
+                    return data;
+                  }else{
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'/'+full.ln3+'</a>';
     }
+  }
             },
             {
                 /*"className":      '',*/
                 /*"orderable":      false,*/
                 "data":           'tgl4',
                 "render": function ( data, type, full, meta ) {
-      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
+                  if(data=='0000-00-00'){
+                    return data;
+                  }else{
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'/'+full.ln4+'</a>';
     }
+  }
             },
             {
                 /*"className":      '',*/
                 /*"orderable":      false,*/
                 "data":           'tgl5',
                 "render": function ( data, type, full, meta ) {
-      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'</a>';
+                  if(data=='0000-00-00'){
+                    return data;
+                  }else{
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'/'+full.ln5+'</a>';
     }
+  }
             }
     ],
     /*scrollY:'65vh',*/
@@ -239,6 +278,19 @@ $(row).find('td:eq(8)').css('background-color', '#ff5c33');
 }
 
 });
+
+  // Apply the search
+    tb.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
 
 
 /*fungsi jika table body di klik*/
