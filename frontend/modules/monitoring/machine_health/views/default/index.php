@@ -186,7 +186,7 @@ return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/mach
                   if(data=='0000-00-00'){
                     return data;
                   }else{
-      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'/'+full.ln2+'</a>';
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec2+'"'+'>'+data+'/'+full.ln2+'</a>';
     }
   }
             },
@@ -198,7 +198,7 @@ return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/mach
                   if(data=='0000-00-00'){
                     return data;
                   }else{
-      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'/'+full.ln3+'</a>';
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec3+'"'+'>'+data+'/'+full.ln3+'</a>';
     }
   }
             },
@@ -210,7 +210,7 @@ return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/mach
                   if(data=='0000-00-00'){
                     return data;
                   }else{
-      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'/'+full.ln4+'</a>';
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec4+'"'+'>'+data+'/'+full.ln4+'</a>';
     }
   }
             },
@@ -222,7 +222,7 @@ return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/mach
                   if(data=='0000-00-00'){
                     return data;
                   }else{
-      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec1+'"'+'>'+data+'/'+full.ln5+'</a>';
+      return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/machine_health');?>"+'/report/pdf?u='+full.UnitID+'&m='+full.Model+'&t='+data+'&e='+full.ec5+'"'+'>'+data+'/'+full.ln5+'</a>';
     }
   }
             }
