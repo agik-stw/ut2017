@@ -2,6 +2,8 @@
 /*error_reporting(0);
 */// Begin of modification Use Constants in Configuration File, by Masino Sinaga, July 3, 2013
 // Put this always at the top of configuration file so you can change it easily!
+use db2\config\Configdb;
+$data_db=(Object)Configdb::$params;
 
 define("MS_USE_CONSTANTS_IN_CONFIG_FILE", FALSE, TRUE); // this is useful if you don't want to use the configuration settings from database, just use from this file!
 
@@ -58,7 +60,7 @@ $EW_FONT_PATH = realpath('./phpfont');
 define("EW_USE_ADODB", FALSE, TRUE); // Use ADOdb
 if (!defined("EW_USE_MYSQLI"))
 	define('EW_USE_MYSQLI', extension_loaded("mysqli"), TRUE); // Use MySQLi
-$EW_CONN["DB"] = array("conn" => NULL, "id" => "DB", "type" => "MYSQL", "host" => "localhost", "port" =>"3306", "user" => "root", "pass" => "", "db" => "ut_2015", "qs" => "`", "qe" => "`");
+$EW_CONN["DB"] = array("conn" => NULL, "id" => "DB", "type" => "MYSQL", "host" => $data_db->host, "port" =>$data_db->port, "user" => $data_db->user, "pass" => $data_db->password, "db" => $data_db->dbname, "qs" => "`", "qe" => "`");
 $EW_CONN[0] = &$EW_CONN["DB"];
 
 // Set up database error function

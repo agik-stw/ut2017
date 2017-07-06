@@ -8,6 +8,7 @@ class Configdb extends Action{
     'password' => '',
     'host' => 'localhost',
     'driver' => 'pdo_mysql',
+    'port'=>3306
 	];
 
 

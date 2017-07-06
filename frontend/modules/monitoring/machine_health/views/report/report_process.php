@@ -1,4 +1,5 @@
 <?php
+
 require('fpdf/fpdf.php');
  include("ewcfg10.php");
  error_reporting(0);

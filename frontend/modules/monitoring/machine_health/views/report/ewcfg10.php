@@ -1,5 +1,6 @@
 <?php
-
+use db2\config\Configdb;
+$data_db=(Object)Configdb::$params;
 /**
  * PHPMaker 10 configuration file
  */
@@ -43,11 +44,11 @@ define("EW_TMP_IMAGE_FONT", "DejaVuSans", TRUE); // Font for temp files
 $EW_FONT_PATH = realpath('./phpfont');
 
 // Database connection info
-define("EW_CONN_HOST", 'localhost', TRUE);
-define("EW_CONN_PORT", 3306, TRUE);
-define("EW_CONN_USER", 'root', TRUE);
-define("EW_CONN_PASS", '', TRUE);
-define("EW_CONN_DB", 'ut_2015', TRUE);
+define("EW_CONN_HOST", $data_db->host, TRUE);
+define("EW_CONN_PORT", $data_db->port, TRUE);
+define("EW_CONN_USER", $data_db->user, TRUE);
+define("EW_CONN_PASS", $data_db->password, TRUE);
+define("EW_CONN_DB", $data_db->dbname, TRUE);
 
 // ADODB (Access/SQL Server)
 define("EW_CODEPAGE", 65001, TRUE); // Code page
