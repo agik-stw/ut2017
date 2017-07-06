@@ -11,7 +11,6 @@ class ReportController extends \yii\web\Controller
 //pdf
   public function actionPdf(){
   	/*\Yii::$app->response->format=\Yii\web\Response::FORMAT_JSON;*/
-  	Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
 
  $u = trim($_GET['u']);
   $m = trim($_GET['m']);
@@ -25,10 +24,15 @@ $query=new Query;
   ->andWhere(['Date(tx.RECV_DT1)'=>$t])
   ->andWhere(['tx.EVAL_CODE'=>$e]);
 $data=(Object)$query->one();
+
+if (isset($data->Lab_No)) {
+Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
 $labNumber=$data->Lab_No;
-/*return $labNumber;*/
-        $connt=$this->renderPartial('report_process',['labNumber'=>$labNumber]);
+$connt=$this->renderPartial('report_process',['labNumber'=>$labNumber]);
 return $connt;
+}else{
+return "<h3>Data Tidak tersedia</h3>".'<a href="#" onclick="window.close();">Close</a>';
+}
 
   }
 }

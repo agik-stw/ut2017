@@ -1107,12 +1107,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpdf/mpdf.git",
-                "reference": "4b5f88f7b826d3a67bff6a1d7bf43806dac33bb4"
+                "reference": "bf523b775ea0203a17085f1d50d3103e01486ba9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/4b5f88f7b826d3a67bff6a1d7bf43806dac33bb4",
-                "reference": "4b5f88f7b826d3a67bff6a1d7bf43806dac33bb4",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/bf523b775ea0203a17085f1d50d3103e01486ba9",
+                "reference": "bf523b775ea0203a17085f1d50d3103e01486ba9",
                 "shasum": ""
             },
             "require": {
@@ -1169,7 +1169,7 @@
                 "php",
                 "utf-8"
             ],
-            "time": "2017-06-05 11:42:31"
+            "time": "2017-07-04 14:42:46"
         },
         {
             "name": "nullref/yii2-datatables",
@@ -1512,12 +1512,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "8c9bb921ea35b1bc9b59fe99bdce2e8e1d076d45"
+                "reference": "f1703ea411d642f5b26c81553063a3154325ed80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8c9bb921ea35b1bc9b59fe99bdce2e8e1d076d45",
-                "reference": "8c9bb921ea35b1bc9b59fe99bdce2e8e1d076d45",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/f1703ea411d642f5b26c81553063a3154325ed80",
+                "reference": "f1703ea411d642f5b26c81553063a3154325ed80",
                 "shasum": ""
             },
             "require": {
@@ -1569,7 +1569,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-06-16 13:42:12"
+            "time": "2017-07-04 13:20:04"
         },
         {
             "name": "vaibhavpandeyvpz/doctrine-datatables",
@@ -1711,12 +1711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a3f518f6eb240a74354562c1f75a0b483cbf92f0"
+                "reference": "394241e083e25824df6759b440fe0a58274861ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a3f518f6eb240a74354562c1f75a0b483cbf92f0",
-                "reference": "a3f518f6eb240a74354562c1f75a0b483cbf92f0",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/394241e083e25824df6759b440fe0a58274861ee",
+                "reference": "394241e083e25824df6759b440fe0a58274861ee",
                 "shasum": ""
             },
             "require": {
@@ -1803,7 +1803,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-07-03 09:34:20"
+            "time": "2017-07-05 22:39:36"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2282,26 +2282,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "ff1ce3321922821ec54943a9b1c270e8af365a72"
+                "reference": "2226f71a3f8644267c2d6588ade9b5fa6f832c23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/ff1ce3321922821ec54943a9b1c270e8af365a72",
-                "reference": "ff1ce3321922821ec54943a9b1c270e8af365a72",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/2226f71a3f8644267c2d6588ade9b5fa6f832c23",
+                "reference": "2226f71a3f8644267c2d6588ade9b5fa6f832c23",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3|^7.0"
+                "php": "^5.3.3 || ^7.0"
             },
             "require-dev": {
                 "ext-intl": "*",
-                "phpunit/phpunit": "~4.0||~5.0",
-                "squizlabs/php_codesniffer": "~1.5"
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "squizlabs/php_codesniffer": "^1.5"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6.x-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -2324,7 +2324,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-07-03T15:50:13+00:00"
+            "time": "2017-07-05T13:44:57+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -3803,7 +3803,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-03T13:31:36+00:00"
+            "time": "2017-07-03 13:31:36"
         },
         {
             "name": "symfony/css-selector",
@@ -4194,7 +4194,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-03T10:20:17+00:00"
+            "time": "2017-07-03 10:20:17"
         },
         {
             "name": "webmozart/assert",
