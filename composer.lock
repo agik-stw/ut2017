@@ -1711,12 +1711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "394241e083e25824df6759b440fe0a58274861ee"
+                "reference": "77a5e9310fb35fbf64ff1a84bfd2de70258c84f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/394241e083e25824df6759b440fe0a58274861ee",
-                "reference": "394241e083e25824df6759b440fe0a58274861ee",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/77a5e9310fb35fbf64ff1a84bfd2de70258c84f6",
+                "reference": "77a5e9310fb35fbf64ff1a84bfd2de70258c84f6",
                 "shasum": ""
             },
             "require": {
@@ -1803,7 +1803,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-07-05 22:39:36"
+            "time": "2017-07-06 11:51:36"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2324,7 +2324,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-07-05T13:44:57+00:00"
+            "time": "2017-07-05 13:44:57"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -3684,12 +3684,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "24ccab4a84236bf328b512ed95b2d0992973b11f"
+                "reference": "e5420ccdba7671f057804f02bfe71861719b45a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/24ccab4a84236bf328b512ed95b2d0992973b11f",
-                "reference": "24ccab4a84236bf328b512ed95b2d0992973b11f",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/e5420ccdba7671f057804f02bfe71861719b45a4",
+                "reference": "e5420ccdba7671f057804f02bfe71861719b45a4",
                 "shasum": ""
             },
             "require": {
@@ -3733,7 +3733,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-24 09:47:31"
+            "time": "2017-07-06T07:45:45+00:00"
         },
         {
             "name": "symfony/console",
@@ -3864,12 +3864,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "9d40ad561ed0ca824de0c514077dc39e5d6b2605"
+                "reference": "296d63b9b2fbe8da9308713295543c08e93cc9cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/9d40ad561ed0ca824de0c514077dc39e5d6b2605",
-                "reference": "9d40ad561ed0ca824de0c514077dc39e5d6b2605",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/296d63b9b2fbe8da9308713295543c08e93cc9cf",
+                "reference": "296d63b9b2fbe8da9308713295543c08e93cc9cf",
                 "shasum": ""
             },
             "require": {
@@ -3912,7 +3912,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-07 14:09:28"
+            "time": "2017-07-06T13:36:30+00:00"
         },
         {
             "name": "symfony/dom-crawler",

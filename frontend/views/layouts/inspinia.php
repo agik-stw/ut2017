@@ -129,7 +129,7 @@ $url=$moduleurl[0];
 
                     <li class="<?php if ($url=='monitoring/unit_no_history') {
                         echo 'active';
-                    }else{echo 'inactive';} ?>"><a href="#<?php /*echo Url::toRoute('/monitoring/unit_no_history')*/ ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" /><span class="nav-label">UnitNo History</span></a></li>
+                    }else{echo 'inactive';} ?>"><a href="<?php echo Url::toRoute('/monitoring/unit_no_history') ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" /><span class="nav-label">UnitNo History</span></a></li>
 
                           <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Component Health</span></a></li>
 
