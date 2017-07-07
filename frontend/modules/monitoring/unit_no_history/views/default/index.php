@@ -46,7 +46,8 @@ var tb=$("#tb").DataTable({
     {data:'Eval_Code'}
     ],
         processing: false,
-        serverSide: true
+        serverSide: true,
+        ordering:false
             
 });
 
