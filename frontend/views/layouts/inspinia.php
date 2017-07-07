@@ -135,8 +135,6 @@ $url=$moduleurl[0];
 
                            <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Comp.</span></a></li>
 
-                           <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Consistency History</span></a></li>
-
                     </ul>
                 </li>
 
