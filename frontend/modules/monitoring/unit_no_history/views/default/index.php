@@ -39,7 +39,7 @@ var tb=$("#tb").DataTable({
     {
         data:'grouploc',
         render:function(data,type,full,meta){
-            return "options";
+            return "<select class='select2'><option disabled selected>Select</option><option>Sample Date</option></select>";
         }
     },
     {data:'grouploc'},
@@ -61,14 +61,3 @@ var tb=$("#tb").DataTable({
 $(".select2").select2();
 </script>
 <?php JSRegister::end(); ?>
-
-
-
-<?php
-
-$this->registerJsFile(
-    '@web/modulejs/usedOil/controller.js',
-    ['depends' => [\yii\web\JqueryAsset::className()]]
-);
-
-?>
