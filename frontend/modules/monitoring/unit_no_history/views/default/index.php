@@ -36,7 +36,12 @@ var tb=$("#tb").DataTable({
           'type':'POST'
         },
     columns: [
-    {data:'grouploc'},
+    {
+        data:'grouploc',
+        render:function(data,type,full,meta){
+            return "options";
+        }
+    },
     {data:'grouploc'},
     {data:'Serial_No'},
     {data:'Unit_No'},
