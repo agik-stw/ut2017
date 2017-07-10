@@ -1107,12 +1107,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpdf/mpdf.git",
-                "reference": "bf523b775ea0203a17085f1d50d3103e01486ba9"
+                "reference": "a569f910ec12b5bc3dd0b5e03de1ff2bd7231e52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/bf523b775ea0203a17085f1d50d3103e01486ba9",
-                "reference": "bf523b775ea0203a17085f1d50d3103e01486ba9",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/a569f910ec12b5bc3dd0b5e03de1ff2bd7231e52",
+                "reference": "a569f910ec12b5bc3dd0b5e03de1ff2bd7231e52",
                 "shasum": ""
             },
             "require": {
@@ -1169,7 +1169,7 @@
                 "php",
                 "utf-8"
             ],
-            "time": "2017-07-04 14:42:46"
+            "time": "2017-07-09 18:18:54"
         },
         {
             "name": "nullref/yii2-datatables",
@@ -1711,12 +1711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "77a5e9310fb35fbf64ff1a84bfd2de70258c84f6"
+                "reference": "f41241ea732f66b8fe13cf17ccd170f589ba1721"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/77a5e9310fb35fbf64ff1a84bfd2de70258c84f6",
-                "reference": "77a5e9310fb35fbf64ff1a84bfd2de70258c84f6",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f41241ea732f66b8fe13cf17ccd170f589ba1721",
+                "reference": "f41241ea732f66b8fe13cf17ccd170f589ba1721",
                 "shasum": ""
             },
             "require": {
@@ -1803,7 +1803,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-07-06 11:51:36"
+            "time": "2017-07-08 22:39:22"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2282,12 +2282,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "2226f71a3f8644267c2d6588ade9b5fa6f832c23"
+                "reference": "83ade5f05d0a7dcfc7c38c7b5fbcaca8863436b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/2226f71a3f8644267c2d6588ade9b5fa6f832c23",
-                "reference": "2226f71a3f8644267c2d6588ade9b5fa6f832c23",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/83ade5f05d0a7dcfc7c38c7b5fbcaca8863436b5",
+                "reference": "83ade5f05d0a7dcfc7c38c7b5fbcaca8863436b5",
                 "shasum": ""
             },
             "require": {
@@ -2324,7 +2324,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-07-05 13:44:57"
+            "time": "2017-07-07T15:11:58+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -3733,7 +3733,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-06T07:45:45+00:00"
+            "time": "2017-07-06 07:45:45"
         },
         {
             "name": "symfony/console",
@@ -3912,7 +3912,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-06T13:36:30+00:00"
+            "time": "2017-07-06 13:36:30"
         },
         {
             "name": "symfony/dom-crawler",

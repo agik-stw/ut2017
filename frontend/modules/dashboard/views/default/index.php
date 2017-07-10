@@ -28,6 +28,18 @@ use richardfan\widget\JSRegister;
 </div>
 <?php JSRegister::begin(); ?>
 <script>
+
+setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.success('United Tractors', 'Welcome to Petrolab Client Report');
+
+            }, 1300);
+
 $("#m_dashboard").attr({
     class: 'active'
 });

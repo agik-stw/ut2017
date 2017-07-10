@@ -458,6 +458,17 @@ use richardfan\widget\JSRegister;
 
 <?php JSRegister::begin(); ?>
 <script>
+setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.success('United Tractors', 'Welcome to Petrolab Client Report');
+
+            }, 1300);
+            
 //filter footer per kolom
  $('#tb_used_oil tfoot th').not(":eq(0),:eq(12),:eq(13)").each( function () {
         var title = $(this).text();

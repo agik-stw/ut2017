@@ -87,6 +87,17 @@ use richardfan\widget\JSRegister;
 
 <?php JSRegister::begin(); ?>
 <script>
+setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.success('United Tractors', 'Welcome to Petrolab Client Report');
+
+            }, 1300);
+            
 var tb=$("#tb_used_oil").DataTable({
 
        "columnDefs": [

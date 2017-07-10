@@ -115,6 +115,17 @@ Machine_health::register($this);
 
 <?php JSRegister::begin(); ?>
 <script>
+setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.success('United Tractors', 'Welcome to Petrolab Client Report');
+
+            }, 1300);
+            
 $('.datepicker').datepicker({
 format: 'yyyy-mm-dd',
             });
