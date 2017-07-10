@@ -9,7 +9,7 @@ swal({
   closeOnConfirm: false
 },
 function(){
-  document.location='/login/proces/logout';
+  document.location='/index.php/login/proces/logout';
 });
 }
 
