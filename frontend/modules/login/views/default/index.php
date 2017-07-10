@@ -31,7 +31,9 @@ use richardfan\widget\JSRegister;
             <form class="form-signin" method="post" action="<?php echo Url::toRoute('/login/proces/auth') ?>" id="form">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="text" id="inputEmail" class="form-control" name="username" placeholder="username" required autofocus v-model="username">
+                <p style="color:red;">{{aaa}}</p>
                 <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required v-model="password">
+                <p style="color:red;">{{bbb}}</p>
                 <div id="remember" class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> Remember me
@@ -39,8 +41,6 @@ use richardfan\widget\JSRegister;
                 </div>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
             </form><!-- /form -->
-            <p style="color:red;">{{aaa}}</p>
-            <p style="color:red;">{{bbb}}</p>
 
              <?= Yii::$app->session->hasFlash('error') ? "<p style=\"color:red;\" class=\"help-block help-block-error\">
                                                 " . Yii::$app->session->getFlash('error') . "</p>" : '' ?>

@@ -189,7 +189,7 @@ $url=$moduleurl[0];
 
                     <div>
                         <strong>Copyright</strong> <a href="http://www.petrolab.co.id" target="_blank">petrolab.co.id &copy; </a><?php echo date('Y'); ?>
-                        <i class="pull-right">Powered by teamIT-petrolab</i>
+                        <i class="pull-right">Powered by petrolab.co.id</i>
                     </div>
                 </div>
 
