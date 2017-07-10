@@ -8,7 +8,7 @@ use richardfan\widget\JSRegister;
                 <table id="tb" class="table table-striped table-hover" >
                     <thead>
                         <tr>
-                        <th class="th_table">Options</th>
+                        <th class="th_table">Actions</th>
                             <th class="th_table">Grouploc</th>
                             <th class="th_table">Serial No</th>
                             <th class="th_table">Unit No</th>
@@ -46,11 +46,14 @@ var tb=$("#tb").DataTable({
           "url": "<?php echo Url::toRoute('/monitoring/unit_no_history/action/get'); ?>",
           'type':'POST'
         },
+        columnDefs:[
+ { "width": "40px", "targets": 0 }
+        ],
     columns: [
     {
         data:'grouploc',
         render:function(data,type,full,meta){
-            return "<select class='select2'><option disabled selected>Select</option><option>Sample Date</option></select>";
+            return "<li class='dropdown list-none'><a href='#' class='btn btn-xs btn-outline btn-success dropdown-toggle count-info' data-toggle='dropdown'><i class='fa fa-bars'></i></a>"+'<ul class="dropdown-menu dropdown-alerts"><li><a href="mailbox.html"><div><i class="fa fa-eye"></i> View data</div></a></li><li><a href="mailbox.html"><div><i class="fa fa-eye"></i> Sample date <span class="badge badge-success">12</span></div></a></li><li><a href="mailbox.html"><div><i class="fa fa-eye"></i> Metering reading <span class="badge badge-success">12</span></div></a></li><li><a href="mailbox.html"><div><i class="fa fa-eye"></i> Lab Number <span class="badge badge-success">12</span></div></a></li></ul></li>';
         }
     },
     {data:'grouploc'},

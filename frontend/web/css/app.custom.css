@@ -54,3 +54,6 @@ tfoot input {
 .table_sub tbody{
 	background-color: #71c6c9 !important;
 }
+.list-none{
+	list-style: none;
+}
