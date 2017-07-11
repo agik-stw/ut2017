@@ -133,7 +133,7 @@ format: 'yyyy-mm-dd',
             });
 
 //filter footer per kolom
- $('#tb_used_oil tfoot th').not(":eq(0)").each( function () {
+ $('#tb_used_oil tfoot th')/*.not(":eq(0)")*/.each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" />' );
     } );
@@ -153,10 +153,6 @@ tb=$("#tb_used_oil").DataTable({
     { "width": "100px", "targets": 8 },
     { "width": "100px", "targets": 9 },
   ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
         order: [[ 1, 'asc' ]],
      "paging": true,
      "bSort": false,
@@ -242,10 +238,7 @@ return '<a target="_blank" href='+'"'+"<?php echo Url::toRoute('/monitoring/mach
         "scrollX": true,
         processing: true,
         serverSide: true,
-        select: {
-            style: 'single'
-        },
-        select: false,
+        select: true,
   "rowCallback": function( row, data, index ) {
   if (data.ec1=='A') {
 $(row).find('td:eq(5)').css('background-color', '#66ff33');

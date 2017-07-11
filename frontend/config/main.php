@@ -91,12 +91,6 @@ return [
         'monitoring' => [
             'class' => 'app\modules\monitoring\Module',
         ],
-        'fuel' => [
-            'class' => 'app\modules\monitoring\fuel\Module',
-        ],
-        'used_oil' => [
-            'class' => 'app\modules\monitoring\used_oil\Module',
-        ],
         'api' => [
             'class' => 'app\modules\api\Module',
         ],
@@ -108,9 +102,6 @@ return [
         ],
         'error' => [
             'class' => 'app\modules\error\Module',
-        ],
-        'proses' => [
-            'class' => 'common\modules\transaction\Module',
         ],
     ],
     'params' => $params,
