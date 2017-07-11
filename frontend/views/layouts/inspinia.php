@@ -106,6 +106,9 @@ $url=$moduleurl[0];
                     elseif($url=='monitoring/machine_health'){
                         echo 'active';
                     }
+                    elseif($url=='monitoring/component_health'){
+                        echo 'active';
+                    }
                         ?>" id="menu">
                     <a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/monitor.png';?>" /> <span class="nav-label">Monitoring</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -131,9 +134,13 @@ $url=$moduleurl[0];
                         echo 'active';
                     }else{echo 'inactive';} ?>"><a href="<?php echo Url::toRoute('/monitoring/unit_no_history') ?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" /><span class="nav-label">UnitNo History</span></a></li>
 
-                          <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Component Health</span></a></li>
+                          <li class="<?php if ($url=='monitoring/component_health') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>"><a href="<?php echo Url::toRoute('/monitoring/component_health');?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Component Health</span></a></li>
 
-                           <li><a href="#"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Comp.</span></a></li>
+                           <li class="<?php if ($url=='monitoring/machine_component') {
+                        echo 'active';
+                    }else{echo 'inactive';} ?>"><a href="<?php Url::toRoute('/monitoring/component_health');?>"><img alt="image" src="<?php echo Url::base('').'/'.'img/icon/next.png';?>" />  <span class="nav-label">Machine Comp.</span></a></li>
 
                     </ul>
                 </li>

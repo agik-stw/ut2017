@@ -34,6 +34,9 @@ $this->modules=[
         'machine_health' => [
             'class' => 'app\modules\monitoring\machine_health\Module',
         ],
+        'component_health' => [
+            'class' => 'app\modules\monitoring\component_health\Module',
+        ],
     ];
         // custom initialization code goes here
     }
