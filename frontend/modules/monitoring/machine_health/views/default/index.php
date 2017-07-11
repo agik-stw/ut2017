@@ -122,7 +122,7 @@ setTimeout(function() {
                     showMethod: 'slideDown',
                     timeOut: 4000
                 };
-                toastr.success('United Tractors', 'Welcome to Petrolab Client Report');
+                toastr.success('Machine Health', 'Monitoring');
 
             }, 1300);
             
